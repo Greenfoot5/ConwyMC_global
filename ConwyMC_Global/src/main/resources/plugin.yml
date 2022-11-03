@@ -7,3 +7,71 @@ load: STARTUP
 depend: [ NametagEdit ]
 authors: [ Huntifi, Greenfoot5, kasteelvuur ]
 description: The global plugin for the ConwyMC server
+
+permissions:
+  # Staff
+  conwymc.owner:
+    description: Gives access to all ConwyMC Owner commands
+    children:
+      conwymc.admin: true
+  conwymc.admin:
+    description: Gives access to all ConwyMC Admin commands
+    children:
+      conwymc.communitymanager: true
+  conwymc.communitymanager:
+    description: Gives access to all ConwyMC Community Manager commands
+    children:
+      conwymc.developer: true
+  conwymc.developer:
+    description: Gives access to all ConwyMC Developer commands
+    children:
+      conwymc.moderator: true
+  conwymc.moderator:
+    description: Gives access to all ConwyMC Moderator commands
+    children:
+      conwymc.chatmod+: true
+      minecraft.command.gamemode: true
+  conwymc.chatmod+:
+    description: Gives access to all ConwyMC Chatmod+ commands
+    children:
+      conwymc.chatmod: true
+  conwymc.chatmod:
+    description: Gives access to all ConwyMC Chatmod commands
+    children:
+      conwymc.builder: true
+  conwymc.builder:
+    description: Gives access to all ConwyMC Builder commands
+
+  # Donator
+  conwymc.high_king:
+    description: Gives access to all ConwyMC High King commands
+    children:
+      conwymc.king: true
+  conwymc.king:
+    description: Gives access to all ConwyMC King commands
+    children:
+      conwymc.viceroy: true
+  conwymc.viceroy:
+    description: Gives access to all ConwyMC Viceroy commands
+    children:
+      conwymc.duke: true
+  conwymc.duke:
+    description: Gives access to all ConwyMC Duke commands
+    children:
+      conwymc.count: true
+  conwymc.count:
+    description: Gives access to all ConwyMC Count commands
+    children:
+      conwymc.baron: true
+  conwymc.baron:
+    description: Gives access to all ConwyMC Baron commands
+    children:
+      conwymc.noble: true
+  conwymc.noble:
+    description: Gives access to all ConwyMC Noble commands
+    children:
+      conwymc.esquire: true
+  conwymc.esquire:
+    description: Gives access to all ConwyMC Esquire commands
+  conwymc.vip:
+    description: Gives access to all ConwyMC VIP commands
