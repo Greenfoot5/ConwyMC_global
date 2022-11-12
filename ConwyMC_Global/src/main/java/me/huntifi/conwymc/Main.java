@@ -3,6 +3,7 @@ package me.huntifi.conwymc;
 import dev.dejvokep.boostedyaml.YamlDocument;
 import me.huntifi.conwymc.database.KeepAlive;
 import me.huntifi.conwymc.database.MySQL;
+import me.huntifi.conwymc.events.connection.PlayerConnect;
 import org.bukkit.Bukkit;
 import org.bukkit.event.HandlerList;
 import org.bukkit.plugin.Plugin;
@@ -38,6 +39,9 @@ public final class Main extends JavaPlugin {
 
         // Connect to the database
         sqlConnect();
+
+        // Register events
+        getServer().getPluginManager().registerEvents(new PlayerConnect(), plugin);
 
         // Register timed tasks
         Bukkit.getServer().getScheduler().runTaskTimerAsynchronously(plugin, new KeepAlive(), 0, 5900);
