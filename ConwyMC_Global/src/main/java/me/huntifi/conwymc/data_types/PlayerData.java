@@ -2,6 +2,7 @@ package me.huntifi.conwymc.data_types;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 
 /**
  * Represents a player's data
@@ -23,16 +24,22 @@ public class PlayerData {
     /** The player's custom leave message */
     private String leaveMessage;
 
+    /** The player's mute reason and expiration time */
+    private Tuple<String, Timestamp> mute;
+
     /**
      * Initialize the player's data.
      * @param rankData The data retrieved from player_rank
+     * @param mute The player's active mute
      * @throws SQLException If a database access error occurs or an invalid column label is used
      */
-    public PlayerData(ResultSet rankData) throws SQLException {
+    public PlayerData(ResultSet rankData, ResultSet mute) throws SQLException {
         this.staffRank = rankData.getString("staff_rank").toLowerCase();
         this.rankPoints = rankData.getDouble("rank_points");
         this.joinMessage = rankData.getString("join_message");
         this.leaveMessage = rankData.getString("leave_message");
+
+        this.mute = mute.next() ? new Tuple<>(mute.getString("reason"), mute.getTimestamp("end")) : null;
     }
 
     /**
@@ -113,5 +120,25 @@ public class PlayerData {
      */
     public void setLeaveMessage(String leaveMessage) {
         this.leaveMessage = leaveMessage;
+    }
+
+    /**
+     * Get the player's current mute.
+     * @return The player's mute reason and expiration timestamp, null if not muted
+     */
+    public Tuple<String, Timestamp> getMute() {
+        return mute;
+    }
+
+    /**
+     * Set the player's mute.
+     * @param reason The reason for the mute
+     * @param end The end of the mute
+     */
+    public void setMute(String reason, Timestamp end) {
+        if (reason == null || end == null)
+            mute = null;
+        else
+            mute = new Tuple<>(reason, end);
     }
 }

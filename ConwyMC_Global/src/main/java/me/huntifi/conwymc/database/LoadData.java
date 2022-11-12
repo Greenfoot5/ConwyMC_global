@@ -26,9 +26,13 @@ public class LoadData {
             createRankEntry(uuid);
             Tuple<PreparedStatement, ResultSet> prRank = getRankData(uuid);
 
+            // Mute data
+            Tuple<PreparedStatement, ResultSet> prMute = Punishments.getActive(uuid, "mute");
+
             // Collect data and release resources
-            PlayerData data = new PlayerData(prRank.getSecond());
+            PlayerData data = new PlayerData(prRank.getSecond(), prMute.getSecond());
             prRank.getFirst().close();
+            prMute.getFirst().close();
 
             return data;
         } catch (SQLException e) {
