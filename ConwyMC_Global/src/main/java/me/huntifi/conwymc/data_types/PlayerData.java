@@ -1,0 +1,117 @@
+package me.huntifi.conwymc.data_types;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+/**
+ * Represents a player's data
+ */
+public class PlayerData {
+
+    /** The player's staff rank */
+    private String staffRank;
+
+    /** The player's rank */
+    private String rank;
+
+    /** The player's rank points */
+    private double rankPoints;
+
+    /** The player's custom join message */
+    private String joinMessage;
+
+    /** The player's custom leave message */
+    private String leaveMessage;
+
+    /**
+     * Initialize the player's data.
+     * @param rankData The data retrieved from player_rank
+     * @throws SQLException If a database access error occurs or an invalid column label is used
+     */
+    public PlayerData(ResultSet rankData) throws SQLException {
+        this.staffRank = rankData.getString("staff_rank").toLowerCase();
+        this.rankPoints = rankData.getDouble("rank_points");
+        this.joinMessage = rankData.getString("join_message");
+        this.leaveMessage = rankData.getString("leave_message");
+    }
+
+    /**
+     * Get the player's staff rank.
+     * @return The player's staff rank
+     */
+    public String getStaffRank() {
+        return staffRank;
+    }
+
+    /**
+     * Set the player's staff rank.
+     * @param staffRank The rank to set
+     */
+    public void setStaffRank(String staffRank) {
+        this.staffRank = staffRank;
+    }
+
+    /**
+     * Get the player's rank.
+     * @return The player's rank
+     */
+    public String getRank() {
+        return rank;
+    }
+
+    /**
+     * Set the player's rank.
+     * @param rank The rank to set
+     */
+    public void setRank(String rank) {
+        this.rank = rank;
+    }
+
+    /**
+     * Get the player's rank points.
+     * @return The player's rank points
+     */
+    public double getRankPoints() {
+        return rankPoints;
+    }
+
+    /**
+     * Set the player's rank points.
+     * @param rankPoints The rank points to set
+     */
+    public void setRankPoints(double rankPoints) {
+        this.rankPoints = rankPoints;
+    }
+
+    /**
+     * Get the player's custom join message.
+     * @return The player's custom join message
+     */
+    public String getJoinMessage() {
+        return joinMessage;
+    }
+
+    /**
+     * Set the player's custom join message.
+     * @param joinMessage The custom join message
+     */
+    public void setJoinMessage(String joinMessage) {
+        this.joinMessage = joinMessage;
+    }
+
+    /**
+     * Get the player's custom leave message.
+     * @return The player's custom leave message
+     */
+    public String getLeaveMessage() {
+        return leaveMessage;
+    }
+
+    /**
+     * Set the player's custom leave message.
+     * @param leaveMessage The custom leave message
+     */
+    public void setLeaveMessage(String leaveMessage) {
+        this.leaveMessage = leaveMessage;
+    }
+}
