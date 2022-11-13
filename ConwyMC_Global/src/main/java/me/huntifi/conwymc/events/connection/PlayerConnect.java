@@ -3,6 +3,7 @@ package me.huntifi.conwymc.events.connection;
 import me.huntifi.conwymc.commands.staff.punishments.PunishmentTime;
 import me.huntifi.conwymc.data_types.PlayerData;
 import me.huntifi.conwymc.data_types.Tuple;
+import me.huntifi.conwymc.database.ActiveData;
 import me.huntifi.conwymc.database.LoadData;
 import me.huntifi.conwymc.database.Punishments;
 import org.bukkit.ChatColor;
@@ -58,8 +59,8 @@ public class PlayerConnect implements Listener {
     }
 
     /**
-     * Load the player's data
-     * Actively store the loaded data
+     * Load the player's data.
+     * Actively store the loaded data.
      * @param uuid The unique ID of the player
      */
     private void loadData(UUID uuid) {
@@ -67,7 +68,9 @@ public class PlayerConnect implements Listener {
         PlayerData data = LoadData.load(uuid);
         assert data != null;
 
-        // TODO: Actively store the data
+        // Actively store data
+        ActiveData.addPlayer(uuid, data);
+
         // TODO: Set the player's donator top rank
     }
 
