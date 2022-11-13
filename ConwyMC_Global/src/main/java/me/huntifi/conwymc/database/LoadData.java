@@ -71,4 +71,17 @@ public class LoadData {
         rs.next();
         return new Tuple<>(ps, rs);
     }
+
+    /**
+     * Get the top 10 donators.
+     * @return A tuple of the prepared statement (to close later) and the query's result
+     * @throws SQLException If something goes wrong executing the query
+     */
+    public static Tuple<PreparedStatement, ResultSet> getTopDonators() throws SQLException {
+        PreparedStatement ps = Main.getConnection().prepareStatement(
+                "SELECT * FROM player_rank ORDER BY rank_points DESC LIMIT 10");
+
+        ResultSet rs = ps.executeQuery();
+        return new Tuple<>(ps, rs);
+    }
 }

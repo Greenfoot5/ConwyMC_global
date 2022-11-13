@@ -1,5 +1,6 @@
 package me.huntifi.conwymc.events.connection;
 
+import me.huntifi.conwymc.commands.staff.RankPoints;
 import me.huntifi.conwymc.commands.staff.punishments.PunishmentTime;
 import me.huntifi.conwymc.data_types.PlayerData;
 import me.huntifi.conwymc.data_types.Tuple;
@@ -71,7 +72,13 @@ public class PlayerConnect implements Listener {
         // Actively store data
         ActiveData.addPlayer(uuid, data);
 
-        // TODO: Set the player's donator top rank
+        // Set the player's donator rank
+        data.setRank(RankPoints.getRank(data.getRankPoints()));
+        if (data.getRankPoints() > 0) {
+            String rank = RankPoints.getTopRank(uuid);
+            if (!rank.isEmpty())
+                data.setRank(rank);
+        }
     }
 
     /**
