@@ -3,6 +3,7 @@ package me.huntifi.conwymc.database;
 import me.huntifi.conwymc.Main;
 import me.huntifi.conwymc.data_types.Tuple;
 
+import java.net.InetAddress;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -28,6 +29,23 @@ public class Punishments {
         ps.setString(1, uuid.toString());
         ps.setString(2, type);
         ps.setTimestamp(3, new Timestamp(System.currentTimeMillis()));
+
+        ResultSet rs = ps.executeQuery();
+        return new Tuple<>(ps, rs);
+    }
+
+    /**
+     * Get an IP's current ban from the database.
+     * @param ip The IP whose data to get
+     * @return A tuple of the prepared statement (to close later) and the query's result
+     * @throws SQLException If something goes wrong executing the query
+     */
+    public static Tuple<PreparedStatement, ResultSet> getIPBan(InetAddress ip) throws SQLException {
+        PreparedStatement ps = Main.getConnection().prepareStatement(
+                "SELECT reason, end FROM punishments WHERE ip = ? AND type = 'ban' AND end > ?"
+                        + " ORDER BY end DESC LIMIT 1");
+        ps.setString(1, ip.toString());
+        ps.setTimestamp(2, new Timestamp(System.currentTimeMillis()));
 
         ResultSet rs = ps.executeQuery();
         return new Tuple<>(ps, rs);
