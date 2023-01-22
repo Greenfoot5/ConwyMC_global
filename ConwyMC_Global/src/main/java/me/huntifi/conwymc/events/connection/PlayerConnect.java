@@ -1,13 +1,14 @@
 package me.huntifi.conwymc.events.connection;
 
+import me.huntifi.conwymc.Main;
 import me.huntifi.conwymc.commands.staff.RankPoints;
 import me.huntifi.conwymc.commands.staff.punishments.PunishmentTime;
 import me.huntifi.conwymc.data_types.PlayerData;
 import me.huntifi.conwymc.data_types.Tuple;
-import me.huntifi.conwymc.database.ActiveData;
-import me.huntifi.conwymc.database.LoadData;
-import me.huntifi.conwymc.database.Punishments;
+import me.huntifi.conwymc.database.*;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerPreLoginEvent;
@@ -26,37 +27,44 @@ import java.util.UUID;
 public class PlayerConnect implements Listener {
 
     /**
-     * Assign the player's data and join a team
-     * @param e The event called when a player join the game
+     * Set a player's join message, assign their permissions, and update their stored name.
+     * @param event The event called when a player joins the game
      */
     @EventHandler
-    public void onPlayerJoin(PlayerJoinEvent e) {
-        // TODO: Login stuff
+    public void onPlayerJoin(PlayerJoinEvent event) {
+        Player player = event.getPlayer();
+        UUID uuid = player.getUniqueId();
+        PlayerData data = ActiveData.getData(uuid);
+
+        setJoinMessage(event, data);
+        setPermissions(uuid, data);
+        StoreData.updateName(uuid);
     }
 
     /**
      * Check if the player is allowed to join the game.
      * Load the player's data.
-     * @param e The event called when a player attempts to join the server
+     * @param event The event called when a player attempts to join the server
      * @throws SQLException If something goes wrong executing a query
      */
     @EventHandler
-    public void preLogin(AsyncPlayerPreLoginEvent e) throws SQLException {
-        if (e.getLoginResult() == AsyncPlayerPreLoginEvent.Result.ALLOWED) {
-            Tuple<String, Timestamp> banned = getBan(e.getUniqueId(), e.getAddress());
-            if (banned != null) {
-                e.disallow(
-                        AsyncPlayerPreLoginEvent.Result.KICK_BANNED,
-                        ChatColor.DARK_RED + "\n[BAN] " + ChatColor.RED + banned.getFirst()
-                                + ChatColor.DARK_RED + "\n[EXPIRES IN] " + ChatColor.RED
-                                + PunishmentTime.getExpire(banned.getSecond())
-                );
-                return;
-            }
+    public void preLogin(AsyncPlayerPreLoginEvent event) throws SQLException {
+        if (event.getLoginResult() != AsyncPlayerPreLoginEvent.Result.ALLOWED)
+            return;
 
-            // The player is allowed to join, so we can start loading their data
-            loadData(e.getUniqueId());
+        Tuple<String, Timestamp> banned = getBan(event.getUniqueId(), event.getAddress());
+        if (banned != null) {
+            event.disallow(
+                    AsyncPlayerPreLoginEvent.Result.KICK_BANNED,
+                    ChatColor.DARK_RED + "\n[BAN] " + ChatColor.RED + banned.getFirst()
+                            + ChatColor.DARK_RED + "\n[EXPIRES IN] " + ChatColor.RED
+                            + PunishmentTime.getExpire(banned.getSecond())
+            );
+            return;
         }
+
+        // The player is allowed to join, so we can start loading their data
+        loadData(event.getUniqueId());
     }
 
     /**
@@ -113,5 +121,28 @@ public class PlayerConnect implements Listener {
         if (rs.next())
             return new Tuple<>(rs.getString("reason"), rs.getTimestamp("end"));
         return null;
+    }
+
+    /**
+     * Overwrite the player's join message if they have a custom one.
+     * @param event The player's join event
+     * @param data The player's data
+     */
+    private void setJoinMessage(PlayerJoinEvent event, PlayerData data) {
+        if (!data.getJoinMessage().isEmpty())
+            event.setJoinMessage(ChatColor.YELLOW + data.getJoinMessage());
+    }
+
+    /**
+     * Set the player's staff and donator permissions.
+     * @param uuid The player's unique ID
+     * @param data The player's data
+     */
+    private void setPermissions(UUID uuid, PlayerData data) {
+        Bukkit.getScheduler().runTaskAsynchronously(Main.getPlugin(), () -> {
+            Permissions.addPlayer(uuid);
+            Permissions.setStaffPermission(uuid, data.getStaffRank());
+            Permissions.setDonatorPermission(uuid, data.getRank());
+        });
     }
 }
