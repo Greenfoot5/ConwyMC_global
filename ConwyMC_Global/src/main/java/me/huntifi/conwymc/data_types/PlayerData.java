@@ -1,5 +1,7 @@
 package me.huntifi.conwymc.data_types;
 
+import org.bukkit.ChatColor;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
@@ -23,6 +25,9 @@ public class PlayerData {
 
     /** The player's custom leave message */
     private String leaveMessage;
+
+    /** Whether the player's staff rank is hidden */
+    private boolean isHiddenStaff = false;
 
     /** The player's mute reason and expiration time */
     private Tuple<String, Timestamp> mute;
@@ -120,6 +125,26 @@ public class PlayerData {
      */
     public void setLeaveMessage(String leaveMessage) {
         this.leaveMessage = leaveMessage;
+    }
+
+    /**
+     * Toggle whether the player's staff rank is hidden.
+     */
+    public void toggleRank() {
+        isHiddenStaff = !isHiddenStaff;
+        // TODO: Update name tag
+    }
+
+    /**
+     * Get the player's chat color.
+     * @return The player's chat color
+     */
+    public ChatColor getChatColor() {
+        if (staffRank.isEmpty() || isHiddenStaff)
+            return ChatColor.GRAY;
+        if (staffRank.equals("owner"))
+            return ChatColor.GREEN;
+        return ChatColor.WHITE;
     }
 
     /**

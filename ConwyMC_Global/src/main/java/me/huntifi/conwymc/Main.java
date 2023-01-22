@@ -1,9 +1,11 @@
 package me.huntifi.conwymc;
 
 import dev.dejvokep.boostedyaml.YamlDocument;
+import me.huntifi.conwymc.commands.staff.punishments.Mute;
 import me.huntifi.conwymc.database.KeepAlive;
 import me.huntifi.conwymc.database.MySQL;
 import me.huntifi.conwymc.database.StoreData;
+import me.huntifi.conwymc.events.chat.PlayerChat;
 import me.huntifi.conwymc.events.connection.PlayerConnect;
 import me.huntifi.conwymc.events.connection.PlayerDisconnect;
 import org.bukkit.Bukkit;
@@ -15,6 +17,7 @@ import java.io.File;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.Objects;
 import java.util.logging.Logger;
 
 /**
@@ -43,8 +46,12 @@ public final class Main extends JavaPlugin {
         sqlConnect();
 
         // Register events
+        getServer().getPluginManager().registerEvents(new PlayerChat(), plugin);
         getServer().getPluginManager().registerEvents(new PlayerConnect(), plugin);
         getServer().getPluginManager().registerEvents(new PlayerDisconnect(), plugin);
+
+        // Register commands
+        Objects.requireNonNull(getCommand("Mute")).setExecutor(new Mute());
 
         // Register timed tasks
         Bukkit.getServer().getScheduler().runTaskTimerAsynchronously(plugin, new KeepAlive(), 0, 5900);

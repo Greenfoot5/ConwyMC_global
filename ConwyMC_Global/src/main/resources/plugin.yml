@@ -75,3 +75,11 @@ permissions:
     description: Gives access to all ConwyMC Esquire commands
   conwymc.vip:
     description: Gives access to all ConwyMC VIP commands
+
+commands:
+  # Staff - Punishments
+  Mute:
+    description: Mute a player
+    usage: /mute <player> <time> <reason>
+    permission: conwymc.chatmod
+    permission-message: You are not permitted to use this command!
