@@ -135,7 +135,7 @@ public class PlayerConnect implements Listener {
 
     /**
      * Set the player's staff and donator permissions.
-     * @param uuid The player's unique ID
+     * @param uuid The unique ID of the player
      * @param data The player's data
      */
     private void setPermissions(UUID uuid, PlayerData data) {

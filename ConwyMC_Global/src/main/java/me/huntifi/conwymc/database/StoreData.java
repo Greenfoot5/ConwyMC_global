@@ -1,10 +1,12 @@
 package me.huntifi.conwymc.database;
 
 import me.huntifi.conwymc.Main;
+import me.huntifi.conwymc.data_types.PlayerData;
 import org.bukkit.Bukkit;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.Collection;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -12,6 +14,46 @@ import java.util.UUID;
  * Store a player's data
  */
 public class StoreData {
+
+    /**
+     * Store a player's data in the database.
+     * @param uuid The unique ID of the player
+     * @param data The player's data
+     */
+    private static void store(UUID uuid, PlayerData data) {
+        try (PreparedStatement ps = Main.getConnection().prepareStatement(
+                "UPDATE player_rank SET staff_rank = ?, rank_points = ?, join_message = ?, leave_message = ? WHERE uuid = ?"
+        )) {
+            ps.setString(1, data.getStaffRank());
+            ps.setDouble(2, data.getRankPoints());
+            ps.setString(3, data.getJoinMessage());
+            ps.setString(4, data.getLeaveMessage());
+            ps.setString(5, uuid.toString());
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Asynchronously store a player's data in the database.
+     * @param uuid The unique ID of the player
+     * @param data The player's data
+     */
+    public static void storeAsync(UUID uuid, PlayerData data) {
+        Bukkit.getScheduler().runTaskAsynchronously(Main.getPlugin(), () -> store(uuid, data));
+    }
+
+    /**
+     * Store the data of all players who are in active storage.
+     * This is <strong>not</strong> done asynchronously, so should only be called when shutting down the server.
+     */
+    public static void storeAll() {
+        Collection<UUID> players = ActiveData.getPlayers();
+        for (UUID uuid : players) {
+            store(uuid, ActiveData.getData(uuid));
+        }
+    }
 
     /**
      * Update the player name saved in the database.

@@ -3,7 +3,9 @@ package me.huntifi.conwymc;
 import dev.dejvokep.boostedyaml.YamlDocument;
 import me.huntifi.conwymc.database.KeepAlive;
 import me.huntifi.conwymc.database.MySQL;
+import me.huntifi.conwymc.database.StoreData;
 import me.huntifi.conwymc.events.connection.PlayerConnect;
+import me.huntifi.conwymc.events.connection.PlayerDisconnect;
 import org.bukkit.Bukkit;
 import org.bukkit.event.HandlerList;
 import org.bukkit.plugin.Plugin;
@@ -42,6 +44,7 @@ public final class Main extends JavaPlugin {
 
         // Register events
         getServer().getPluginManager().registerEvents(new PlayerConnect(), plugin);
+        getServer().getPluginManager().registerEvents(new PlayerDisconnect(), plugin);
 
         // Register timed tasks
         Bukkit.getServer().getScheduler().runTaskTimerAsynchronously(plugin, new KeepAlive(), 0, 5900);
@@ -57,7 +60,8 @@ public final class Main extends JavaPlugin {
         HandlerList.unregisterAll(plugin);
         Bukkit.getServer().getScheduler().cancelTasks(plugin);
 
-        // Disconnect from the database
+        // Save data and disconnect from the database
+        StoreData.storeAll();
         try {
             SQL.disconnect();
         } catch (SQLException | NullPointerException e) {
