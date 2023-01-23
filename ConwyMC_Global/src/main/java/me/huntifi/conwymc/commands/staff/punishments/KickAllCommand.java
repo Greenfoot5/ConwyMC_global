@@ -24,7 +24,7 @@ public class KickAllCommand implements CommandExecutor {
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command cmd, @NotNull String label, @NotNull String[] args) {
         String message = ChatColor.RED + "You were kicked by " + ChatColor.WHITE + sender.getName();
-        if (args.length > 1)
+        if (args.length > 0)
             message += ChatColor.RED + " for: " + String.join(" ", args);
 
         for (Player player : Bukkit.getOnlinePlayers())
