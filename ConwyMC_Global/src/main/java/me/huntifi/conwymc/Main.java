@@ -137,6 +137,7 @@ public final class Main extends JavaPlugin {
         Objects.requireNonNull(getCommand("Mute")).setExecutor(new MuteCommand());
         Objects.requireNonNull(getCommand("Unban")).setExecutor(new UnbanCommand());
         Objects.requireNonNull(getCommand("Unmute")).setExecutor(new UnmuteCommand());
+        Objects.requireNonNull(getCommand("Warn")).setExecutor(new WarnCommand());
     }
 
     /**
