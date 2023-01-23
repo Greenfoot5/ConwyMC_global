@@ -21,7 +21,7 @@ import java.util.UUID;
 /**
  * Mutes a player
  */
-public class Mute implements CommandExecutor {
+public class MuteCommand implements CommandExecutor {
 
     /**
      * Mute a player

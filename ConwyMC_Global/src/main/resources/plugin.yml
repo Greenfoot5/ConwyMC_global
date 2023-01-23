@@ -78,8 +78,38 @@ permissions:
 
 commands:
   # Staff - Punishments
+  Ban:
+    description: Ban a player
+    usage: /ban <player> <time> <reason>
+    permission: conwymc.chatmod+
+    permission-message: You are not permitted to use this command!
+  Kick:
+    description: Kick a player from the server
+    usage: /kick <player> <reason>
+    permission: conwymc.chatmod+
+    permission-message: You are not permitted to use this command!
+  KickAll:
+    description: Kick all players from the server
+    usage: /kickall <reason>
+    permission: conwymc.moderator
+    permission-message: You are not permitted to use this command!
   Mute:
     description: Mute a player
     usage: /mute <player> <time> <reason>
+    permission: conwymc.chatmod
+    permission-message: You are not permitted to use this command!
+  Unban:
+    description: Unban a banned player
+    usage: /unban <player>
+    permission: conwymc.chatmod+
+    permission-message: You are not permitted to use this command!
+  Unmute:
+    description: Unmute a muted player
+    usage: /unmute <player>
+    permission: conwymc.chatmod
+    permission-message: You are not permitted to use this command!
+  Warn:
+    description: Warn a player
+    usage: /warn <player> <reason>
     permission: conwymc.chatmod
     permission-message: You are not permitted to use this command!

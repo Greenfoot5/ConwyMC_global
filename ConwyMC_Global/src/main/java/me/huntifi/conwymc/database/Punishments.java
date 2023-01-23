@@ -75,4 +75,23 @@ public class Punishments {
         ps.executeUpdate();
         ps.close();
     }
+
+    /**
+     * End a player's punishment.
+     * @param name The name of the player
+     * @param type The type of punishment to end
+     * @throws SQLException If something goes wrong executing the update
+     */
+    public static void end(String name, String type) throws SQLException {
+        try (PreparedStatement ps = Main.getConnection().prepareStatement(
+                "UPDATE punishments SET end = ? WHERE end > ? AND name = ? AND type = ?"
+        )) {
+            ps.setTimestamp(1, new Timestamp(System.currentTimeMillis()));
+            ps.setTimestamp(2, new Timestamp(System.currentTimeMillis()));
+            ps.setString(3, name);
+            ps.setString(4, type);
+
+            ps.executeUpdate();
+        }
+    }
 }

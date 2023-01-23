@@ -1,7 +1,7 @@
 package me.huntifi.conwymc.events.chat;
 
 import me.huntifi.conwymc.Main;
-import me.huntifi.conwymc.commands.staff.punishments.Mute;
+import me.huntifi.conwymc.commands.staff.punishments.MuteCommand;
 import me.huntifi.conwymc.data_types.PlayerData;
 import me.huntifi.conwymc.database.ActiveData;
 import org.bukkit.Bukkit;
@@ -31,7 +31,7 @@ public class PlayerChat implements Listener {
         UUID uuid = player.getUniqueId();
 
         // Muted players are not allowed to send messages
-        if (Mute.isMuted(uuid)) {
+        if (MuteCommand.isMuted(uuid)) {
             event.setCancelled(true);
             return;
         }

@@ -1,7 +1,7 @@
 package me.huntifi.conwymc;
 
 import dev.dejvokep.boostedyaml.YamlDocument;
-import me.huntifi.conwymc.commands.staff.punishments.Mute;
+import me.huntifi.conwymc.commands.staff.punishments.*;
 import me.huntifi.conwymc.database.KeepAlive;
 import me.huntifi.conwymc.database.MySQL;
 import me.huntifi.conwymc.database.StoreData;
@@ -18,7 +18,6 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Objects;
-import java.util.logging.Logger;
 
 /**
  * The main class that controls the global ConwyMC plugin
@@ -42,19 +41,11 @@ public final class Main extends JavaPlugin {
         plugin = Bukkit.getServer().getPluginManager().getPlugin("ConwyMC_Global");
         instance = this;
 
-        // Connect to the database
+        // Connect to the database and register events, commands, and timed tasks
         sqlConnect();
-
-        // Register events
-        getServer().getPluginManager().registerEvents(new PlayerChat(), plugin);
-        getServer().getPluginManager().registerEvents(new PlayerConnect(), plugin);
-        getServer().getPluginManager().registerEvents(new PlayerDisconnect(), plugin);
-
-        // Register commands
-        Objects.requireNonNull(getCommand("Mute")).setExecutor(new Mute());
-
-        // Register timed tasks
-        Bukkit.getServer().getScheduler().runTaskTimerAsynchronously(plugin, new KeepAlive(), 0, 5900);
+        registerEvents();
+        registerCommands();
+        registerTimedTasks();
 
         getLogger().info("Plugin has been enabled!");
     }
@@ -124,5 +115,34 @@ public final class Main extends JavaPlugin {
      */
     public static Connection getConnection() throws SQLException {
         return SQL.getConnection();
+    }
+
+    /**
+     * Register all events.
+     */
+    private void registerEvents() {
+        getServer().getPluginManager().registerEvents(new PlayerChat(), plugin);
+        getServer().getPluginManager().registerEvents(new PlayerConnect(), plugin);
+        getServer().getPluginManager().registerEvents(new PlayerDisconnect(), plugin);
+    }
+
+    /**
+     * Register all commands.
+     */
+    private void registerCommands() {
+        // Staff - Punishments
+        Objects.requireNonNull(getCommand("Ban")).setExecutor(new BanCommand());
+        Objects.requireNonNull(getCommand("Kick")).setExecutor(new KickCommand());
+        Objects.requireNonNull(getCommand("KickAll")).setExecutor(new KickAllCommand());
+        Objects.requireNonNull(getCommand("Mute")).setExecutor(new MuteCommand());
+        Objects.requireNonNull(getCommand("Unban")).setExecutor(new UnbanCommand());
+        Objects.requireNonNull(getCommand("Unmute")).setExecutor(new UnmuteCommand());
+    }
+
+    /**
+     * Register all times tasks.
+     */
+    private void registerTimedTasks() {
+        Bukkit.getServer().getScheduler().runTaskTimerAsynchronously(plugin, new KeepAlive(), 0, 5900);
     }
 }
