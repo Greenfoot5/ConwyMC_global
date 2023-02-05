@@ -76,6 +76,18 @@ permissions:
   conwymc.vip:
     description: Gives access to all ConwyMC VIP commands
 
+  # Other
+  conwymc.disable:
+    description: Disable basic minecraft permissions
+    children:
+      bukkit.command.plugins: false
+      bukkit.command.version: false
+      minecraft.command.help: false
+      minecraft.command.me: false
+      minecraft.command.msg: false
+      minecraft.command.teammsg: false
+      minecraft.command.trigger: false
+
 commands:
   # Staff - Punishments
   Ban:

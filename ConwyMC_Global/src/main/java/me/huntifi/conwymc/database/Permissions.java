@@ -45,11 +45,15 @@ public class Permissions {
      * @param uuid The unique ID of the player
      * @param permission The permission to set
      */
-    public static void setStaffPermission(UUID uuid, String permission) {
+    public static boolean setStaffPermission(UUID uuid, String permission) {
         Collection<String> staffPerms = Arrays.asList("owner", "admin", "communitymanager", "developer",
                 "moderator", "chatmod+", "chatmod", "builder", "");
-        if (staffPerms.contains(permission.toLowerCase()))
+        if (staffPerms.contains(permission.toLowerCase())) {
             setPermission(uuid, ActiveData.getData(uuid).getStaffRank(), permission.toLowerCase());
+            return true;
+        }
+
+        return false;
     }
 
     /**

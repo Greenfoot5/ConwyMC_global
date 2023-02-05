@@ -48,6 +48,17 @@ public class PlayerData {
     }
 
     /**
+     * Get the player's display rank.
+     * @return The player's staff or donator rank
+     */
+    public String getDisplayRank() {
+        if (!staffRank.isEmpty() && !isHiddenStaff)
+            return staffRank;
+
+        return rank;
+    }
+
+    /**
      * Get the player's staff rank.
      * @return The player's staff rank
      */
