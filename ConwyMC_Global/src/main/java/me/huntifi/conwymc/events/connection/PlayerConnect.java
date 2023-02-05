@@ -1,8 +1,8 @@
 package me.huntifi.conwymc.events.connection;
 
 import me.huntifi.conwymc.Main;
-import me.huntifi.conwymc.commands.staff.RankPoints;
-import me.huntifi.conwymc.commands.staff.punishments.PunishmentTime;
+import me.huntifi.conwymc.util.RankPoints;
+import me.huntifi.conwymc.util.PunishmentTime;
 import me.huntifi.conwymc.data_types.PlayerData;
 import me.huntifi.conwymc.data_types.Tuple;
 import me.huntifi.conwymc.database.*;

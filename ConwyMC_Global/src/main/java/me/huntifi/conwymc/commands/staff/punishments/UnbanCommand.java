@@ -2,6 +2,7 @@ package me.huntifi.conwymc.commands.staff.punishments;
 
 import me.huntifi.conwymc.Main;
 import me.huntifi.conwymc.database.Punishments;
+import me.huntifi.conwymc.util.Messenger;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -33,10 +34,9 @@ public class UnbanCommand implements CommandExecutor {
         Bukkit.getScheduler().runTaskAsynchronously(Main.getPlugin(), () -> {
             try {
                 Punishments.end(args[0], "ban");
-                sender.sendMessage(ChatColor.DARK_GREEN + "Successfully unbanned: " + ChatColor.GREEN + args[0]);
+                Messenger.sendInfo("Successfully unbanned: " + ChatColor.DARK_AQUA + args[0], sender);
             } catch (SQLException e) {
-                sender.sendMessage(ChatColor.DARK_RED + "An error occurred while trying to unban: "
-                        + ChatColor.RED + args[0]);
+                Messenger.sendError("An error occurred while trying to unban: " + ChatColor.RED + args[0], sender);
                 e.printStackTrace();
             }
         });

@@ -1,4 +1,4 @@
-package me.huntifi.conwymc.commands.staff;
+package me.huntifi.conwymc.util;
 
 import me.huntifi.conwymc.data_types.Tuple;
 import me.huntifi.conwymc.database.LoadData;

@@ -3,6 +3,8 @@ package me.huntifi.conwymc.commands.staff.punishments;
 import me.huntifi.conwymc.Main;
 import me.huntifi.conwymc.database.LoadData;
 import me.huntifi.conwymc.database.Punishments;
+import me.huntifi.conwymc.util.Messenger;
+import me.huntifi.conwymc.util.PunishmentTime;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -43,8 +45,7 @@ public class BanCommand implements CommandExecutor {
                 else
                     ban(sender, player.getUniqueId(), Objects.requireNonNull(player.getAddress()).getAddress(), args);
             } catch (SQLException e) {
-                sender.sendMessage(ChatColor.DARK_RED + "An error occurred while trying to ban: "
-                        + ChatColor.RED + args[0]);
+                Messenger.sendError("An error occurred while trying to ban: " + ChatColor.RED + args[0], sender);
                 e.printStackTrace();
             }
         });
@@ -60,7 +61,7 @@ public class BanCommand implements CommandExecutor {
     private void banOffline(CommandSender sender, String[] args) throws SQLException {
         UUID uuid = LoadData.getUUID(args[0]);
         if (uuid == null)
-            sender.sendMessage(ChatColor.DARK_RED + "Could not find player: " + ChatColor.RED + args[0]);
+            Messenger.sendError("Could not find player: " + ChatColor.RED + args[0], sender);
         else
             ban(sender, uuid, null, args);
     }
@@ -84,7 +85,7 @@ public class BanCommand implements CommandExecutor {
 
         // Apply the ban to our database
         Punishments.add(args[0], uuid, ip, "ban", reason, duration);
-        sender.sendMessage(ChatColor.DARK_GREEN + "Successfully banned: " + ChatColor.GREEN + args[0]);
+        Messenger.sendInfo("Successfully banned: " + ChatColor.DARK_AQUA + args[0], sender);
 
         // Kick the player if they are online
         kick(uuid, reason, args[1]);

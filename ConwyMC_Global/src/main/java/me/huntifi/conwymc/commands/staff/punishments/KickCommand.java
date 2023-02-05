@@ -1,5 +1,6 @@
 package me.huntifi.conwymc.commands.staff.punishments;
 
+import me.huntifi.conwymc.util.Messenger;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -28,7 +29,7 @@ public class KickCommand implements CommandExecutor {
 
         Player player = Bukkit.getPlayer(args[0]);
         if (player == null) {
-            sender.sendMessage(ChatColor.DARK_RED + "Could not find player: " + ChatColor.RED + args[0]);
+            Messenger.sendError("Could not find player: " + ChatColor.RED + args[0], sender);
             return true;
         }
 

@@ -1,4 +1,4 @@
-package me.huntifi.conwymc.commands.staff.punishments;
+package me.huntifi.conwymc.util;
 
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
@@ -13,15 +13,16 @@ public class PunishmentTime {
 
     /**
      * Notify a command sender of the correct time format.
-     * @param s The command sender to notify
+     * @param sender The command sender to notify
      */
-    public static void wrongFormat(CommandSender s) {
-        s.sendMessage(
-                ChatColor.DARK_RED + "Please supply a duration in the form " + ChatColor.RED + "0t"
+    public static void wrongFormat(CommandSender sender) {
+        Messenger.sendError(
+                "Please supply a duration in the form " + ChatColor.RED + "0t"
                 + ChatColor.DARK_RED + ", where " + ChatColor.RED + "0" + ChatColor.DARK_RED
                 + " is any positive number and " + ChatColor.RED + "t" + ChatColor.DARK_RED
                 + " is one of the following units:\n"
-                + ChatColor.RED + "y(ears), M(onths), d(ays), h(ours), m(inutes), s(econds)"
+                + ChatColor.RED + "y(ears), M(onths), d(ays), h(ours), m(inutes), s(econds)",
+                sender
         );
     }
 

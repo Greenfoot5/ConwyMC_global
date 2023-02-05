@@ -3,6 +3,7 @@ package me.huntifi.conwymc.commands.staff.punishments;
 import me.huntifi.conwymc.Main;
 import me.huntifi.conwymc.database.LoadData;
 import me.huntifi.conwymc.database.Punishments;
+import me.huntifi.conwymc.util.Messenger;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -41,8 +42,7 @@ public class WarnCommand implements CommandExecutor {
                 else
                     warn(sender, player.getUniqueId(), args);
             } catch (SQLException e) {
-                sender.sendMessage(ChatColor.DARK_RED + "An error occurred while trying to warn: "
-                        + ChatColor.RED + args[0]);
+                Messenger.sendError("An error occurred while trying to warn: " + ChatColor.RED + args[0], sender);
                 e.printStackTrace();
             }
         });
@@ -52,32 +52,32 @@ public class WarnCommand implements CommandExecutor {
 
     /**
      * Get the UUID of a player that is currently offline and warn them.
-     * @param s Source of the command
+     * @param sender Source of the command
      * @param args Passed command arguments
      */
-    private void warnOffline(CommandSender s, String[] args) throws SQLException {
+    private void warnOffline(CommandSender sender, String[] args) throws SQLException {
         UUID uuid = LoadData.getUUID(args[0]);
         if (uuid == null) {
-            s.sendMessage(ChatColor.DARK_RED + "Could not find player: " + ChatColor.RED + args[0]);
+            Messenger.sendError("Could not find player: " + ChatColor.RED + args[0], sender);
         } else {
-            warn(s, uuid, args);
+            warn(sender, uuid, args);
         }
     }
 
     /**
      * Warn the player.
-     * @param s Source of the command
+     * @param sender Source of the command
      * @param uuid Unique ID of the player to mute
      * @param args Passed command arguments
      */
-    private void warn(CommandSender s, UUID uuid, String[] args) throws SQLException {
+    private void warn(CommandSender sender, UUID uuid, String[] args) throws SQLException {
         // Get the warning reason
         String reason = String.join(" ", args).split(" ", 2)[1];
 
         // Apply the warning to our database
         Punishments.add(args[0], uuid, null, "warn", reason, 0);
         warnOnline(uuid, reason);
-        s.sendMessage(ChatColor.DARK_GREEN + "Successfully warned: " + ChatColor.GREEN + args[0]);
+        Messenger.sendInfo("Successfully warned: " + ChatColor.DARK_AQUA + args[0], sender);
     }
 
     /**
@@ -86,8 +86,8 @@ public class WarnCommand implements CommandExecutor {
      * @param reason The reason for the warning
      */
     private void warnOnline(UUID uuid, String reason) {
-        Player p = Bukkit.getPlayer(uuid);
-        if (p != null)
-            p.sendMessage(ChatColor.DARK_RED + "You were warned for: " + ChatColor.RED + reason);
+        Player player = Bukkit.getPlayer(uuid);
+        if (player != null)
+            Messenger.sendError("You were warned for: " + ChatColor.RED + reason, player);
     }
 }

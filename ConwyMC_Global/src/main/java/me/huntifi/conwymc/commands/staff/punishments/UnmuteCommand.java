@@ -3,6 +3,7 @@ package me.huntifi.conwymc.commands.staff.punishments;
 import me.huntifi.conwymc.Main;
 import me.huntifi.conwymc.database.ActiveData;
 import me.huntifi.conwymc.database.Punishments;
+import me.huntifi.conwymc.util.Messenger;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -36,10 +37,9 @@ public class UnmuteCommand implements CommandExecutor {
             try {
                 Punishments.end(args[0], "mute");
                 unmuteOnline(args[0]);
-                sender.sendMessage(ChatColor.DARK_GREEN + "Successfully unmuted: " + ChatColor.GREEN + args[0]);
+                Messenger.sendInfo("Successfully unmuted: " + ChatColor.DARK_AQUA + args[0], sender);
             } catch (SQLException e) {
-                sender.sendMessage(ChatColor.DARK_RED + "An error occurred while trying to unmute: "
-                        + ChatColor.RED + args[0]);
+                Messenger.sendError("An error occurred while trying to unmute: " + ChatColor.RED + args[0], sender);
                 e.printStackTrace();
             }
         });
@@ -55,7 +55,7 @@ public class UnmuteCommand implements CommandExecutor {
         Player player = Bukkit.getPlayer(name);
         if (player != null) {
             ActiveData.getData(player.getUniqueId()).setMute(null, null);
-            player.sendMessage(ChatColor.GREEN + "Your mute has been removed!");
+            Messenger.sendInfo("Your mute has been removed!", player);
         }
     }
 }
