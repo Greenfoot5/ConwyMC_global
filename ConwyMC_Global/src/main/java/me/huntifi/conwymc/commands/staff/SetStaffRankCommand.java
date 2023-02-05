@@ -4,6 +4,7 @@ import me.huntifi.conwymc.database.ActiveData;
 import me.huntifi.conwymc.database.Permissions;
 import me.huntifi.conwymc.events.nametag.UpdateNameTagEvent;
 import me.huntifi.conwymc.util.Messenger;
+import me.huntifi.conwymc.util.NameTag;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -41,7 +42,7 @@ public class SetStaffRankCommand implements CommandExecutor {
         String rank = args.length == 1 || args[1].equalsIgnoreCase("none") ? "" : args[1].toLowerCase();
         if (Permissions.setStaffPermission(player.getUniqueId(), rank)) {
             ActiveData.getData(player.getUniqueId()).setStaffRank(rank);
-            Bukkit.getPluginManager().callEvent(new UpdateNameTagEvent(player));
+            Bukkit.getPluginManager().callEvent(new UpdateNameTagEvent(player, NameTag.convertRank(rank)));
         } else {
             Messenger.sendError("Rank " + ChatColor.RED + rank + ChatColor.DARK_RED + " is invalid!", sender);
         }
