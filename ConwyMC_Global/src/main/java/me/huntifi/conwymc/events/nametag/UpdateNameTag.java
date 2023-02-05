@@ -26,6 +26,6 @@ public class UpdateNameTag implements Listener {
         String rank = NameTag.convertRank(data.getDisplayRank());
 
         player.setDisplayName(rank + ChatColor.GRAY + player.getName());
-        NametagEdit.getApi().setPrefix(player, rank);
+        NametagEdit.getApi().setPrefix(player, rank + ChatColor.GRAY);
     }
 }

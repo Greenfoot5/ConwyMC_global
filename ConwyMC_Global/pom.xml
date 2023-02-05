@@ -63,7 +63,7 @@
             <url>https://repo.papermc.io/repository/maven-public/</url>
         </repository>
         <repository>
-            <id>nametagedit</id>
+            <id>upstream</id>
             <url>https://ci.nametagedit.com/plugin/repository/everything/</url>
         </repository>
     </repositories>
@@ -90,6 +90,7 @@
             <groupId>com.nametagedit</groupId>
             <artifactId>nametagedit</artifactId>
             <version>4.5.4</version>
+            <scope>provided</scope>
         </dependency>
     </dependencies>
 </project>

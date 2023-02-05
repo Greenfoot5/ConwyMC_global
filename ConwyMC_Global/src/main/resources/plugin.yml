@@ -125,3 +125,10 @@ commands:
     usage: /warn <player> <reason>
     permission: conwymc.chatmod
     permission-message: You are not permitted to use this command!
+
+  # Staff - Other
+  SetStaffRank:
+    description: Set a staff rank for a player
+    usage: /setstaffrank <player> <rank>
+    permission: conwymc.admin
+    permission-message: You are not permitted to use this command!

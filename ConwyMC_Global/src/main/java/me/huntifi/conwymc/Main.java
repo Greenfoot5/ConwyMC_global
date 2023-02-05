@@ -1,6 +1,7 @@
 package me.huntifi.conwymc;
 
 import dev.dejvokep.boostedyaml.YamlDocument;
+import me.huntifi.conwymc.commands.staff.SetStaffRankCommand;
 import me.huntifi.conwymc.commands.staff.punishments.*;
 import me.huntifi.conwymc.database.KeepAlive;
 import me.huntifi.conwymc.database.MySQL;
@@ -8,6 +9,7 @@ import me.huntifi.conwymc.database.StoreData;
 import me.huntifi.conwymc.events.chat.PlayerChat;
 import me.huntifi.conwymc.events.connection.PlayerConnect;
 import me.huntifi.conwymc.events.connection.PlayerDisconnect;
+import me.huntifi.conwymc.events.nametag.UpdateNameTag;
 import org.bukkit.Bukkit;
 import org.bukkit.event.HandlerList;
 import org.bukkit.plugin.Plugin;
@@ -124,6 +126,7 @@ public final class Main extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new PlayerChat(), plugin);
         getServer().getPluginManager().registerEvents(new PlayerConnect(), plugin);
         getServer().getPluginManager().registerEvents(new PlayerDisconnect(), plugin);
+        getServer().getPluginManager().registerEvents(new UpdateNameTag(), plugin);
     }
 
     /**
@@ -138,6 +141,9 @@ public final class Main extends JavaPlugin {
         Objects.requireNonNull(getCommand("Unban")).setExecutor(new UnbanCommand());
         Objects.requireNonNull(getCommand("Unmute")).setExecutor(new UnmuteCommand());
         Objects.requireNonNull(getCommand("Warn")).setExecutor(new WarnCommand());
+
+        // Staff - Other
+        Objects.requireNonNull(getCommand("SetStaffRank")).setExecutor(new SetStaffRankCommand());
     }
 
     /**
