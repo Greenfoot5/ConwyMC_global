@@ -26,6 +26,9 @@ public class PlayerData {
     /** The player's custom leave message */
     private String leaveMessage;
 
+    /** The player's current chat mode */
+    private String chatMode = "global";
+
     /** Whether the player's staff rank is hidden */
     private boolean isHiddenStaff = false;
 
@@ -136,6 +139,22 @@ public class PlayerData {
      */
     public void setLeaveMessage(String leaveMessage) {
         this.leaveMessage = leaveMessage;
+    }
+
+    /**
+     * Get the player's current chat mode.
+     * @return The player's chat mode
+     */
+    public String getChatMode() {
+        return chatMode;
+    }
+
+    /**
+     * Set the player's current chat mode
+     * @param chatMode The chat mode to set
+     */
+    public void setChatMode(String chatMode) {
+        this.chatMode = chatMode;
     }
 
     /**

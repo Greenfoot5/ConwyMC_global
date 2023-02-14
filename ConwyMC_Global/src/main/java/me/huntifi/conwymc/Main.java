@@ -1,7 +1,11 @@
 package me.huntifi.conwymc;
 
 import dev.dejvokep.boostedyaml.YamlDocument;
+import me.huntifi.conwymc.commands.chat.GlobalChatCommand;
+import me.huntifi.conwymc.commands.chat.MessageCommand;
+import me.huntifi.conwymc.commands.chat.ReplyCommand;
 import me.huntifi.conwymc.commands.staff.SetStaffRankCommand;
+import me.huntifi.conwymc.commands.staff.chat.StaffChatCommand;
 import me.huntifi.conwymc.commands.staff.punishments.*;
 import me.huntifi.conwymc.database.KeepAlive;
 import me.huntifi.conwymc.database.MySQL;
@@ -133,6 +137,14 @@ public final class Main extends JavaPlugin {
      * Register all commands.
      */
     private void registerCommands() {
+        // Chat
+        Objects.requireNonNull(getCommand("GlobalChat")).setExecutor(new GlobalChatCommand());
+        Objects.requireNonNull(getCommand("Message")).setExecutor(new MessageCommand());
+        Objects.requireNonNull(getCommand("Reply")).setExecutor(new ReplyCommand());
+
+        // Staff - Chat
+        Objects.requireNonNull(getCommand("StaffChat")).setExecutor(new StaffChatCommand());
+
         // Staff - Punishments
         Objects.requireNonNull(getCommand("Ban")).setExecutor(new BanCommand());
         Objects.requireNonNull(getCommand("Kick")).setExecutor(new KickCommand());

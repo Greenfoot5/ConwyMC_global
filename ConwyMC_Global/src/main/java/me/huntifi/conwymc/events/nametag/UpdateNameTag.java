@@ -1,9 +1,6 @@
 package me.huntifi.conwymc.events.nametag;
 
 import com.nametagedit.plugin.NametagEdit;
-import me.huntifi.conwymc.data_types.PlayerData;
-import me.huntifi.conwymc.database.ActiveData;
-import me.huntifi.conwymc.util.NameTag;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
