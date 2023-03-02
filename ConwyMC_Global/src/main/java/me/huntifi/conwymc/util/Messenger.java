@@ -87,20 +87,30 @@ public class Messenger {
     }
 
     /**
-     * Send a lore message to a user
+     * Send a success message to a user
      * @param message The message to send
      * @param sender To whom the message should be sent
      */
-    public static void sendLore(String message, @NotNull CommandSender sender) {
-        sender.sendMessage(ChatColor.GOLD + "[l] " + ChatColor.GREEN + message);
+    public static void sendSuccess(String message, CommandSender sender) {
+        sender.sendMessage(ChatColor.GOLD + "[+] " + ChatColor.GREEN + message);
     }
 
     /**
-     * Broadcast a lore message to all users
-     * @param message The message to broadcast
+     * Send an action success message to a user
+     * @param message The message to send
+     * @param sender To whom the message should be sent
      */
-    public static void broadcastLore(String message) {
-        getServer().broadcastMessage(ChatColor.GOLD + "[l] " + ChatColor.GREEN + message);
+    public static void sendActionSuccess(String message, @NotNull Player sender) {
+        sender.spigot().sendMessage(ChatMessageType.ACTION_BAR,
+                TextComponent.fromLegacyText(ChatColor.GOLD + "[+] " + ChatColor.GREEN + message));
+    }
+
+    /**
+     * Broadcast a success message to everyone
+     * @param message The message to send
+     */
+    public static void broadcastSuccess(String message) {
+        getServer().broadcastMessage(ChatColor.GOLD + "[+] " + ChatColor.GREEN + message);
     }
 
     /**

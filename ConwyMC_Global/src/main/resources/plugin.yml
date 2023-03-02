@@ -107,6 +107,20 @@ commands:
     usage: /r <message>
     aliases: r
 
+  # Donator
+  JoinMessage:
+    description: Sets your custom join message
+    usage: /joinmsg <set | reset> [message]
+    aliases: joinmsg
+    permission: castlesiege.esquire
+    permission-message: Only donators are permitted to use this command!
+  LeaveMessage:
+    description: Sets your custom leave message
+    usage: /leavemsg <set | reset> [message]
+    aliases: leavemsg
+    permission: castlesiege.esquire
+    permission-message: Only donators are permitted to use this command!
+
   # Staff - Chat
   StaffChat:
     description: Talk in staff-chat
