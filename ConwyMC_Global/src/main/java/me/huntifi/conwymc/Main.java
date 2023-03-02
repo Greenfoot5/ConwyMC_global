@@ -4,6 +4,8 @@ import dev.dejvokep.boostedyaml.YamlDocument;
 import me.huntifi.conwymc.commands.chat.GlobalChatCommand;
 import me.huntifi.conwymc.commands.chat.MessageCommand;
 import me.huntifi.conwymc.commands.chat.ReplyCommand;
+import me.huntifi.conwymc.commands.donator.JoinMessageCommand;
+import me.huntifi.conwymc.commands.donator.LeaveMessageCommand;
 import me.huntifi.conwymc.commands.staff.SetStaffRankCommand;
 import me.huntifi.conwymc.commands.staff.chat.StaffChatCommand;
 import me.huntifi.conwymc.commands.staff.punishments.*;
@@ -141,6 +143,10 @@ public final class Main extends JavaPlugin {
         Objects.requireNonNull(getCommand("GlobalChat")).setExecutor(new GlobalChatCommand());
         Objects.requireNonNull(getCommand("Message")).setExecutor(new MessageCommand());
         Objects.requireNonNull(getCommand("Reply")).setExecutor(new ReplyCommand());
+
+        // Donator
+        Objects.requireNonNull(getCommand("JoinMessage")).setExecutor(new JoinMessageCommand());
+        Objects.requireNonNull(getCommand("LeaveMessage")).setExecutor(new LeaveMessageCommand());
 
         // Staff - Chat
         Objects.requireNonNull(getCommand("StaffChat")).setExecutor(new StaffChatCommand());
