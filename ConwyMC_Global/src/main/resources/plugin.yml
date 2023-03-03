@@ -122,6 +122,9 @@ commands:
     permission-message: Only donators are permitted to use this command!
 
   # Info
+  Discord:
+    description: Gives the link to our discord
+    usage: /discord
   TopDonators:
     description: Shows the donator leaderboard
     usage: /topdonators [position]
