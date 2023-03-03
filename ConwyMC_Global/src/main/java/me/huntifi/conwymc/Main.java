@@ -6,10 +6,7 @@ import me.huntifi.conwymc.commands.chat.MessageCommand;
 import me.huntifi.conwymc.commands.chat.ReplyCommand;
 import me.huntifi.conwymc.commands.donator.JoinMessageCommand;
 import me.huntifi.conwymc.commands.donator.LeaveMessageCommand;
-import me.huntifi.conwymc.commands.info.DiscordCommand;
-import me.huntifi.conwymc.commands.info.PingCommand;
-import me.huntifi.conwymc.commands.info.RulesCommand;
-import me.huntifi.conwymc.commands.info.TopDonatorsCommand;
+import me.huntifi.conwymc.commands.info.*;
 import me.huntifi.conwymc.commands.staff.SetStaffRankCommand;
 import me.huntifi.conwymc.commands.staff.chat.StaffChatCommand;
 import me.huntifi.conwymc.commands.staff.punishments.*;
@@ -157,6 +154,7 @@ public final class Main extends JavaPlugin {
         Objects.requireNonNull(getCommand("Ping")).setExecutor(new PingCommand());
         Objects.requireNonNull(getCommand("Rules")).setExecutor(new RulesCommand());
         Objects.requireNonNull(getCommand("TopDonators")).setExecutor(new TopDonatorsCommand());
+        Objects.requireNonNull(getCommand("WebShop")).setExecutor(new WebShopCommand());
 
         // Staff - Chat
         Objects.requireNonNull(getCommand("StaffChat")).setExecutor(new StaffChatCommand());

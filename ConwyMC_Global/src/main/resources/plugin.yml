@@ -134,6 +134,11 @@ commands:
   TopDonators:
     description: Shows the donator leaderboard
     usage: /topdonators [position]
+  WebShop:
+    description: Gives the link to our web shop
+    usage: /webshop
+    aliases:
+      - donate
 
   # Staff - Chat
   StaffChat:
