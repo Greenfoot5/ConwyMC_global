@@ -3,7 +3,7 @@ package me.huntifi.conwymc.commands.donator;
 import me.huntifi.conwymc.data_types.PlayerData;
 
 /**
- * Manages custom leave messages
+ * Manages custom join messages
  */
 public class JoinMessageCommand extends CustomMessageCommand {
 

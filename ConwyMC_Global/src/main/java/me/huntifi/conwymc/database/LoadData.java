@@ -78,8 +78,19 @@ public class LoadData {
      * @throws SQLException If something goes wrong executing the query
      */
     public static Tuple<PreparedStatement, ResultSet> getTopDonators() throws SQLException {
+        return getDonators(0);
+    }
+
+    /**
+     * Get 10 donators from the database.
+     * @param offset The amount of donators to skip
+     * @return A tuple of the prepared statement (to close later) and the query's result
+     * @throws SQLException If something goes wrong executing the query
+     */
+    public static Tuple<PreparedStatement, ResultSet> getDonators(int offset) throws SQLException {
         PreparedStatement ps = Main.getConnection().prepareStatement(
-                "SELECT * FROM player_rank ORDER BY rank_points DESC LIMIT 10");
+                "SELECT * FROM vw_donator LIMIT 10 OFFSET ?");
+        ps.setInt(1, offset);
 
         ResultSet rs = ps.executeQuery();
         return new Tuple<>(ps, rs);

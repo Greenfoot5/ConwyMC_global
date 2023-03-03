@@ -121,6 +121,11 @@ commands:
     permission: castlesiege.esquire
     permission-message: Only donators are permitted to use this command!
 
+  # Info
+  TopDonators:
+    description: Shows the donator leaderboard
+    usage: /topdonators [position]
+
   # Staff - Chat
   StaffChat:
     description: Talk in staff-chat
