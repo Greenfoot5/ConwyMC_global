@@ -125,6 +125,9 @@ commands:
   Discord:
     description: Gives the link to our discord
     usage: /discord
+  Ping:
+    description: Shows a player's current ping
+    usage: /ping [player]
   TopDonators:
     description: Shows the donator leaderboard
     usage: /topdonators [position]
