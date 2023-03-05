@@ -155,6 +155,7 @@ public final class Main extends JavaPlugin {
         Objects.requireNonNull(getCommand("Rules")).setExecutor(new RulesCommand());
         Objects.requireNonNull(getCommand("TopDonators")).setExecutor(new TopDonatorsCommand());
         Objects.requireNonNull(getCommand("WebShop")).setExecutor(new WebShopCommand());
+        Objects.requireNonNull(getCommand("WhoIs")).setExecutor(new WhoIsCommand());
 
         // Staff - Chat
         Objects.requireNonNull(getCommand("StaffChat")).setExecutor(new StaffChatCommand());

@@ -139,6 +139,9 @@ commands:
     usage: /webshop
     aliases:
       - donate
+  WhoIs:
+    description: Returns all previous names of a player!
+    usage: /whois [player]
 
   # Staff - Chat
   StaffChat:
