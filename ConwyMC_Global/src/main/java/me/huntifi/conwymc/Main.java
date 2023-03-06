@@ -7,6 +7,7 @@ import me.huntifi.conwymc.commands.chat.ReplyCommand;
 import me.huntifi.conwymc.commands.donator.JoinMessageCommand;
 import me.huntifi.conwymc.commands.donator.LeaveMessageCommand;
 import me.huntifi.conwymc.commands.info.*;
+import me.huntifi.conwymc.commands.staff.RankPointsCommand;
 import me.huntifi.conwymc.commands.staff.SetStaffRankCommand;
 import me.huntifi.conwymc.commands.staff.chat.StaffChatCommand;
 import me.huntifi.conwymc.commands.staff.punishments.*;
@@ -170,6 +171,7 @@ public final class Main extends JavaPlugin {
         Objects.requireNonNull(getCommand("Warn")).setExecutor(new WarnCommand());
 
         // Staff - Other
+        Objects.requireNonNull(getCommand("RankPoints")).setExecutor(new RankPointsCommand());
         Objects.requireNonNull(getCommand("SetStaffRank")).setExecutor(new SetStaffRankCommand());
     }
 

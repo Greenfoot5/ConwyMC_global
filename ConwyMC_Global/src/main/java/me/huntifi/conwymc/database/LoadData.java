@@ -73,6 +73,29 @@ public class LoadData {
     }
 
     /**
+     * Get the rank points of a player from our database.
+     * @param name The name of the player
+     * @return The player's rank points, or -1 if the name is not in the database
+     * @throws SQLException If something goes wrong executing the query
+     */
+    public static double getRankPoints(String name) throws SQLException {
+        PreparedStatement ps = Main.getConnection().prepareStatement(
+                "SELECT rank_points FROM player_rank WHERE name=?");
+        ps.setString(1, name);
+        ResultSet rs = ps.executeQuery();
+
+        double rankPoints;
+        if (rs.next()) {
+            rankPoints = rs.getDouble(1);
+        } else {
+            rankPoints = -1;
+        }
+
+        ps.close();
+        return rankPoints;
+    }
+
+    /**
      * Get the top 10 donators.
      * @return A tuple of the prepared statement (to close later) and the query's result
      * @throws SQLException If something goes wrong executing the query

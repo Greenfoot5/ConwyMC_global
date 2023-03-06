@@ -189,6 +189,11 @@ commands:
     permission-message: You are not permitted to use this command!
 
   # Staff - Other
+  RankPoints:
+    description: Manage a player's rank points
+    usage: /rankpoints <player> <set | add | remove> <amount>
+    permission: castlesiege.moderator
+    permission-message: You are not permitted to use this command!
   SetStaffRank:
     description: Set a staff rank for a player
     usage: /setstaffrank <player> <rank>

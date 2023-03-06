@@ -73,4 +73,23 @@ public class StoreData {
             }
         });
     }
+
+    /**
+     * Update the player's donator rank saved in the database
+     * @param name The name of the player
+     * @param rp The player's rank points
+     */
+    public static void updateRank(String name, double rp) {
+        Bukkit.getScheduler().runTaskAsynchronously(Main.getPlugin(), () -> {
+            try (PreparedStatement ps = Main.getConnection().prepareStatement(
+                        "UPDATE player_rank SET rank_points = ? WHERE name = ?"
+            )) {
+                ps.setDouble(1, rp);
+                ps.setString(2, name);
+                ps.executeUpdate();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        });
+    }
 }
