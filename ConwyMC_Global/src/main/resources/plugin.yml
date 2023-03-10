@@ -112,13 +112,13 @@ commands:
     description: Sets your custom join message
     usage: /joinmsg <set | reset> [message]
     aliases: joinmsg
-    permission: castlesiege.esquire
+    permission: conwymc.esquire
     permission-message: Only donators are permitted to use this command!
   LeaveMessage:
     description: Sets your custom leave message
     usage: /leavemsg <set | reset> [message]
     aliases: leavemsg
-    permission: castlesiege.esquire
+    permission: conwymc.esquire
     permission-message: Only donators are permitted to use this command!
 
   # Info
@@ -192,7 +192,7 @@ commands:
   RankPoints:
     description: Manage a player's rank points
     usage: /rankpoints <player> <set | add | remove> <amount>
-    permission: castlesiege.moderator
+    permission: conwymc.moderator
     permission-message: You are not permitted to use this command!
   SetStaffRank:
     description: Set a staff rank for a player
