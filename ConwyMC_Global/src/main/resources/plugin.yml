@@ -144,6 +144,11 @@ commands:
     usage: /whois [player]
 
   # Staff - Chat
+  Broadcast:
+    description: Send a special message to everyone on the server
+    usage: /broadcast <message>
+    permission: conwymc.chatmod
+    permission-message: You are not permitted to use this command!
   StaffChat:
     description: Talk in staff-chat
     usage: /s [message]
