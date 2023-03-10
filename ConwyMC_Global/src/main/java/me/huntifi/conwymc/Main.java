@@ -12,6 +12,7 @@ import me.huntifi.conwymc.commands.staff.rank.SetStaffRankCommand;
 import me.huntifi.conwymc.commands.staff.chat.BroadcastCommand;
 import me.huntifi.conwymc.commands.staff.chat.StaffChatCommand;
 import me.huntifi.conwymc.commands.staff.punishments.*;
+import me.huntifi.conwymc.commands.staff.rank.ToggleRankCommand;
 import me.huntifi.conwymc.database.KeepAlive;
 import me.huntifi.conwymc.database.MySQL;
 import me.huntifi.conwymc.database.StoreData;
@@ -175,6 +176,7 @@ public final class Main extends JavaPlugin {
         // Staff - Rank
         Objects.requireNonNull(getCommand("RankPoints")).setExecutor(new RankPointsCommand());
         Objects.requireNonNull(getCommand("SetStaffRank")).setExecutor(new SetStaffRankCommand());
+        Objects.requireNonNull(getCommand("ToggleRank")).setExecutor(new ToggleRankCommand());
     }
 
     /**

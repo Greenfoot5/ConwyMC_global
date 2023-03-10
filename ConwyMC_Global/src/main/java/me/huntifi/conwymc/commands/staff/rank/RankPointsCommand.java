@@ -6,6 +6,7 @@ import me.huntifi.conwymc.database.ActiveData;
 import me.huntifi.conwymc.database.LoadData;
 import me.huntifi.conwymc.database.Permissions;
 import me.huntifi.conwymc.database.StoreData;
+import me.huntifi.conwymc.events.nametag.UpdateNameTagEvent;
 import me.huntifi.conwymc.util.Messenger;
 import me.huntifi.conwymc.util.RankPoints;
 import org.bukkit.Bukkit;
@@ -124,5 +125,6 @@ public class RankPointsCommand implements CommandExecutor {
         data.setRankPoints(rp);
         data.setRank(rank);
         Permissions.setDonatorPermission(uuid, rank);
+        Bukkit.getPluginManager().callEvent(new UpdateNameTagEvent(player, data.getDisplayRank()));
     }
 }

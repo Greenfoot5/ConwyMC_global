@@ -19,7 +19,7 @@ public class UpdateNameTag implements Listener {
     @EventHandler (priority = EventPriority.LOWEST)
     public void onUpdateNameTag(UpdateNameTagEvent event) {
         Player player = event.getPlayer();
-        String rank = event.getRank();
+        String rank = event.getDisplayRank();
 
         player.setDisplayName(rank + ChatColor.GRAY + player.getName());
         NametagEdit.getApi().setPrefix(player, rank + ChatColor.GRAY);

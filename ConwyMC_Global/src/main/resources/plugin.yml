@@ -204,3 +204,8 @@ commands:
     usage: /setstaffrank <player> <rank>
     permission: conwymc.admin
     permission-message: You are not permitted to use this command!
+  ToggleRank:
+    description: Switch between staff and donator rank
+    usage: /togglerank
+    permission: castlesiege.chatmod
+    permission-message: You are not permitted to use this command!

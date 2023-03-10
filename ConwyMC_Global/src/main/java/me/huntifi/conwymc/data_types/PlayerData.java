@@ -1,5 +1,6 @@
 package me.huntifi.conwymc.data_types;
 
+import me.huntifi.conwymc.util.NameTag;
 import org.bukkit.ChatColor;
 
 import java.sql.ResultSet;
@@ -52,13 +53,13 @@ public class PlayerData {
 
     /**
      * Get the player's display rank.
-     * @return The player's staff or donator rank
+     * @return The pretty representation of the player's staff or donator rank
      */
     public String getDisplayRank() {
         if (!staffRank.isEmpty() && !isHiddenStaff)
-            return staffRank;
+            return NameTag.convertRank(staffRank);
 
-        return rank;
+        return NameTag.convertRank(rank);
     }
 
     /**
@@ -158,11 +159,12 @@ public class PlayerData {
     }
 
     /**
-     * Toggle whether the player's staff rank is hidden.
+     * Toggle whether the player's staff rank or donator rank is shown.
+     * @return Whether the player's staff rank is shown
      */
-    public void toggleRank() {
+    public boolean toggleRank() {
         isHiddenStaff = !isHiddenStaff;
-        // TODO: Update name tag
+        return !isHiddenStaff;
     }
 
     /**

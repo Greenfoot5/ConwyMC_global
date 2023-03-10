@@ -11,20 +11,20 @@ public class UpdateNameTagEvent extends Event {
 
     private final Player player;
 
-    private final String rank;
+    private final String displayRank;
 
     /**
      * Create a new event that calls for a player's name tag to be updated.
      * @param player The player
-     * @param rank The rank string that should be used
+     * @param displayRank The pretty rank string that should be used
      */
-    public UpdateNameTagEvent(Player player, String rank) {
+    public UpdateNameTagEvent(Player player, String displayRank) {
         this.player = player;
-        this.rank = rank;
+        this.displayRank = displayRank;
     }
 
     /**
-     * Get the player whose name tag should be updated
+     * Get the player whose name tag should be updated.
      * @return The player
      */
     public Player getPlayer() {
@@ -32,11 +32,11 @@ public class UpdateNameTagEvent extends Event {
     }
 
     /**
-     * Get the player's new rank representation
-     * @return The rank string
+     * Get the player's new display rank.
+     * @return The pretty rank string
      */
-    public String getRank() {
-        return rank;
+    public String getDisplayRank() {
+        return displayRank;
     }
 
     public static HandlerList getHandlerList() {
