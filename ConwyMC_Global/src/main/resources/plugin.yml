@@ -193,7 +193,7 @@ commands:
     permission: conwymc.chatmod
     permission-message: You are not permitted to use this command!
 
-  # Staff - Other
+  # Staff - Rank
   RankPoints:
     description: Manage a player's rank points
     usage: /rankpoints <player> <set | add | remove> <amount>

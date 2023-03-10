@@ -1,4 +1,4 @@
-package me.huntifi.conwymc.commands.staff;
+package me.huntifi.conwymc.commands.staff.rank;
 
 import me.huntifi.conwymc.database.ActiveData;
 import me.huntifi.conwymc.database.Permissions;
