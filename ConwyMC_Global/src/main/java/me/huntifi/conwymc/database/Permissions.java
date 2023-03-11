@@ -29,7 +29,6 @@ public class Permissions {
 
         PermissionAttachment attachment = player.addAttachment(Main.getPlugin());
         perms.put(uuid, attachment);
-        setPermission(uuid, "", "disable");
     }
 
     /**
