@@ -209,3 +209,10 @@ commands:
     usage: /togglerank
     permission: conwymc.chatmod
     permission-message: You are not permitted to use this command!
+
+  # Staff - Other
+  Fly:
+    description: Toggle flight
+    usage: /fly
+    permission: conwymc.chatmod+
+    permission-message: You are not permitted to use this command!
