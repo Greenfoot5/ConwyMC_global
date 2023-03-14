@@ -1,6 +1,6 @@
 package me.huntifi.conwymc.commands.info;
 
-import me.huntifi.conwymc.Main;
+import me.huntifi.conwymc.ConwyMC;
 import me.huntifi.conwymc.data_types.Tuple;
 import me.huntifi.conwymc.database.LoadData;
 import me.huntifi.conwymc.util.Messenger;
@@ -33,7 +33,7 @@ public class TopDonatorsCommand implements CommandExecutor {
      */
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command cmd, @NotNull String label, @NotNull String[] args) {
-        Bukkit.getScheduler().runTaskAsynchronously(Main.getPlugin(), () -> {
+        Bukkit.getScheduler().runTaskAsynchronously(ConwyMC.getPlugin(), () -> {
             if (args.length == 0) {
                 display(sender, 0);
             } else {

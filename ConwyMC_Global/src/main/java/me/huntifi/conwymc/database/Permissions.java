@@ -1,6 +1,6 @@
 package me.huntifi.conwymc.database;
 
-import me.huntifi.conwymc.Main;
+import me.huntifi.conwymc.ConwyMC;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.permissions.PermissionAttachment;
@@ -27,7 +27,7 @@ public class Permissions {
         Player player = Bukkit.getPlayer(uuid);
         assert player != null;
 
-        PermissionAttachment attachment = player.addAttachment(Main.getPlugin());
+        PermissionAttachment attachment = player.addAttachment(ConwyMC.getPlugin());
         perms.put(uuid, attachment);
     }
 

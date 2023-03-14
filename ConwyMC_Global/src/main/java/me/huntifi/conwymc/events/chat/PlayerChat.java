@@ -1,6 +1,6 @@
 package me.huntifi.conwymc.events.chat;
 
-import me.huntifi.conwymc.Main;
+import me.huntifi.conwymc.ConwyMC;
 import me.huntifi.conwymc.commands.staff.punishments.MuteCommand;
 import me.huntifi.conwymc.data_types.PlayerData;
 import me.huntifi.conwymc.database.ActiveData;
@@ -34,7 +34,7 @@ public class PlayerChat implements Listener {
         PlayerData data = ActiveData.getData(event.getPlayer().getUniqueId());
         if (data.getChatMode().equalsIgnoreCase("global")) {
             event.setCancelled(true);
-            Bukkit.getScheduler().runTask(Main.getPlugin(), () ->
+            Bukkit.getScheduler().runTask(ConwyMC.getPlugin(), () ->
                     event.getPlayer().performCommand("GlobalChat " + event.getMessage())
             );
         }
@@ -49,7 +49,7 @@ public class PlayerChat implements Listener {
         PlayerData data = ActiveData.getData(event.getPlayer().getUniqueId());
         if (data.getChatMode().equalsIgnoreCase("staff")) {
             event.setCancelled(true);
-            Bukkit.getScheduler().runTask(Main.getPlugin(), () ->
+            Bukkit.getScheduler().runTask(ConwyMC.getPlugin(), () ->
                     event.getPlayer().performCommand("StaffChat " + event.getMessage())
             );
         }

@@ -1,6 +1,6 @@
 package me.huntifi.conwymc.database;
 
-import me.huntifi.conwymc.Main;
+import me.huntifi.conwymc.ConwyMC;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -15,12 +15,12 @@ public class KeepAlive implements Runnable {
      */
     @Override
     public void run() {
-        try (PreparedStatement ps = Main.getConnection().prepareStatement(
+        try (PreparedStatement ps = ConwyMC.getConnection().prepareStatement(
                 "SELECT * FROM player_rank LIMIT 0"
         )) {
             ps.execute();
         } catch (SQLException e) {
-            Main.getInstance().getLogger().warning("Could not keep the database connection alive!");
+            ConwyMC.getInstance().getLogger().warning("Could not keep the database connection alive!");
         }
     }
 }

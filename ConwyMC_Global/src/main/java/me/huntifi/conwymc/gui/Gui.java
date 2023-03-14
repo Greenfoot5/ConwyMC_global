@@ -1,6 +1,6 @@
 package me.huntifi.conwymc.gui;
 
-import me.huntifi.conwymc.Main;
+import me.huntifi.conwymc.ConwyMC;
 import me.huntifi.conwymc.util.ItemCreator;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -10,7 +10,6 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.inventory.Inventory;
-import org.bukkit.inventory.ItemStack;
 
 import java.util.HashMap;
 import java.util.List;
@@ -46,10 +45,10 @@ public class Gui implements Listener {
      * @param shouldUnregister Whether this GUI should stop listening for events after being closed
      */
     public Gui(String name, int rows, boolean shouldUnregister) {
-        inventory = Main.getPlugin().getServer().createInventory(null, 9 * rows, name);
+        inventory = ConwyMC.getPlugin().getServer().createInventory(null, 9 * rows, name);
         this.shouldUnregister = shouldUnregister;
 
-        Main.getPlugin().getServer().getPluginManager().registerEvents(this, Main.getPlugin());
+        ConwyMC.getPlugin().getServer().getPluginManager().registerEvents(this, ConwyMC.getPlugin());
     }
 
     /**

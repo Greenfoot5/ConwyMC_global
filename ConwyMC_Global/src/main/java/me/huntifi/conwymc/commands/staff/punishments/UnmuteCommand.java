@@ -1,6 +1,6 @@
 package me.huntifi.conwymc.commands.staff.punishments;
 
-import me.huntifi.conwymc.Main;
+import me.huntifi.conwymc.ConwyMC;
 import me.huntifi.conwymc.database.ActiveData;
 import me.huntifi.conwymc.database.Punishments;
 import me.huntifi.conwymc.util.Messenger;
@@ -33,7 +33,7 @@ public class UnmuteCommand implements CommandExecutor {
             return false;
 
         // Attempt to unmute the player asynchronously, as the database is involved
-        Bukkit.getScheduler().runTaskAsynchronously(Main.getPlugin(), () -> {
+        Bukkit.getScheduler().runTaskAsynchronously(ConwyMC.getPlugin(), () -> {
             try {
                 Punishments.end(args[0], "mute");
                 unmuteOnline(args[0]);

@@ -1,6 +1,6 @@
 package me.huntifi.conwymc.commands.staff.punishments;
 
-import me.huntifi.conwymc.Main;
+import me.huntifi.conwymc.ConwyMC;
 import me.huntifi.conwymc.data_types.PlayerData;
 import me.huntifi.conwymc.data_types.Tuple;
 import me.huntifi.conwymc.database.ActiveData;
@@ -39,7 +39,7 @@ public class MuteCommand implements CommandExecutor {
             return false;
 
         // Attempt to mute the player asynchronously, as the database is involved
-        Bukkit.getScheduler().runTaskAsynchronously(Main.getPlugin(), () -> {
+        Bukkit.getScheduler().runTaskAsynchronously(ConwyMC.getPlugin(), () -> {
             try {
                 Player p = Bukkit.getPlayer(args[0]);
                 if (p == null) {

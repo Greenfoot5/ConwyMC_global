@@ -1,6 +1,6 @@
 package me.huntifi.conwymc.commands.chat;
 
-import me.huntifi.conwymc.Main;
+import me.huntifi.conwymc.ConwyMC;
 import me.huntifi.conwymc.commands.staff.punishments.MuteCommand;
 import me.huntifi.conwymc.util.Messenger;
 import org.bukkit.Bukkit;
@@ -25,7 +25,7 @@ public abstract class ToggleChatCommand extends ChatCommand {
      */
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command cmd, @NotNull String label, @NotNull String[] args) {
-        Bukkit.getScheduler().runTaskAsynchronously(Main.getPlugin(), () -> {
+        Bukkit.getScheduler().runTaskAsynchronously(ConwyMC.getPlugin(), () -> {
             String message = String.join(" ", args);
 
             if (message.isEmpty()) {

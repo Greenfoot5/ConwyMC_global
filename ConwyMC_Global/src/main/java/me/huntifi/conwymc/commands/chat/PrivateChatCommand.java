@@ -1,6 +1,6 @@
 package me.huntifi.conwymc.commands.chat;
 
-import me.huntifi.conwymc.Main;
+import me.huntifi.conwymc.ConwyMC;
 import me.huntifi.conwymc.commands.staff.punishments.MuteCommand;
 import me.huntifi.conwymc.util.Messenger;
 import org.bukkit.Bukkit;
@@ -37,7 +37,7 @@ public abstract class PrivateChatCommand extends ChatCommand {
         if (args.length < requiredArguments)
             return false;
 
-        Bukkit.getScheduler().runTaskAsynchronously(Main.getPlugin(), () -> {
+        Bukkit.getScheduler().runTaskAsynchronously(ConwyMC.getPlugin(), () -> {
             if (sender instanceof Player && MuteCommand.isMuted(((Player) sender).getUniqueId()))
                 return;
 

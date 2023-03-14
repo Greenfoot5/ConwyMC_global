@@ -1,6 +1,6 @@
 package me.huntifi.conwymc.commands.info;
 
-import me.huntifi.conwymc.Main;
+import me.huntifi.conwymc.ConwyMC;
 import me.huntifi.conwymc.util.Messenger;
 import me.huntifi.conwymc.util.mojang.NameLookup;
 import me.huntifi.conwymc.util.mojang.PreviousPlayerNameEntry;
@@ -10,7 +10,6 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.bukkit.scheduler.BukkitRunnable;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
@@ -32,7 +31,7 @@ public class WhoIsCommand implements CommandExecutor {
      */
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command cmd, @NotNull String label, @NotNull String[] args) {
-        Bukkit.getScheduler().runTaskAsynchronously(Main.getPlugin(), () -> {
+        Bukkit.getScheduler().runTaskAsynchronously(ConwyMC.getPlugin(), () -> {
             if (!(sender instanceof Player) && args.length == 0)
                 Messenger.sendError("Only players can check their own name history!", sender);
             else if (args.length > 1)

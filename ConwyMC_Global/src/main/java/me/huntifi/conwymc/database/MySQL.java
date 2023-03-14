@@ -4,7 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-import me.huntifi.conwymc.Main;
+import me.huntifi.conwymc.ConwyMC;
 
 /**
  * The connection to the SQL database
@@ -63,7 +63,7 @@ public class MySQL {
             connection = DriverManager.getConnection(
                     String.format("jdbc:mysql://%s:%d/%s?autoReconnect=true", host, port, database), username, password
             );
-            Main.getInstance().getLogger().info("Successfully connected to the ConwyMC MySQL Database!");
+            ConwyMC.getInstance().getLogger().info("Successfully connected to the ConwyMC MySQL Database!");
         }
     }
 

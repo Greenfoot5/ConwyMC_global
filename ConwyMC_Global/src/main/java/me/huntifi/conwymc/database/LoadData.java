@@ -1,6 +1,6 @@
 package me.huntifi.conwymc.database;
 
-import me.huntifi.conwymc.Main;
+import me.huntifi.conwymc.ConwyMC;
 import me.huntifi.conwymc.data_types.PlayerData;
 import me.huntifi.conwymc.data_types.Tuple;
 
@@ -36,7 +36,7 @@ public class LoadData {
 
             return data;
         } catch (SQLException e) {
-            Main.getInstance().getLogger().warning("Something went wrong while loading player data!");
+            ConwyMC.getInstance().getLogger().warning("Something went wrong while loading player data!");
             e.printStackTrace();
             return null;
         }
@@ -48,7 +48,7 @@ public class LoadData {
      * @throws SQLException If a database access error occurs
      */
     private static void createRankEntry(UUID uuid) throws SQLException {
-        PreparedStatement ps = Main.getConnection().prepareStatement(
+        PreparedStatement ps = ConwyMC.getConnection().prepareStatement(
                 "INSERT IGNORE INTO player_rank (uuid) VALUES (?)");
         ps.setString(1, uuid.toString());
         ps.executeUpdate();
@@ -63,7 +63,7 @@ public class LoadData {
      */
     private static Tuple<PreparedStatement, ResultSet> getRankData(UUID uuid) throws SQLException {
         // Get player stats from the database
-        PreparedStatement ps = Main.getConnection().prepareStatement("SELECT * FROM player_rank WHERE uuid=?");
+        PreparedStatement ps = ConwyMC.getConnection().prepareStatement("SELECT * FROM player_rank WHERE uuid=?");
         ps.setString(1, uuid.toString());
         ResultSet rs = ps.executeQuery();
 
@@ -79,7 +79,7 @@ public class LoadData {
      * @throws SQLException If something goes wrong executing the query
      */
     public static double getRankPoints(String name) throws SQLException {
-        PreparedStatement ps = Main.getConnection().prepareStatement(
+        PreparedStatement ps = ConwyMC.getConnection().prepareStatement(
                 "SELECT rank_points FROM player_rank WHERE name=?");
         ps.setString(1, name);
         ResultSet rs = ps.executeQuery();
@@ -111,7 +111,7 @@ public class LoadData {
      * @throws SQLException If something goes wrong executing the query
      */
     public static Tuple<PreparedStatement, ResultSet> getDonators(int offset) throws SQLException {
-        PreparedStatement ps = Main.getConnection().prepareStatement(
+        PreparedStatement ps = ConwyMC.getConnection().prepareStatement(
                 "SELECT * FROM vw_donator LIMIT 10 OFFSET ?");
         ps.setInt(1, offset);
 
@@ -126,7 +126,7 @@ public class LoadData {
      * @throws SQLException If something goes wrong executing the query
      */
     public static UUID getUUID(String name) throws SQLException {
-        try (PreparedStatement ps = Main.getConnection().prepareStatement(
+        try (PreparedStatement ps = ConwyMC.getConnection().prepareStatement(
                 "SELECT uuid FROM player_rank WHERE name=?"
         )) {
             ps.setString(1, name);

@@ -1,6 +1,6 @@
 package me.huntifi.conwymc.commands.staff.punishments;
 
-import me.huntifi.conwymc.Main;
+import me.huntifi.conwymc.ConwyMC;
 import me.huntifi.conwymc.database.LoadData;
 import me.huntifi.conwymc.database.Punishments;
 import me.huntifi.conwymc.util.Messenger;
@@ -34,7 +34,7 @@ public class WarnCommand implements CommandExecutor {
             return false;
 
         // Attempt to warn the player asynchronously, as the database is involved
-        Bukkit.getScheduler().runTaskAsynchronously(Main.getPlugin(), () -> {
+        Bukkit.getScheduler().runTaskAsynchronously(ConwyMC.getPlugin(), () -> {
             try {
                 Player player = Bukkit.getPlayer(args[0]);
                 if (player == null)

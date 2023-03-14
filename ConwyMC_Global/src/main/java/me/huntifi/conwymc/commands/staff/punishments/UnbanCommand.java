@@ -1,6 +1,6 @@
 package me.huntifi.conwymc.commands.staff.punishments;
 
-import me.huntifi.conwymc.Main;
+import me.huntifi.conwymc.ConwyMC;
 import me.huntifi.conwymc.database.Punishments;
 import me.huntifi.conwymc.util.Messenger;
 import org.bukkit.Bukkit;
@@ -31,7 +31,7 @@ public class UnbanCommand implements CommandExecutor {
             return false;
 
         // Attempt to unban the player asynchronously, as the database is involved
-        Bukkit.getScheduler().runTaskAsynchronously(Main.getPlugin(), () -> {
+        Bukkit.getScheduler().runTaskAsynchronously(ConwyMC.getPlugin(), () -> {
             try {
                 Punishments.end(args[0], "ban");
                 Messenger.sendInfo("Successfully unbanned: " + ChatColor.DARK_AQUA + args[0], sender);

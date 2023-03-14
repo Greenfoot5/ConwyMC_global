@@ -35,13 +35,13 @@ import java.util.Objects;
 /**
  * The main class that controls the global ConwyMC plugin
  */
-public final class Main extends JavaPlugin {
+public final class ConwyMC extends JavaPlugin {
 
     /** The global ConwyMC plugin */
     private static Plugin plugin;
 
     /** The instance of the main class */
-    private static Main instance;
+    private static ConwyMC instance;
 
     /** The instance that handles the database connection */
     private static MySQL SQL;
@@ -94,7 +94,7 @@ public final class Main extends JavaPlugin {
      * Get the instance of the main class.
      * @return The main instance
      */
-    public static Main getInstance() {
+    public static ConwyMC getInstance() {
         return instance;
     }
 

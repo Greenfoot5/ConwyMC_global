@@ -1,6 +1,6 @@
 package me.huntifi.conwymc.commands.staff.rank;
 
-import me.huntifi.conwymc.Main;
+import me.huntifi.conwymc.ConwyMC;
 import me.huntifi.conwymc.data_types.PlayerData;
 import me.huntifi.conwymc.database.ActiveData;
 import me.huntifi.conwymc.database.LoadData;
@@ -38,7 +38,7 @@ public class RankPointsCommand implements CommandExecutor {
         if (args.length != 3)
             return false;
 
-        Bukkit.getScheduler().runTaskAsynchronously(Main.getPlugin(), () -> {
+        Bukkit.getScheduler().runTaskAsynchronously(ConwyMC.getPlugin(), () -> {
             try {
                 // Get the player's stored rank points
                 double rp = LoadData.getRankPoints(args[0]);

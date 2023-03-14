@@ -1,6 +1,6 @@
 package me.huntifi.conwymc.events.connection;
 
-import me.huntifi.conwymc.Main;
+import me.huntifi.conwymc.ConwyMC;
 import me.huntifi.conwymc.util.RankPoints;
 import me.huntifi.conwymc.util.PunishmentTime;
 import me.huntifi.conwymc.data_types.PlayerData;
@@ -139,7 +139,7 @@ public class PlayerConnect implements Listener {
      * @param data The player's data
      */
     private void setPermissions(UUID uuid, PlayerData data) {
-        Bukkit.getScheduler().runTaskAsynchronously(Main.getPlugin(), () -> {
+        Bukkit.getScheduler().runTaskAsynchronously(ConwyMC.getPlugin(), () -> {
             Permissions.addPlayer(uuid);
             Permissions.setStaffPermission(uuid, data.getStaffRank());
             Permissions.setDonatorPermission(uuid, data.getRank());

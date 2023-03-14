@@ -1,6 +1,6 @@
 name: ConwyMC_Global
 version: '${project.version}'
-main: me.huntifi.conwymc.Main
+main: me.huntifi.conwymc.ConwyMC
 api-version: 1.16
 prefix: ConwyMC
 load: STARTUP
