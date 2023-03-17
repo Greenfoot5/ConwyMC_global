@@ -132,6 +132,8 @@ public final class ConwyMC extends JavaPlugin {
         Objects.requireNonNull(getCommand("LeaveMessage")).setExecutor(new LeaveMessageCommand());
 
         // Info
+        Objects.requireNonNull(getCommand("Coins")).setExecutor(new CoinsCommand());
+        Objects.requireNonNull(getCommand("CoinMultiplier")).setExecutor(new CoinMultiplierCommand());
         Objects.requireNonNull(getCommand("Discord")).setExecutor(new DiscordCommand());
         Objects.requireNonNull(getCommand("Ping")).setExecutor(new PingCommand());
         Objects.requireNonNull(getCommand("Rules")).setExecutor(new RulesCommand());

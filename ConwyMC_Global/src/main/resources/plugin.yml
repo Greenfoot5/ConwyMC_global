@@ -123,6 +123,12 @@ commands:
     permission-message: Only donators are permitted to use this command!
 
   # Info
+  CoinMultiplier:
+    description: Shows the active coin multiplier
+    usage: /coinmultiplier
+  Coins:
+    description: Shows the player's coins
+    usage: /coins
   Discord:
     description: Gives the link to our discord
     usage: /discord
