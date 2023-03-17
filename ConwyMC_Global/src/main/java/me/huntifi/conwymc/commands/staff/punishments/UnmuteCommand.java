@@ -33,7 +33,7 @@ public class UnmuteCommand implements CommandExecutor {
             return false;
 
         // Attempt to unmute the player asynchronously, as the database is involved
-        Bukkit.getScheduler().runTaskAsynchronously(ConwyMC.getPlugin(), () -> {
+        Bukkit.getScheduler().runTaskAsynchronously(ConwyMC.plugin, () -> {
             try {
                 Punishments.end(args[0], "mute");
                 unmuteOnline(args[0]);

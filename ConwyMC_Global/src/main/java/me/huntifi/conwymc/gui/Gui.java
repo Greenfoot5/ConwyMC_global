@@ -45,10 +45,10 @@ public class Gui implements Listener {
      * @param shouldUnregister Whether this GUI should stop listening for events after being closed
      */
     public Gui(String name, int rows, boolean shouldUnregister) {
-        inventory = ConwyMC.getPlugin().getServer().createInventory(null, 9 * rows, name);
+        inventory = ConwyMC.plugin.getServer().createInventory(null, 9 * rows, name);
         this.shouldUnregister = shouldUnregister;
 
-        ConwyMC.getPlugin().getServer().getPluginManager().registerEvents(this, ConwyMC.getPlugin());
+        ConwyMC.plugin.getServer().getPluginManager().registerEvents(this, ConwyMC.plugin);
     }
 
     /**

@@ -63,7 +63,7 @@ public class MySQL {
             connection = DriverManager.getConnection(
                     String.format("jdbc:mysql://%s:%d/%s?autoReconnect=true", host, port, database), username, password
             );
-            ConwyMC.getInstance().getLogger().info("Successfully connected to the ConwyMC MySQL Database!");
+            ConwyMC.instance.getLogger().info("Successfully connected to the ConwyMC MySQL Database!");
         }
     }
 

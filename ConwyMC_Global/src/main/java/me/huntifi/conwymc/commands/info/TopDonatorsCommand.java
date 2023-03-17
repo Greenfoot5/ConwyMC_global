@@ -33,7 +33,7 @@ public class TopDonatorsCommand implements CommandExecutor {
      */
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command cmd, @NotNull String label, @NotNull String[] args) {
-        Bukkit.getScheduler().runTaskAsynchronously(ConwyMC.getPlugin(), () -> {
+        Bukkit.getScheduler().runTaskAsynchronously(ConwyMC.plugin, () -> {
             if (args.length == 0) {
                 display(sender, 0);
             } else {

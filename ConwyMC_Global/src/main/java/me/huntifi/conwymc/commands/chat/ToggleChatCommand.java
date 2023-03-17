@@ -25,7 +25,7 @@ public abstract class ToggleChatCommand extends ChatCommand {
      */
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command cmd, @NotNull String label, @NotNull String[] args) {
-        Bukkit.getScheduler().runTaskAsynchronously(ConwyMC.getPlugin(), () -> {
+        Bukkit.getScheduler().runTaskAsynchronously(ConwyMC.plugin, () -> {
             String message = String.join(" ", args);
 
             if (message.isEmpty()) {

@@ -31,7 +31,7 @@ public class WhoIsCommand implements CommandExecutor {
      */
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command cmd, @NotNull String label, @NotNull String[] args) {
-        Bukkit.getScheduler().runTaskAsynchronously(ConwyMC.getPlugin(), () -> {
+        Bukkit.getScheduler().runTaskAsynchronously(ConwyMC.plugin, () -> {
             if (!(sender instanceof Player) && args.length == 0)
                 Messenger.sendError("Only players can check their own name history!", sender);
             else if (args.length > 1)

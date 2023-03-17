@@ -23,7 +23,7 @@ public class Punishments {
      * @throws SQLException If something goes wrong executing the query
      */
     public static Tuple<PreparedStatement, ResultSet> getActive(UUID uuid, String type) throws SQLException {
-        PreparedStatement ps = ConwyMC.getConnection().prepareStatement(
+        PreparedStatement ps = ConwyMC.SQL.getConnection().prepareStatement(
                 "SELECT reason, end FROM punishments WHERE uuid = ? AND type = ? AND end > ?"
                         + " ORDER BY end DESC LIMIT 1");
         ps.setString(1, uuid.toString());
@@ -41,7 +41,7 @@ public class Punishments {
      * @throws SQLException If something goes wrong executing the query
      */
     public static Tuple<PreparedStatement, ResultSet> getIPBan(InetAddress ip) throws SQLException {
-        PreparedStatement ps = ConwyMC.getConnection().prepareStatement(
+        PreparedStatement ps = ConwyMC.SQL.getConnection().prepareStatement(
                 "SELECT reason, end FROM punishments WHERE ip = ? AND type = 'ban' AND end > ?"
                         + " ORDER BY end DESC LIMIT 1");
         ps.setString(1, ip.toString());
@@ -62,7 +62,7 @@ public class Punishments {
      * @throws SQLException If something goes wrong executing the insert
      */
     public static void add(String name, UUID uuid, InetAddress ip, String type, String reason, long duration) throws SQLException {
-        PreparedStatement ps = ConwyMC.getConnection().prepareStatement(
+        PreparedStatement ps = ConwyMC.SQL.getConnection().prepareStatement(
                 "INSERT INTO punishments VALUES (?, ?, ?, ?, ?, ?, ?)");
         ps.setString(1, name);
         ps.setString(2, uuid.toString());
@@ -83,7 +83,7 @@ public class Punishments {
      * @throws SQLException If something goes wrong executing the update
      */
     public static void end(String name, String type) throws SQLException {
-        try (PreparedStatement ps = ConwyMC.getConnection().prepareStatement(
+        try (PreparedStatement ps = ConwyMC.SQL.getConnection().prepareStatement(
                 "UPDATE punishments SET end = ? WHERE end > ? AND name = ? AND type = ?"
         )) {
             ps.setTimestamp(1, new Timestamp(System.currentTimeMillis()));

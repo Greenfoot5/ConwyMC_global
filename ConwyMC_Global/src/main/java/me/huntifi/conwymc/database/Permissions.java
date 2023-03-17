@@ -27,7 +27,7 @@ public class Permissions {
         Player player = Bukkit.getPlayer(uuid);
         assert player != null;
 
-        PermissionAttachment attachment = player.addAttachment(ConwyMC.getPlugin());
+        PermissionAttachment attachment = player.addAttachment(ConwyMC.plugin);
         perms.put(uuid, attachment);
     }
 

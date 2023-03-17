@@ -34,7 +34,7 @@ public class PlayerChat implements Listener {
         PlayerData data = ActiveData.getData(event.getPlayer().getUniqueId());
         if (data.getChatMode().equalsIgnoreCase("global")) {
             event.setCancelled(true);
-            Bukkit.getScheduler().runTask(ConwyMC.getPlugin(), () ->
+            Bukkit.getScheduler().runTask(ConwyMC.plugin, () ->
                     event.getPlayer().performCommand("GlobalChat " + event.getMessage())
             );
         }
@@ -49,7 +49,7 @@ public class PlayerChat implements Listener {
         PlayerData data = ActiveData.getData(event.getPlayer().getUniqueId());
         if (data.getChatMode().equalsIgnoreCase("staff")) {
             event.setCancelled(true);
-            Bukkit.getScheduler().runTask(ConwyMC.getPlugin(), () ->
+            Bukkit.getScheduler().runTask(ConwyMC.plugin, () ->
                     event.getPlayer().performCommand("StaffChat " + event.getMessage())
             );
         }

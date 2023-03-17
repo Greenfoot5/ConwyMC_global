@@ -37,7 +37,7 @@ public abstract class PrivateChatCommand extends ChatCommand {
         if (args.length < requiredArguments)
             return false;
 
-        Bukkit.getScheduler().runTaskAsynchronously(ConwyMC.getPlugin(), () -> {
+        Bukkit.getScheduler().runTaskAsynchronously(ConwyMC.plugin, () -> {
             if (sender instanceof Player && MuteCommand.isMuted(((Player) sender).getUniqueId()))
                 return;
 

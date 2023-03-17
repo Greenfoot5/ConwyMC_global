@@ -28,7 +28,6 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
 import java.io.IOException;
-import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Objects;
 
@@ -38,13 +37,13 @@ import java.util.Objects;
 public final class ConwyMC extends JavaPlugin {
 
     /** The global ConwyMC plugin */
-    private static Plugin plugin;
+    public static Plugin plugin;
 
     /** The instance of the main class */
-    private static ConwyMC instance;
+    public static ConwyMC instance;
 
     /** The instance that handles the database connection */
-    private static MySQL SQL;
+    public static MySQL SQL;
 
     @Override
     public void onEnable() {
@@ -83,22 +82,6 @@ public final class ConwyMC extends JavaPlugin {
     }
 
     /**
-     * Get the global ConwyMC plugin.
-     * @return The global ConwyMC plugin
-     */
-    public static Plugin getPlugin() {
-        return plugin;
-    }
-
-    /**
-     * Get the instance of the main class.
-     * @return The main instance
-     */
-    public static ConwyMC getInstance() {
-        return instance;
-    }
-
-    /**
      * Connect to the SQL database.
      */
     private void sqlConnect() {
@@ -119,15 +102,6 @@ public final class ConwyMC extends JavaPlugin {
             // Connecting to the database failed
             getLogger().warning("<!> Database is not connected! <!>");
         }
-    }
-
-    /**
-     * Get the database connection.
-     * @return The connection to the database
-     * @throws SQLException If a database access error occurs
-     */
-    public static Connection getConnection() throws SQLException {
-        return SQL.getConnection();
     }
 
     /**

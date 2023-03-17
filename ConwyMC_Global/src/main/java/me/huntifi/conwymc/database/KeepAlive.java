@@ -15,12 +15,12 @@ public class KeepAlive implements Runnable {
      */
     @Override
     public void run() {
-        try (PreparedStatement ps = ConwyMC.getConnection().prepareStatement(
+        try (PreparedStatement ps = ConwyMC.SQL.getConnection().prepareStatement(
                 "SELECT * FROM player_rank LIMIT 0"
         )) {
             ps.execute();
         } catch (SQLException e) {
-            ConwyMC.getInstance().getLogger().warning("Could not keep the database connection alive!");
+            ConwyMC.instance.getLogger().warning("Could not keep the database connection alive!");
         }
     }
 }

@@ -31,7 +31,7 @@ public class UnbanCommand implements CommandExecutor {
             return false;
 
         // Attempt to unban the player asynchronously, as the database is involved
-        Bukkit.getScheduler().runTaskAsynchronously(ConwyMC.getPlugin(), () -> {
+        Bukkit.getScheduler().runTaskAsynchronously(ConwyMC.plugin, () -> {
             try {
                 Punishments.end(args[0], "ban");
                 Messenger.sendInfo("Successfully unbanned: " + ChatColor.DARK_AQUA + args[0], sender);

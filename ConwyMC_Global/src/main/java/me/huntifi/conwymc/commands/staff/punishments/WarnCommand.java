@@ -34,7 +34,7 @@ public class WarnCommand implements CommandExecutor {
             return false;
 
         // Attempt to warn the player asynchronously, as the database is involved
-        Bukkit.getScheduler().runTaskAsynchronously(ConwyMC.getPlugin(), () -> {
+        Bukkit.getScheduler().runTaskAsynchronously(ConwyMC.plugin, () -> {
             try {
                 Player player = Bukkit.getPlayer(args[0]);
                 if (player == null)

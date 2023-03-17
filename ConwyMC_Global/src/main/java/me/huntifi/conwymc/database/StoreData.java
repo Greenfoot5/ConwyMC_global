@@ -21,7 +21,7 @@ public class StoreData {
      * @param data The player's data
      */
     private static void store(UUID uuid, PlayerData data) {
-        try (PreparedStatement ps = ConwyMC.getConnection().prepareStatement(
+        try (PreparedStatement ps = ConwyMC.SQL.getConnection().prepareStatement(
                 "UPDATE player_rank SET staff_rank = ?, rank_points = ?, join_message = ?, leave_message = ? WHERE uuid = ?"
         )) {
             ps.setString(1, data.getStaffRank());
@@ -41,7 +41,7 @@ public class StoreData {
      * @param data The player's data
      */
     public static void storeAsync(UUID uuid, PlayerData data) {
-        Bukkit.getScheduler().runTaskAsynchronously(ConwyMC.getPlugin(), () -> store(uuid, data));
+        Bukkit.getScheduler().runTaskAsynchronously(ConwyMC.plugin, () -> store(uuid, data));
     }
 
     /**
@@ -61,8 +61,8 @@ public class StoreData {
      * @param uuid The unique ID of the player
      */
     public static void updateName(UUID uuid) {
-        Bukkit.getScheduler().runTaskAsynchronously(ConwyMC.getPlugin(), () -> {
-            try (PreparedStatement ps = ConwyMC.getConnection().prepareStatement(
+        Bukkit.getScheduler().runTaskAsynchronously(ConwyMC.plugin, () -> {
+            try (PreparedStatement ps = ConwyMC.SQL.getConnection().prepareStatement(
                     "UPDATE player_rank SET name = ? WHERE uuid = ?"
             )) {
                 ps.setString(1, Objects.requireNonNull(Bukkit.getPlayer(uuid)).getName());
@@ -80,8 +80,8 @@ public class StoreData {
      * @param rp The player's rank points
      */
     public static void updateRank(String name, double rp) {
-        Bukkit.getScheduler().runTaskAsynchronously(ConwyMC.getPlugin(), () -> {
-            try (PreparedStatement ps = ConwyMC.getConnection().prepareStatement(
+        Bukkit.getScheduler().runTaskAsynchronously(ConwyMC.plugin, () -> {
+            try (PreparedStatement ps = ConwyMC.SQL.getConnection().prepareStatement(
                         "UPDATE player_rank SET rank_points = ? WHERE name = ?"
             )) {
                 ps.setDouble(1, rp);

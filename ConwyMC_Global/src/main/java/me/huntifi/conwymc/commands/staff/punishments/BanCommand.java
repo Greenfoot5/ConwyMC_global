@@ -37,7 +37,7 @@ public class BanCommand implements CommandExecutor {
             return false;
 
         // Attempt to ban the player asynchronously, as the database is involved
-        Bukkit.getScheduler().runTaskAsynchronously(ConwyMC.getPlugin(), () -> {
+        Bukkit.getScheduler().runTaskAsynchronously(ConwyMC.plugin, () -> {
             try {
                 Player player = Bukkit.getPlayer(args[0]);
                 if (player == null)
@@ -98,7 +98,7 @@ public class BanCommand implements CommandExecutor {
      * @param duration The duration of the ban
      */
     private void kick(UUID uuid, String reason, String duration) {
-        Bukkit.getScheduler().runTask(ConwyMC.getPlugin(), () -> {
+        Bukkit.getScheduler().runTask(ConwyMC.plugin, () -> {
             Player player = Bukkit.getPlayer(uuid);
             if (player != null) {
                 player.kickPlayer(ChatColor.DARK_RED + "\n[BAN] " + ChatColor.RED + reason

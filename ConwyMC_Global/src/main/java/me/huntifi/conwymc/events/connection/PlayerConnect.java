@@ -139,7 +139,7 @@ public class PlayerConnect implements Listener {
      * @param data The player's data
      */
     private void setPermissions(UUID uuid, PlayerData data) {
-        Bukkit.getScheduler().runTaskAsynchronously(ConwyMC.getPlugin(), () -> {
+        Bukkit.getScheduler().runTaskAsynchronously(ConwyMC.plugin, () -> {
             Permissions.addPlayer(uuid);
             Permissions.setStaffPermission(uuid, data.getStaffRank());
             Permissions.setDonatorPermission(uuid, data.getRank());

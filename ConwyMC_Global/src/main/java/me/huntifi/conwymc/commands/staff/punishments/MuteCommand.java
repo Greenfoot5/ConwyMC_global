@@ -39,7 +39,7 @@ public class MuteCommand implements CommandExecutor {
             return false;
 
         // Attempt to mute the player asynchronously, as the database is involved
-        Bukkit.getScheduler().runTaskAsynchronously(ConwyMC.getPlugin(), () -> {
+        Bukkit.getScheduler().runTaskAsynchronously(ConwyMC.plugin, () -> {
             try {
                 Player p = Bukkit.getPlayer(args[0]);
                 if (p == null) {

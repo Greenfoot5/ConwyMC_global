@@ -38,7 +38,7 @@ public class RankPointsCommand implements CommandExecutor {
         if (args.length != 3)
             return false;
 
-        Bukkit.getScheduler().runTaskAsynchronously(ConwyMC.getPlugin(), () -> {
+        Bukkit.getScheduler().runTaskAsynchronously(ConwyMC.plugin, () -> {
             try {
                 // Get the player's stored rank points
                 double rp = LoadData.getRankPoints(args[0]);
