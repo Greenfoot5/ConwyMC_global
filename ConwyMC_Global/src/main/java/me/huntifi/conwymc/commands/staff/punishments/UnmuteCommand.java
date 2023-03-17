@@ -37,9 +37,9 @@ public class UnmuteCommand implements CommandExecutor {
             try {
                 Punishments.end(args[0], "mute");
                 unmuteOnline(args[0]);
-                Messenger.sendInfo("Successfully unmuted: " + ChatColor.DARK_AQUA + args[0], sender);
+                Messenger.sendInfo("Successfully unmuted: " + Messenger.INFO_SECONDARY + args[0], sender);
             } catch (SQLException e) {
-                Messenger.sendError("An error occurred while trying to unmute: " + ChatColor.RED + args[0], sender);
+                Messenger.sendError("An error occurred while trying to unmute: " + Messenger.ERROR_SECONDARY + args[0], sender);
                 e.printStackTrace();
             }
         });

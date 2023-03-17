@@ -61,7 +61,7 @@ public abstract class CustomMessageCommand implements CommandExecutor {
             Messenger.sendSuccess(String.format("Your %s message has been reset.", getMessageType()), player);
         } else {
             Messenger.sendSuccess(String.format("Your %s message has been set to: %s%s",
-                    getMessageType(), ChatColor.YELLOW, message), player);
+                    getMessageType(), Messenger.SUCCESS_SECONDARY, message), player);
         }
     }
 

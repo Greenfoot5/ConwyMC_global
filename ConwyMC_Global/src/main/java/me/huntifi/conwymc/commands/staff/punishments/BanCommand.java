@@ -45,7 +45,7 @@ public class BanCommand implements CommandExecutor {
                 else
                     ban(sender, player.getUniqueId(), Objects.requireNonNull(player.getAddress()).getAddress(), args);
             } catch (SQLException e) {
-                Messenger.sendError("An error occurred while trying to ban: " + ChatColor.RED + args[0], sender);
+                Messenger.sendError("An error occurred while trying to ban: " + Messenger.ERROR_SECONDARY + args[0], sender);
                 e.printStackTrace();
             }
         });
@@ -61,7 +61,7 @@ public class BanCommand implements CommandExecutor {
     private void banOffline(CommandSender sender, String[] args) throws SQLException {
         UUID uuid = LoadData.getUUID(args[0]);
         if (uuid == null)
-            Messenger.sendError("Could not find player: " + ChatColor.RED + args[0], sender);
+            Messenger.sendError("Could not find player: " + Messenger.ERROR_SECONDARY + args[0], sender);
         else
             ban(sender, uuid, null, args);
     }
@@ -85,7 +85,7 @@ public class BanCommand implements CommandExecutor {
 
         // Apply the ban to our database
         Punishments.add(args[0], uuid, ip, "ban", reason, duration);
-        Messenger.sendInfo("Successfully banned: " + ChatColor.DARK_AQUA + args[0], sender);
+        Messenger.sendInfo("Successfully banned: " + Messenger.INFO_SECONDARY + args[0], sender);
 
         // Kick the player if they are online
         kick(uuid, reason, args[1]);

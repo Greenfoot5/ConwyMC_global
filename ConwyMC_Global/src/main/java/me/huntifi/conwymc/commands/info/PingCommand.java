@@ -38,14 +38,14 @@ public class PingCommand implements CommandExecutor {
         } else {
             player = Bukkit.getPlayer(args[0]);
             if (player == null) {
-                Messenger.sendError(String.format("Could not find player: %s%s",  ChatColor.RED, args[0]), sender);
+                Messenger.sendError(String.format("Could not find player: %s%s",  Messenger.ERROR_SECONDARY, args[0]), sender);
                 return true;
             }
         }
 
         String playerName = args.length == 0 ? "Your" : player.getName() + "'s";
         Messenger.sendInfo(String.format("%s ping is %s%s%sms.",
-                playerName, ChatColor.AQUA, getPing(player), ChatColor.DARK_AQUA), sender);
+                playerName, Messenger.INFO_SECONDARY, getPing(player), Messenger.INFO_PRIMARY), sender);
         return true;
     }
 

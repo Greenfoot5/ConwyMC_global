@@ -32,6 +32,6 @@ public class MessageCommand extends PrivateChatCommand {
 
     @Override
     protected void sendTargetNotFoundMessage(CommandSender sender, String[] args) {
-        Messenger.sendError("Could not find player: " + ChatColor.RED + args[0], sender);
+        Messenger.sendError("Could not find player: " + Messenger.ERROR_SECONDARY + args[0], sender);
     }
 }

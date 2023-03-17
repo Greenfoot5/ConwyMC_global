@@ -23,7 +23,7 @@ public class DiscordCommand implements CommandExecutor {
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command cmd, @NotNull String label, @NotNull String[] args) {
         Messenger.sendInfo(String.format("The link to the %s[ConwyMC] %sdiscord is: %shttps://discord.gg/AUDqTpC",
-                ChatColor.LIGHT_PURPLE, ChatColor.AQUA, ChatColor.DARK_PURPLE), sender);
+                ChatColor.LIGHT_PURPLE, Messenger.INFO_PRIMARY, ChatColor.DARK_PURPLE), sender);
         return true;
     }
 }

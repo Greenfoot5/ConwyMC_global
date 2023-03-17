@@ -34,7 +34,7 @@ public class SetStaffRankCommand implements CommandExecutor {
         // Get the target player
         Player player = Bukkit.getPlayer(args[0]);
         if (player == null) {
-            Messenger.sendError("Could not find player: " + ChatColor.RED + args[0], sender);
+            Messenger.sendError("Could not find player: " + Messenger.ERROR_SECONDARY + args[0], sender);
             return true;
         }
 
@@ -45,7 +45,7 @@ public class SetStaffRankCommand implements CommandExecutor {
             data.setStaffRank(rank);
             Bukkit.getPluginManager().callEvent(new UpdateNameTagEvent(player, data.getDisplayRank()));
         } else {
-            Messenger.sendError("Rank " + ChatColor.RED + rank + ChatColor.DARK_RED + " is invalid!", sender);
+            Messenger.sendError("Rank " + Messenger.ERROR_SECONDARY + rank + Messenger.ERROR_PRIMARY + " is invalid!", sender);
         }
 
         return true;

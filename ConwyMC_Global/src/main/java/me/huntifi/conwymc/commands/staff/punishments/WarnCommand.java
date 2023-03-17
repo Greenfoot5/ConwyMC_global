@@ -42,7 +42,7 @@ public class WarnCommand implements CommandExecutor {
                 else
                     warn(sender, player.getUniqueId(), args);
             } catch (SQLException e) {
-                Messenger.sendError("An error occurred while trying to warn: " + ChatColor.RED + args[0], sender);
+                Messenger.sendError("An error occurred while trying to warn: " + Messenger.ERROR_SECONDARY + args[0], sender);
                 e.printStackTrace();
             }
         });
@@ -58,7 +58,7 @@ public class WarnCommand implements CommandExecutor {
     private void warnOffline(CommandSender sender, String[] args) throws SQLException {
         UUID uuid = LoadData.getUUID(args[0]);
         if (uuid == null) {
-            Messenger.sendError("Could not find player: " + ChatColor.RED + args[0], sender);
+            Messenger.sendError("Could not find player: " + Messenger.ERROR_SECONDARY + args[0], sender);
         } else {
             warn(sender, uuid, args);
         }
@@ -77,7 +77,7 @@ public class WarnCommand implements CommandExecutor {
         // Apply the warning to our database
         Punishments.add(args[0], uuid, null, "warn", reason, 0);
         warnOnline(uuid, reason);
-        Messenger.sendInfo("Successfully warned: " + ChatColor.DARK_AQUA + args[0], sender);
+        Messenger.sendInfo("Successfully warned: " + Messenger.INFO_SECONDARY + args[0], sender);
     }
 
     /**
@@ -88,6 +88,6 @@ public class WarnCommand implements CommandExecutor {
     private void warnOnline(UUID uuid, String reason) {
         Player player = Bukkit.getPlayer(uuid);
         if (player != null)
-            Messenger.sendError("You were warned for: " + ChatColor.RED + reason, player);
+            Messenger.sendError("You were warned for: " + Messenger.ERROR_SECONDARY + reason, player);
     }
 }

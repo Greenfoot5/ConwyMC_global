@@ -14,13 +14,27 @@ import static org.bukkit.Bukkit.getServer;
  */
 public class Messenger {
 
+    private static final ChatColor ICON = ChatColor.GOLD;
+    public static final ChatColor ERROR_PRIMARY = ChatColor.DARK_RED;
+    public static final ChatColor ERROR_SECONDARY = ChatColor.RED;
+    public static final ChatColor WARNING_PRIMARY = ChatColor.RED;
+    public static final ChatColor WARNING_SECONDARY = ChatColor.LIGHT_PURPLE;
+    public static final ChatColor TIP_PRIMARY = ChatColor.AQUA;
+    public static final ChatColor TIP_SECONDARY = ChatColor.DARK_AQUA;
+    public static final ChatColor SECRET_PRIMARY = ChatColor.YELLOW;
+    public static final ChatColor SECRET_SECONDARY = ChatColor.WHITE;
+    public static final ChatColor SUCCESS_PRIMARY = ChatColor.GREEN;
+    public static final ChatColor SUCCESS_SECONDARY = ChatColor.YELLOW;
+    public static final ChatColor INFO_PRIMARY = ChatColor.BLUE;
+    public static final ChatColor INFO_SECONDARY = ChatColor.DARK_AQUA;
+
     /**
      * Send an error message to a user
      * @param message The message to send
      * @param sender To whom the message should be sent
      */
     public static void sendError(String message, @NotNull CommandSender sender) {
-        sender.sendMessage(ChatColor.GOLD + "[!] " + ChatColor.DARK_RED + message);
+        sender.sendMessage(ICON + "[!] " + ERROR_PRIMARY + message);
     }
 
     /**
@@ -31,7 +45,7 @@ public class Messenger {
     public static void sendActionError(String message, @NotNull Player sender) {
         sender.spigot().sendMessage(
                 ChatMessageType.ACTION_BAR,
-                TextComponent.fromLegacyText(ChatColor.GOLD + "[!] " + ChatColor.DARK_RED + message)
+                TextComponent.fromLegacyText(ICON + "[!] " + ERROR_PRIMARY + message)
         );
     }
 
@@ -41,7 +55,7 @@ public class Messenger {
      * @param sender To whom the message should be sent
      */
     public static void sendWarning(String message, @NotNull CommandSender sender) {
-        sender.sendMessage(ChatColor.GOLD + "[!] "+ ChatColor.DARK_RED + "You were warned for: " + ChatColor.RED + message);
+        sender.sendMessage(ICON + "[!] "+ WARNING_PRIMARY + message);
     }
 
     /**
@@ -49,7 +63,7 @@ public class Messenger {
      * @param message The message to broadcast
      */
     public static void broadcastWarning(String message) {
-        getServer().broadcastMessage(ChatColor.GOLD + "[!] " + ChatColor.RED + message);
+        getServer().broadcastMessage(ICON + "[!] " + WARNING_PRIMARY + message);
     }
 
     /**
@@ -58,7 +72,7 @@ public class Messenger {
      * @param sender To whom the message should be sent
      */
     public static void sendTip(String message, @NotNull CommandSender sender) {
-        sender.sendMessage(ChatColor.GOLD + "[i] " + ChatColor.AQUA + message);
+        sender.sendMessage(ICON + "[i] " + TIP_PRIMARY + message);
     }
 
     /**
@@ -66,7 +80,7 @@ public class Messenger {
      * @param message The message to broadcast
      */
     public static void broadcastTip(String message) {
-        getServer().broadcastMessage(ChatColor.GOLD + "[i] " + ChatColor.AQUA + message);
+        getServer().broadcastMessage(ICON + "[i] " + TIP_PRIMARY + message);
     }
 
     /**
@@ -75,7 +89,7 @@ public class Messenger {
      * @param sender To whom the message should be sent
      */
     public static void sendSecret(String message, @NotNull CommandSender sender) {
-        sender.sendMessage(ChatColor.GOLD + "[S] " + ChatColor.YELLOW + message);
+        sender.sendMessage(ICON + "[S] " + SECRET_PRIMARY + message);
     }
 
     /**
@@ -83,7 +97,7 @@ public class Messenger {
      * @param message The message to broadcast
      */
     public static void broadcastSecret(String message) {
-        getServer().broadcastMessage(ChatColor.GOLD + "[S] " + ChatColor.YELLOW + message);
+        getServer().broadcastMessage(ICON + "[S] " + SECRET_PRIMARY + message);
     }
 
     /**
@@ -92,7 +106,7 @@ public class Messenger {
      * @param sender To whom the message should be sent
      */
     public static void sendSuccess(String message, CommandSender sender) {
-        sender.sendMessage(ChatColor.GOLD + "[+] " + ChatColor.GREEN + message);
+        sender.sendMessage(ICON + "[+] " + SUCCESS_PRIMARY + message);
     }
 
     /**
@@ -102,7 +116,7 @@ public class Messenger {
      */
     public static void sendActionSuccess(String message, @NotNull Player sender) {
         sender.spigot().sendMessage(ChatMessageType.ACTION_BAR,
-                TextComponent.fromLegacyText(ChatColor.GOLD + "[+] " + ChatColor.GREEN + message));
+                TextComponent.fromLegacyText(ICON + "[+] " + SUCCESS_PRIMARY + message));
     }
 
     /**
@@ -110,7 +124,7 @@ public class Messenger {
      * @param message The message to send
      */
     public static void broadcastSuccess(String message) {
-        getServer().broadcastMessage(ChatColor.GOLD + "[+] " + ChatColor.GREEN + message);
+        getServer().broadcastMessage(ICON + "[+] " + SUCCESS_PRIMARY + message);
     }
 
     /**
@@ -119,7 +133,7 @@ public class Messenger {
      * @param sender To whom the message should be sent
      */
     public static void sendInfo(String message, @NotNull CommandSender sender) {
-        sender.sendMessage(ChatColor.GOLD + "[i] " + ChatColor.BLUE + message);
+        sender.sendMessage(ICON + "[i] " + INFO_PRIMARY + message);
     }
 
     /**
@@ -130,7 +144,7 @@ public class Messenger {
     public static void sendActionInfo(String message, @NotNull Player sender) {
         sender.spigot().sendMessage(
                 ChatMessageType.ACTION_BAR,
-                TextComponent.fromLegacyText(ChatColor.GOLD + "[i] " + ChatColor.BLUE + message)
+                TextComponent.fromLegacyText(ICON + "[i] " + INFO_PRIMARY + message)
         );
     }
 
@@ -139,6 +153,6 @@ public class Messenger {
      * @param message The message to broadcast
      */
     public static void broadcastInfo(String message) {
-        getServer().broadcastMessage(ChatColor.GOLD + "[i] " + ChatColor.BLUE + message);
+        getServer().broadcastMessage(ICON + "[i] " + INFO_PRIMARY + message);
     }
 }

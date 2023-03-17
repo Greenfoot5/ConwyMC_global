@@ -29,7 +29,7 @@ public class KickCommand implements CommandExecutor {
 
         Player player = Bukkit.getPlayer(args[0]);
         if (player == null) {
-            Messenger.sendError("Could not find player: " + ChatColor.RED + args[0], sender);
+            Messenger.sendError("Could not find player: " + Messenger.ERROR_SECONDARY + args[0], sender);
             return true;
         }
 

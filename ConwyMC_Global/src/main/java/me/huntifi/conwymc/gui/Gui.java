@@ -2,6 +2,7 @@ package me.huntifi.conwymc.gui;
 
 import me.huntifi.conwymc.ConwyMC;
 import me.huntifi.conwymc.util.ItemCreator;
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -45,10 +46,10 @@ public class Gui implements Listener {
      * @param shouldUnregister Whether this GUI should stop listening for events after being closed
      */
     public Gui(String name, int rows, boolean shouldUnregister) {
-        inventory = ConwyMC.plugin.getServer().createInventory(null, 9 * rows, name);
+        inventory = Bukkit.getServer().createInventory(null, 9 * rows, name);
         this.shouldUnregister = shouldUnregister;
 
-        ConwyMC.plugin.getServer().getPluginManager().registerEvents(this, ConwyMC.plugin);
+        Bukkit.getServer().getPluginManager().registerEvents(this, ConwyMC.plugin);
     }
 
     /**

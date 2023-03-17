@@ -17,11 +17,11 @@ public class PunishmentTime {
      */
     public static void wrongFormat(CommandSender sender) {
         Messenger.sendError(
-                "Please supply a duration in the form " + ChatColor.RED + "0t"
-                + ChatColor.DARK_RED + ", where " + ChatColor.RED + "0" + ChatColor.DARK_RED
-                + " is any positive number and " + ChatColor.RED + "t" + ChatColor.DARK_RED
+                "Please supply a duration in the form " + Messenger.ERROR_SECONDARY + "0t"
+                + Messenger.ERROR_PRIMARY + ", where " + Messenger.ERROR_SECONDARY + "0" + Messenger.ERROR_PRIMARY
+                + " is any positive number and " + Messenger.ERROR_SECONDARY + "t" + Messenger.ERROR_PRIMARY
                 + " is one of the following units:\n"
-                + ChatColor.RED + "y(ears), M(onths), d(ays), h(ours), m(inutes), s(econds)",
+                + Messenger.ERROR_SECONDARY + "y(ears), M(onths), d(ays), h(ours), m(inutes), s(econds)",
                 sender
         );
     }

@@ -43,7 +43,7 @@ public class RankPointsCommand implements CommandExecutor {
                 // Get the player's stored rank points
                 double rp = LoadData.getRankPoints(args[0]);
                 if (rp < 0) {
-                    Messenger.sendError(String.format("Could not find player: %s%s", ChatColor.RED, args[0]), sender);
+                    Messenger.sendError(String.format("Could not find player: %s%s", Messenger.ERROR_SECONDARY, args[0]), sender);
                     return;
                 }
 
@@ -61,13 +61,13 @@ public class RankPointsCommand implements CommandExecutor {
                     default:
                         Messenger.sendError(String.format("The operation %s%s%s is not supported!\n" +
                                 "Please use one of the following:%s set, add, remove",
-                                ChatColor.RED, args[1], ChatColor.DARK_RED, ChatColor.RED), sender);
+                                Messenger.ERROR_SECONDARY, args[1], Messenger.ERROR_PRIMARY, Messenger.ERROR_SECONDARY), sender);
                         break;
                 }
 
             } catch (NumberFormatException e) {
                 Messenger.sendError(String.format("The argument %s%s%s is not a number!",
-                        ChatColor.RED, args[2], ChatColor.DARK_RED), sender);
+                        Messenger.ERROR_SECONDARY, args[2], Messenger.ERROR_PRIMARY), sender);
             } catch (SQLException e) {
                 Messenger.sendError("An error occurred while performing the command!\n" +
                         "Please contact staff if this issue persists.", sender);
@@ -88,7 +88,7 @@ public class RankPointsCommand implements CommandExecutor {
         StoreData.updateRank(name, rp);
         updateOnline(name, rp);
         Messenger.sendSuccess(String.format("%s now has %s%f%s rank points.",
-                name, ChatColor.YELLOW, rp, ChatColor.GREEN), sender);
+                name, Messenger.SUCCESS_SECONDARY, rp, Messenger.SUCCESS_PRIMARY), sender);
     }
 
     /**
