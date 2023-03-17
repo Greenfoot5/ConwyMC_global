@@ -1,5 +1,6 @@
 package me.huntifi.conwymc.commands.info;
 
+import me.huntifi.conwymc.util.Messenger;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -21,11 +22,12 @@ public class WebShopCommand implements CommandExecutor {
      */
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command cmd, @NotNull String label, @NotNull String[] args) {
-        String message = "--------------------------------\n" +
+        Messenger.sendError("The shop is currently closed! It will open again soon.", sender);
+        /*String message = "--------------------------------\n" +
                 ChatColor.GREEN + "Link to the web shop:\n" +
                 ChatColor.BLUE + "https://conwymc.tebex.io/\n" +
                 "--------------------------------";
-        sender.sendMessage(message);
+        sender.sendMessage(message);*/
 
         return true;
     }
