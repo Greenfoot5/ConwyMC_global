@@ -8,6 +8,10 @@ import me.huntifi.conwymc.commands.donator.JoinMessageCommand;
 import me.huntifi.conwymc.commands.donator.LeaveMessageCommand;
 import me.huntifi.conwymc.commands.info.*;
 import me.huntifi.conwymc.commands.staff.FlyCommand;
+import me.huntifi.conwymc.commands.staff.currencies.AddCoinsCommand;
+import me.huntifi.conwymc.commands.staff.currencies.SetCoinMultiplierCommand;
+import me.huntifi.conwymc.commands.staff.currencies.SetCoinsCommand;
+import me.huntifi.conwymc.commands.staff.currencies.TakeCoinsCommand;
 import me.huntifi.conwymc.commands.staff.rank.RankPointsCommand;
 import me.huntifi.conwymc.commands.staff.rank.SetStaffRankCommand;
 import me.huntifi.conwymc.commands.staff.chat.BroadcastCommand;
@@ -138,6 +142,12 @@ public final class ConwyMC extends JavaPlugin {
         // Staff - Chat
         Objects.requireNonNull(getCommand("Broadcast")).setExecutor(new BroadcastCommand());
         Objects.requireNonNull(getCommand("StaffChat")).setExecutor(new StaffChatCommand());
+
+        // Staff - Currencies
+        Objects.requireNonNull(getCommand("AddCoins")).setExecutor(new AddCoinsCommand());
+        Objects.requireNonNull(getCommand("SetCoins")).setExecutor(new SetCoinsCommand());
+        Objects.requireNonNull(getCommand("SetCoinMultiplier")).setExecutor(new SetCoinMultiplierCommand());
+        Objects.requireNonNull(getCommand("TakeCoins")).setExecutor(new TakeCoinsCommand());
 
         // Staff - Punishments
         Objects.requireNonNull(getCommand("Ban")).setExecutor(new BanCommand());

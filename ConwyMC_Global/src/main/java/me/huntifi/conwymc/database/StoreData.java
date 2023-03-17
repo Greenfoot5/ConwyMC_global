@@ -33,6 +33,16 @@ public class StoreData {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
+        try (PreparedStatement ps = ConwyMC.SQL.getConnection().prepareStatement(
+                "UPDATE player_stats SET coins = ? WHERE uuid = ?"
+        )) {
+            ps.setDouble(1, data.getCoins());
+            ps.setString(2, uuid.toString());
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     /**

@@ -157,6 +157,28 @@ commands:
     permission: conwymc.chatmod
     permission-message: You are not permitted to use this command!
 
+  # Staff - Currencies
+  AddCoins:
+    description: Add to a player's coins
+    usage: /addcoins <player> <amount> [verbose]
+    permission: castlesiege.moderator
+    permission-message: You are not permitted to use this command!
+  SetCoins:
+    description: Set a player's coins
+    usage: /setcoins <player> <amount> [verbose]
+    permission: castlesiege.moderator
+    permission-message: You are not permitted to use this command!
+  SetCoinMultiplier:
+    description: Sets the active coin multiplier
+    usage: /setcoinmultiplier <multiplier>
+    permission: castlesiege.moderator
+    permission-message: You are not permitted to use this command!
+  TakeCoins:
+    description: Take from a player's coins
+    usage: /takecoins <player> <amount> [verbose]
+    permission: castlesiege.moderator
+    permission-message: You are not permitted to use this command!
+
   # Staff - Punishments
   Ban:
     description: Ban a player

@@ -30,7 +30,7 @@ public class LoadData {
             Tuple<PreparedStatement, ResultSet> prMute = Punishments.getActive(uuid, "mute");
 
             // Collect data and release resources
-            PlayerData data = new PlayerData(prRank.getSecond(), prMute.getSecond());
+            PlayerData data = new PlayerData(getCoins(uuid), prRank.getSecond(), prMute.getSecond());
             prRank.getFirst().close();
             prMute.getFirst().close();
 
@@ -70,6 +70,23 @@ public class LoadData {
         // Return result set with pointer on first (and only) row
         rs.next();
         return new Tuple<>(ps, rs);
+    }
+
+    /**
+     * Get a player's coins from the database.
+     * @param uuid The unique id of the player whose data to get
+     * @return The player's coins
+     * @throws SQLException If something goes wrong executing the query
+     */
+    private static double getCoins(UUID uuid) throws SQLException {
+        try (PreparedStatement ps = ConwyMC.SQL.getConnection().prepareStatement(
+                "SELECT coins FROM player_stats WHERE uuid=?"
+        )) {
+            ps.setString(1, uuid.toString());
+            ResultSet rs = ps.executeQuery();
+            rs.next();
+            return rs.getDouble("coins");
+        }
     }
 
     /**

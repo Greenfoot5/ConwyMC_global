@@ -12,6 +12,9 @@ import java.sql.Timestamp;
  */
 public class PlayerData {
 
+    /** The player's coins */
+    private double coins;
+
     /** The player's staff rank */
     private String staffRank;
 
@@ -36,19 +39,76 @@ public class PlayerData {
     /** The player's mute reason and expiration time */
     private Tuple<String, Timestamp> mute;
 
+    /** The current coin multiplier */
+    private static double coinMultiplier = 1;
+
     /**
      * Initialize the player's data.
      * @param rankData The data retrieved from player_rank
      * @param mute The player's active mute
      * @throws SQLException If a database access error occurs or an invalid column label is used
      */
-    public PlayerData(ResultSet rankData, ResultSet mute) throws SQLException {
+    public PlayerData(double coins, ResultSet rankData, ResultSet mute) throws SQLException {
+        this.coins = coins;
         this.staffRank = rankData.getString("staff_rank").toLowerCase();
         this.rankPoints = rankData.getDouble("rank_points");
         this.joinMessage = rankData.getString("join_message");
         this.leaveMessage = rankData.getString("leave_message");
 
         this.mute = mute.next() ? new Tuple<>(mute.getString("reason"), mute.getTimestamp("end")) : null;
+    }
+
+    /**
+     * Get the player's coins.
+     * @return The player's coins
+     */
+    public double getCoins() {
+        return coins;
+    }
+
+    /**
+     * Set the player's coins.
+     * @param coins The coins to set
+     */
+    public void setCoins(double coins) {
+        this.coins = coins;
+    }
+
+    /**
+     * Add to the player's coins.
+     * @param coins The amount of coins to add
+     */
+    public void addCoins(double coins) {
+        this.coins += coins * coinMultiplier;
+    }
+
+    /**
+     * Add to the player's coins without taking the multiplier into account.
+     * @param coins The amount of coins to add
+     */
+    public void addCoinsClean(double coins) {
+        this.coins += coins;
+    }
+
+    /**
+     * Take from the player's coins if they have enough.
+     * @param amount The amount of coins to take
+     * @return Whether the player had enough coins to take
+     */
+    public boolean takeCoins(double amount) {
+        if (this.coins < amount) {
+            return false;
+        }
+        this.coins -= amount;
+        return true;
+    }
+
+    /**
+     * Take from the player's coins regardless of their current balance.
+     * @param amount The amount of coins to take
+     */
+    public void takeCoinsForce(double amount) {
+        this.coins -= amount;
     }
 
     /**
@@ -197,5 +257,21 @@ public class PlayerData {
             mute = null;
         else
             mute = new Tuple<>(reason, end);
+    }
+
+    /**
+     * Get the active coin multiplier.
+     * @return The active coin multiplier
+     */
+    public static double getCoinMultiplier() {
+        return coinMultiplier;
+    }
+
+    /**
+     * Set the coin multiplier.
+     * @param multiplier The multiplier to set
+     */
+    public static void setCoinMultiplier(double multiplier) {
+        coinMultiplier = multiplier;
     }
 }
