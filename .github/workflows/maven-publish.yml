@@ -28,12 +28,12 @@ jobs:
         settings-path: ${{ github.workspace }}/ConwyMC-global # location for the settings.xml file
 
     - name: List files in the repository
-      run: ls $GITHUB_WORKSPACE
+      run: ls $GITHUB_WORKSPACE/ConwyMC-global
 
     - name: Build with Maven
-      run: mvn -B package --file pom.xml
+      run: mvn -B package --file ConwyMC-global/pom.xml
 
     - name: Publish to GitHub Packages Apache Maven
-      run: mvn deploy -s $GITHUB_WORKSPACE/settings.xml
+      run: mvn deploy -s $GITHUB_WORKSPACE/ConwyMC-global/settings.xml
       env:
         GITHUB_TOKEN: ${{ github.token }}
