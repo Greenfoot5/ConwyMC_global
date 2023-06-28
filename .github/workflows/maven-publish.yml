@@ -34,6 +34,6 @@ jobs:
       run: mvn -B package --file ConwyMC-global/pom.xml
 
     - name: Publish to GitHub Packages Apache Maven
-      run: mvn deploy -s $GITHUB_WORKSPACE/ConwyMC-global/settings.xml
+      run: ConwyMC-global/mvn deploy -s $GITHUB_WORKSPACE/ConwyMC-global/settings.xml
       env:
         GITHUB_TOKEN: ${{ github.token }}
