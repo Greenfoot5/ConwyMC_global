@@ -26,7 +26,7 @@ public class GlobalChatCommand extends ToggleChatCommand {
     }
 
     @Override
-    protected Collection<CommandSender> getReceivers() {
+    protected Collection<CommandSender> getReceivers(CommandSender sender) {
         Collection<CommandSender> receivers = new ArrayList<>(Bukkit.getOnlinePlayers());
         receivers.add(Bukkit.getConsoleSender());
         return receivers;

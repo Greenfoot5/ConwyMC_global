@@ -34,7 +34,7 @@ public class StaffChatCommand extends ToggleChatCommand {
     }
 
     @Override
-    protected Collection<CommandSender> getReceivers() {
+    protected Collection<CommandSender> getReceivers(CommandSender sender) {
         Collection<CommandSender> receivers = new ArrayList<>(Bukkit.getOnlinePlayers());
         receivers.removeIf(receiver -> !receiver.hasPermission("conwymc.chatmod"));
         receivers.add(Bukkit.getConsoleSender());

@@ -56,7 +56,7 @@ public abstract class ToggleChatCommand extends ChatCommand {
         String lowerMessage = message.toLowerCase();
 
         // Loop over all receivers to send the message and play the tag sound
-        for (CommandSender receiver : getReceivers()) {
+        for (CommandSender receiver : getReceivers(sender)) {
             receiver.sendMessage(formattedMessage);
 
             // Cannot tag self or console
@@ -76,9 +76,10 @@ public abstract class ToggleChatCommand extends ChatCommand {
 
     /**
      * Get everyone who should receive the message.
+     * @param sender The sender of the message
      * @return The receivers of the message
      */
-    protected abstract Collection<CommandSender> getReceivers();
+    protected abstract Collection<CommandSender> getReceivers(CommandSender sender);
 
     /**
      * Get the message with formatting applied.
