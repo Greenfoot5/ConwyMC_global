@@ -43,13 +43,9 @@
                 <executions>
                     <execution>
                         <id>attach-javadoc</id>
-                        <phase>prepare-package</phase>
                         <goals>
-                            <goal>javadoc</goal>
+                            <goal>jar</goal>
                         </goals>
-                        <configuration>
-                            <reportOutputDirectory>${project.build.directory}/classes/</reportOutputDirectory>
-                        </configuration>
                     </execution>
                 </executions>
             </plugin>

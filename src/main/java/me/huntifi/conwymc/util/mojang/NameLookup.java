@@ -32,6 +32,7 @@ public class NameLookup {
      * NOTE: Avoid running this method <i>Synchronously</i> with the main thread!It blocks while attempting to get a response from Mojang servers!
      * @param player The UUID of the player to be looked up.
      * @return Returns an array of {@link PreviousPlayerNameEntry} objects, or null if the response couldn't be interpreted.
+     * @throws IOException Inherited by {@link BufferedReader#readLine()}, {@link BufferedReader#close()}, {@link URL}, {@link HttpURLConnection#getInputStream()}
      */
     public static PreviousPlayerNameEntry[] getPlayerPreviousNames(UUID player) throws IOException {
         return getPlayerPreviousNames(player.toString());
