@@ -43,6 +43,7 @@ public class Permissions {
      * Set the player's staff rank permission
      * @param uuid The unique ID of the player
      * @param permission The permission to set
+     * @return Whether the permission was set
      */
     public static boolean setStaffPermission(UUID uuid, String permission) {
         Collection<String> staffPerms = Arrays.asList("owner", "admin", "communitymanager", "developer",

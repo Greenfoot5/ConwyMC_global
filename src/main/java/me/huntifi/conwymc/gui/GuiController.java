@@ -22,6 +22,7 @@ public class GuiController {
     /**
      * Get a GUI from the map of GUIs.
      * @param key The key with which the GUI is stored
+     * @return The requested GUI
      */
     public static Gui get(String key) {
         return keyToGui.get(key);

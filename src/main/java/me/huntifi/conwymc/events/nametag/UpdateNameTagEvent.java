@@ -5,6 +5,9 @@ import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
 import org.jetbrains.annotations.NotNull;
 
+/**
+ * The event called when a player's nametag should be updated
+ */
 public class UpdateNameTagEvent extends Event {
 
     private static final HandlerList HANDLERS = new HandlerList();
@@ -39,6 +42,10 @@ public class UpdateNameTagEvent extends Event {
         return displayRank;
     }
 
+    /**
+     * Get this event's handlers.
+     * @return This event's handlers
+     */
     public static HandlerList getHandlerList() {
         return HANDLERS;
     }

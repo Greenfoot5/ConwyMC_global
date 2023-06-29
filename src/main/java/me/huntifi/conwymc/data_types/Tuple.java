@@ -10,6 +10,11 @@ public class Tuple<K, V> {
     private K first;
     private V second;
 
+    /**
+     * Create a tuple for two arbitrary elements
+     * @param first The first element
+     * @param second The second element
+     */
     public Tuple(K first, V second){
         this.first = first;
         this.second = second;

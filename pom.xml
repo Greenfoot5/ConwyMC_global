@@ -6,7 +6,7 @@
 
     <groupId>com.github.AdminHuntifi</groupId>
     <artifactId>conwymc-global</artifactId>
-    <version>0.0.13-auto.package.test</version>
+    <version>0.0.13-javadoc</version>
     <packaging>jar</packaging>
 
     <name>ConwyMC_Global</name>
@@ -38,16 +38,17 @@
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-shade-plugin</artifactId>
-                <version>3.2.4</version>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>3.5.0</version>
                 <executions>
                     <execution>
-                        <phase>package</phase>
+                        <id>attach-javadoc</id>
+                        <phase>prepare-package</phase>
                         <goals>
-                            <goal>shade</goal>
+                            <goal>javadoc</goal>
                         </goals>
                         <configuration>
-                            <createDependencyReducedPom>false</createDependencyReducedPom>
+                            <reportOutputDirectory>${project.build.directory}/classes/</reportOutputDirectory>
                         </configuration>
                     </execution>
                 </executions>

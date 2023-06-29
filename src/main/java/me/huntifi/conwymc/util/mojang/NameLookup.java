@@ -29,7 +29,7 @@ public class NameLookup {
     private static final Gson JSON_PARSER = new Gson();
 
     /**
-     * <h1>NOTE: Avoid running this method <i>Synchronously</i> with the main thread!It blocks while attempting to get a response from Mojang servers!</h1>
+     * NOTE: Avoid running this method <i>Synchronously</i> with the main thread!It blocks while attempting to get a response from Mojang servers!
      * @param player The UUID of the player to be looked up.
      * @return Returns an array of {@link PreviousPlayerNameEntry} objects, or null if the response couldn't be interpreted.
      */
@@ -38,20 +38,22 @@ public class NameLookup {
     }
 
     /**
-     * <h1>NOTE: Avoid running this method <i>Synchronously</i> with the main thread! It blocks while attempting to get a response from Mojang servers!</h1>
+     * NOTE: Avoid running this method <i>Synchronously</i> with the main thread! It blocks while attempting to get a response from Mojang servers!
      * Alternative method accepting an 'OfflinePlayer' (and therefore 'Player') objects as parameter.
      * @param player The OfflinePlayer object to obtain the UUID from.
      * @return Returns an array of {@link PreviousPlayerNameEntry} objects, or null if the response couldn't be interpreted.
+     * @throws IOException Inherited by {@link BufferedReader#readLine()}, {@link BufferedReader#close()}, {@link URL}, {@link HttpURLConnection#getInputStream()}
      */
     public static PreviousPlayerNameEntry[] getPlayerPreviousNames(OfflinePlayer player) throws IOException {
         return getPlayerPreviousNames(player.getUniqueId());
     }
 
     /**
-     * <h1>NOTE: Avoid running this method <i>Synchronously</i> with the main thread! It blocks while attempting to get a response from Mojang servers!</h1>
+     * NOTE: Avoid running this method <i>Synchronously</i> with the main thread! It blocks while attempting to get a response from Mojang servers!
      * Alternative method accepting an {@link OfflinePlayer} (and therefore {@link Player}) objects as parameter.
      * @param uuid The UUID String to lookup
      * @return Returns an array of {@link PreviousPlayerNameEntry} objects, or null if the response couldn't be interpreted.
+     * @throws IOException Inherited by {@link BufferedReader#readLine()}, {@link BufferedReader#close()}, {@link URL}, {@link HttpURLConnection#getInputStream()}
      */
     public static PreviousPlayerNameEntry[] getPlayerPreviousNames(String uuid) throws IOException {
         if (uuid == null || uuid.isEmpty())

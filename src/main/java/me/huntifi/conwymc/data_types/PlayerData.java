@@ -44,6 +44,7 @@ public class PlayerData {
 
     /**
      * Initialize the player's data.
+     * @param coins The player's coins
      * @param rankData The data retrieved from player_rank
      * @param mute The player's active mute
      * @throws SQLException If a database access error occurs or an invalid column label is used

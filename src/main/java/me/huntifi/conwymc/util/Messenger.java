@@ -14,18 +14,31 @@ import static org.bukkit.Bukkit.getServer;
  */
 public class Messenger {
 
+    /** Icon color */
     private static final ChatColor ICON = ChatColor.GOLD;
+    /** Primary error color */
     public static final ChatColor ERROR_PRIMARY = ChatColor.DARK_RED;
+    /** Secondary error color */
     public static final ChatColor ERROR_SECONDARY = ChatColor.RED;
+    /** Primary warning color */
     public static final ChatColor WARNING_PRIMARY = ChatColor.RED;
+    /** Secondary warning color */
     public static final ChatColor WARNING_SECONDARY = ChatColor.LIGHT_PURPLE;
+    /** Primary tip color */
     public static final ChatColor TIP_PRIMARY = ChatColor.AQUA;
+    /** Secondary tip color */
     public static final ChatColor TIP_SECONDARY = ChatColor.DARK_AQUA;
+    /** Primary secret color */
     public static final ChatColor SECRET_PRIMARY = ChatColor.YELLOW;
+    /** Secondary secret color */
     public static final ChatColor SECRET_SECONDARY = ChatColor.WHITE;
+    /** Primary success color */
     public static final ChatColor SUCCESS_PRIMARY = ChatColor.GREEN;
+    /** Secondary success color */
     public static final ChatColor SUCCESS_SECONDARY = ChatColor.YELLOW;
+    /** Primary info color */
     public static final ChatColor INFO_PRIMARY = ChatColor.BLUE;
+    /** Secondary info color */
     public static final ChatColor INFO_SECONDARY = ChatColor.DARK_AQUA;
 
     /**

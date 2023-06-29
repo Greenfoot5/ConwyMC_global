@@ -1,5 +1,8 @@
 package me.huntifi.conwymc.util;
 
+/**
+ * Utility functions related to player name tags
+ */
 public class NameTag {
 
     /**
