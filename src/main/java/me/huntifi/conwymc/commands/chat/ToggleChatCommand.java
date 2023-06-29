@@ -9,6 +9,9 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Collection;
+import java.util.Objects;
+
 /**
  * Toggles chat mode or sends a message in the chat mode
  */
@@ -35,7 +38,6 @@ public abstract class ToggleChatCommand extends ChatCommand {
                     Messenger.sendError("Console cannot toggle chat modes", sender);
             } else if (!(sender instanceof Player && MuteCommand.isMuted(((Player) sender).getUniqueId()))) {
                 sendMessage(sender, message);
-                tagPlayers(message.toLowerCase());
             }
         });
 
@@ -43,24 +45,27 @@ public abstract class ToggleChatCommand extends ChatCommand {
     }
 
     /**
+     * Send the message from the sender to the receivers via this chat mode.
      * Play a tag sound for all tagged players.
-     * @param message The message in lower case
-     */
-    private void tagPlayers(String message) {
-        for (Player player : Bukkit.getOnlinePlayers()) {
-            if (shouldTagPlayer(player, message))
-                playTagSound(player);
-        }
-    }
-
-    /**
-     * Check whether a player should be tagged.
-     * @param player The player
+     * @param sender The sender of the message
      * @param message The message
-     * @return Whether the player should be tagged
      */
-    protected boolean shouldTagPlayer(Player player, String message) {
-        return message.contains("@" + player.getName().toLowerCase());
+    private void sendMessage(CommandSender sender, String message) {
+        // Get alternative versions of the message
+        String formattedMessage = getFormattedMessage(sender, message);
+        String lowerMessage = message.toLowerCase();
+
+        // Loop over all receivers to send the message and play the tag sound
+        for (CommandSender receiver : getReceivers()) {
+            receiver.sendMessage(formattedMessage);
+
+            // Cannot tag self or console
+            if (Objects.equals(sender, receiver) || !(receiver instanceof Player))
+                continue;
+
+            if (lowerMessage.contains("@" + receiver.getName().toLowerCase()))
+                playTagSound((Player) receiver);
+        }
     }
 
     /**
@@ -70,9 +75,16 @@ public abstract class ToggleChatCommand extends ChatCommand {
     protected abstract void toggleChatMode(Player player);
 
     /**
-     * Send the message from the sender via this chat mode.
+     * Get everyone who should receive the message.
+     * @return The receivers of the message
+     */
+    protected abstract Collection<CommandSender> getReceivers();
+
+    /**
+     * Get the message with formatting applied.
      * @param sender The sender of the message
      * @param message The message
+     * @return The formatted message
      */
-    protected abstract void sendMessage(CommandSender sender, String message);
+    protected abstract String getFormattedMessage(CommandSender sender, String message);
 }

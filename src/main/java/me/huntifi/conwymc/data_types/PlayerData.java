@@ -1,5 +1,6 @@
 package me.huntifi.conwymc.data_types;
 
+import me.huntifi.conwymc.commands.chat.GlobalChatCommand;
 import me.huntifi.conwymc.util.NameTag;
 import org.bukkit.ChatColor;
 
@@ -31,7 +32,7 @@ public class PlayerData {
     private String leaveMessage;
 
     /** The player's current chat mode */
-    private String chatMode = "global";
+    private String chatMode = GlobalChatCommand.CHAT_MODE;
 
     /** Whether the player's staff rank is hidden */
     private boolean isHiddenStaff = false;
