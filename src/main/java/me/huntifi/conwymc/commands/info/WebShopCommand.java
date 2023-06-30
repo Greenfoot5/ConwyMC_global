@@ -22,12 +22,11 @@ public class WebShopCommand implements CommandExecutor {
      */
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command cmd, @NotNull String label, @NotNull String[] args) {
-        Messenger.sendError("The shop is currently closed! It will open again soon.", sender);
-        /*String message = "--------------------------------\n" +
+        String message = "--------------------------------\n" +
                 ChatColor.GREEN + "Link to the web shop:\n" +
                 ChatColor.BLUE + "https://conwymc.tebex.io/\n" +
                 "--------------------------------";
-        sender.sendMessage(message);*/
+        sender.sendMessage(message);
 
         return true;
     }
