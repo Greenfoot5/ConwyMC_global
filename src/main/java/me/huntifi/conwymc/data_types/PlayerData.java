@@ -2,6 +2,8 @@ package me.huntifi.conwymc.data_types;
 
 import me.huntifi.conwymc.commands.chat.GlobalChatCommand;
 import me.huntifi.conwymc.util.NameTag;
+import net.kyori.adventure.text.format.NamedTextColor;
+import net.kyori.adventure.text.format.TextColor;
 import org.bukkit.ChatColor;
 
 import java.sql.ResultSet;
@@ -233,12 +235,26 @@ public class PlayerData {
      * Get the player's chat color.
      * @return The player's chat color
      */
-    public ChatColor getChatColor() {
+    public TextColor getTextColor() {
         if (staffRank.isEmpty() || isHiddenStaff)
-            return ChatColor.GRAY;
+            return NamedTextColor.GRAY;
         if (staffRank.equals("owner"))
-            return ChatColor.GREEN;
-        return ChatColor.WHITE;
+            return NamedTextColor.GREEN;
+        return NamedTextColor.WHITE;
+    }
+
+    public String getMMChatColor(String name) {
+        if (staffRank.isEmpty() || isHiddenStaff || name == null)
+            return "<gray>";
+
+        switch (name) {
+            case "Huntifi":
+                return "<dark_purple>";
+            case "Greenfoot5":
+                return "<gradient:#1FD1F9:#B621FE>";
+            default:
+                return "<white>";
+        }
     }
 
     /**

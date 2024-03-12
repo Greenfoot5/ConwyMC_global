@@ -2,7 +2,7 @@ package me.huntifi.conwymc.commands.chat;
 
 import me.huntifi.conwymc.data_types.PlayerData;
 import me.huntifi.conwymc.database.ActiveData;
-import org.bukkit.ChatColor;
+import net.kyori.adventure.text.Component;
 import org.bukkit.Location;
 import org.bukkit.Sound;
 import org.bukkit.command.CommandExecutor;
@@ -19,8 +19,8 @@ public abstract class ChatCommand implements CommandExecutor {
      * @param sender The sender of the message
      * @return The sender's name
      */
-    protected String getName(CommandSender sender) {
-        return sender instanceof Player ? ((Player) sender).getDisplayName() : sender.getName();
+    protected Component getName(CommandSender sender) {
+        return sender instanceof Player ? ((Player) sender).displayName() : Component.text(sender.getName());
     }
 
     /**
@@ -28,13 +28,13 @@ public abstract class ChatCommand implements CommandExecutor {
      * @param sender The sender of the message
      * @return The sender's chat color
      */
-    protected ChatColor getChatColor(CommandSender sender) {
+    protected String getChatColor(CommandSender sender) {
         if (!(sender instanceof Player))
-            return ChatColor.WHITE;
+            return "<white>";
 
         Player player = (Player) sender;
         PlayerData data = ActiveData.getData(player.getUniqueId());
-        return data.getChatColor();
+        return data.getMMChatColor(player.getName());
     }
 
     /**

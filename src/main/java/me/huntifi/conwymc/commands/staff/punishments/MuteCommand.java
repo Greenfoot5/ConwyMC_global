@@ -1,5 +1,6 @@
 package me.huntifi.conwymc.commands.staff.punishments;
 
+import io.papermc.paper.event.player.AsyncChatEvent;
 import me.huntifi.conwymc.ConwyMC;
 import me.huntifi.conwymc.data_types.PlayerData;
 import me.huntifi.conwymc.data_types.Tuple;
@@ -14,6 +15,9 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
+import org.bukkit.event.Listener;
 import org.jetbrains.annotations.NotNull;
 
 import java.sql.SQLException;
@@ -23,7 +27,17 @@ import java.util.UUID;
 /**
  * Mutes a player
  */
-public class MuteCommand implements CommandExecutor {
+public class MuteCommand implements CommandExecutor, Listener {
+
+    @EventHandler(priority = EventPriority.LOW, ignoreCancelled = true)
+    public void onChat(AsyncChatEvent e) {
+        Player p = e.getPlayer();
+
+        // Check if the player is muted
+        if (isMuted(p.getUniqueId())) {
+            e.setCancelled(true);
+        }
+    }
 
     /**
      * Mute a player
