@@ -28,6 +28,7 @@
     </distributionManagement>
 
     <build>
+        <finalName>ConwyMC</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
