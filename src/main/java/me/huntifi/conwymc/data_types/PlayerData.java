@@ -7,6 +7,8 @@ import net.kyori.adventure.text.Component;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.util.HashMap;
+import java.util.Objects;
 
 /**
  * Represents a player's data
@@ -43,6 +45,9 @@ public class PlayerData {
     /** The current coin multiplier */
     private static double coinMultiplier = 1;
 
+    /** The player's settings */
+    private HashMap<String, String> settings;
+
     /**
      * Initialize the player's data.
      * @param coins The player's coins
@@ -50,12 +55,13 @@ public class PlayerData {
      * @param mute The player's active mute
      * @throws SQLException If a database access error occurs or an invalid column label is used
      */
-    public PlayerData(double coins, ResultSet rankData, ResultSet mute) throws SQLException {
+    public PlayerData(double coins, ResultSet rankData, ResultSet mute, HashMap<String, String> settings) throws SQLException {
         this.coins = coins;
         this.staffRank = rankData.getString("staff_rank").toLowerCase();
         this.rankPoints = rankData.getDouble("rank_points");
         this.joinMessage = rankData.getString("join_message");
         this.leaveMessage = rankData.getString("leave_message");
+        this.settings = settings;
 
         this.mute = mute.next() ? new Tuple<>(mute.getString("reason"), mute.getTimestamp("end")) : null;
     }
@@ -276,5 +282,14 @@ public class PlayerData {
      */
     public static void setCoinMultiplier(double multiplier) {
         coinMultiplier = multiplier;
+    }
+
+    /**
+     * Get the player's value of a setting
+     * @param name The name or key of a setting
+     * @return The player's value of a setting or default
+     */
+    public String getSetting(String name) {
+        return settings.get(name) == null ? Objects.requireNonNull(Setting.getDefault(name)) : settings.get(name);
     }
 }

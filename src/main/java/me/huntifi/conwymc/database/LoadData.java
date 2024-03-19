@@ -7,6 +7,7 @@ import me.huntifi.conwymc.data_types.Tuple;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.UUID;
 
 /**
@@ -29,8 +30,11 @@ public class LoadData {
             // Mute data
             Tuple<PreparedStatement, ResultSet> prMute = Punishments.getActive(uuid, "mute");
 
+            // Settings
+            HashMap<String, String> settings = getSettings(uuid);
+
             // Collect data and release resources
-            PlayerData data = new PlayerData(getCoins(uuid), prRank.getSecond(), prMute.getSecond());
+            PlayerData data = new PlayerData(getCoins(uuid), prRank.getSecond(), prMute.getSecond(), settings);
             prRank.getFirst().close();
             prMute.getFirst().close();
 
@@ -158,5 +162,24 @@ public class LoadData {
             else
                 return null;
         }
+    }
+
+    public static HashMap<String, String> getSettings(UUID uuid) {
+        HashMap<String, String> loadedSettings = new HashMap<>();
+
+        try (PreparedStatement ps = ConwyMC.SQL.getConnection().prepareStatement(
+                "SELECT setting, value FROM player_settings WHERE uuid = ?")) {
+            ps.setString(1, uuid.toString());
+
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                loadedSettings.put(rs.getString("setting"), rs.getString("value"));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return loadedSettings;
     }
 }

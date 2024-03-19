@@ -36,7 +36,7 @@ public class Gui implements Listener {
     protected final HashMap<Integer, GuiItem> locationToItem = new HashMap<>();
 
     /** Whether this GUI should stop listening for events after being closed */
-    private final boolean shouldUnregister;
+    protected final boolean shouldUnregister;
 
     /**
      * Create an inventory.

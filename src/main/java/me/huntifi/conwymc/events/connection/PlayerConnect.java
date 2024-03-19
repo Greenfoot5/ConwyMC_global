@@ -13,8 +13,8 @@ import me.huntifi.conwymc.util.PunishmentTime;
 import me.huntifi.conwymc.util.RankPoints;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
-import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.Bukkit;
+import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -46,6 +46,12 @@ public class PlayerConnect implements Listener {
         setJoinMessage(event, data);
         setPermissions(uuid, data);
         StoreData.updateName(uuid);
+
+        for (Player p : Bukkit.getOnlinePlayers()) {
+            if (data.getSetting("joinPing").equals("true")) {
+                player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1.0f, 0.1f);
+            }
+        }
     }
 
     /**
