@@ -39,14 +39,15 @@ public class PlayerData {
     /** Whether the player's staff rank is hidden */
     private boolean isHiddenStaff = false;
 
+    /** The player's settings */
+    private final HashMap<String, String> settings;
+
     /** The player's mute reason and expiration time */
     private Tuple<String, Timestamp> mute;
 
     /** The current coin multiplier */
-    private static double coinMultiplier = 1;
+    protected static double coinMultiplier = 1;
 
-    /** The player's settings */
-    private HashMap<String, String> settings;
 
     /**
      * Initialize the player's data.
