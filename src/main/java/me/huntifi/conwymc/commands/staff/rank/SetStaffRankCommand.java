@@ -6,7 +6,6 @@ import me.huntifi.conwymc.database.Permissions;
 import me.huntifi.conwymc.events.nametag.UpdateNameTagEvent;
 import me.huntifi.conwymc.util.Messenger;
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -34,7 +33,7 @@ public class SetStaffRankCommand implements CommandExecutor {
         // Get the target player
         Player player = Bukkit.getPlayer(args[0]);
         if (player == null) {
-            Messenger.sendError("Could not find player: " + Messenger.ERROR_SECONDARY + args[0], sender);
+            Messenger.sendError("Could not find player: <red>" + args[0], sender);
             return true;
         }
 
@@ -45,7 +44,7 @@ public class SetStaffRankCommand implements CommandExecutor {
             data.setStaffRank(rank);
             Bukkit.getPluginManager().callEvent(new UpdateNameTagEvent(player, data.getDisplayRank()));
         } else {
-            Messenger.sendError("Rank " + Messenger.ERROR_SECONDARY + rank + Messenger.ERROR_PRIMARY + " is invalid!", sender);
+            Messenger.sendError("Rank <red>" + rank + "</red> is invalid!", sender);
         }
 
         return true;

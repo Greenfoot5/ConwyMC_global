@@ -4,7 +4,6 @@ import me.huntifi.conwymc.ConwyMC;
 import me.huntifi.conwymc.commands.staff.punishments.MuteCommand;
 import me.huntifi.conwymc.util.Messenger;
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -62,10 +61,11 @@ public abstract class PrivateChatCommand extends ChatCommand {
      * @param message The message
      */
     private void sendMessage(CommandSender sender, CommandSender target, String message) {
-        sender.sendMessage(String.format("%sTo %s%s: %s%s",
-                ChatColor.GOLD, getName(target), ChatColor.GOLD, ChatColor.DARK_AQUA, message));
-        target.sendMessage(String.format("%sFrom %s%s: %s%s",
-                ChatColor.GOLD, getName(sender), ChatColor.GOLD, ChatColor.DARK_AQUA, message));
+        message = Messenger.clean(message);
+        Messenger.send(String.format("<gold>To %s: <dark_aqua>%s",
+                getName(target), message), sender);
+        Messenger.send(String.format("<gold>From %s: <dark_aqua>%s",
+                getName(sender), message), target);
 
         lastSender.put(target, sender);
         if (target instanceof Player)

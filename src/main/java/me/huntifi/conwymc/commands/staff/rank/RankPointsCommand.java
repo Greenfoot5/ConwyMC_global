@@ -10,7 +10,6 @@ import me.huntifi.conwymc.events.nametag.UpdateNameTagEvent;
 import me.huntifi.conwymc.util.Messenger;
 import me.huntifi.conwymc.util.RankPoints;
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -43,7 +42,7 @@ public class RankPointsCommand implements CommandExecutor {
                 // Get the player's stored rank points
                 double rp = LoadData.getRankPoints(args[0]);
                 if (rp < 0) {
-                    Messenger.sendError(String.format("Could not find player: %s%s", Messenger.ERROR_SECONDARY, args[0]), sender);
+                    Messenger.sendError(String.format("Could not find player: <red>%s", args[0]), sender);
                     return;
                 }
 
@@ -59,15 +58,13 @@ public class RankPointsCommand implements CommandExecutor {
                         setRankPoints(sender, args[0], Math.max(rp - Double.parseDouble(args[2]), 0));
                         break;
                     default:
-                        Messenger.sendError(String.format("The operation %s%s%s is not supported!\n" +
-                                "Please use one of the following:%s set, add, remove",
-                                Messenger.ERROR_SECONDARY, args[1], Messenger.ERROR_PRIMARY, Messenger.ERROR_SECONDARY), sender);
+                        Messenger.sendError(String.format("The operation <red>%s</red> is not supported!\n" +
+                                "Please use one of the following:<red? set, add, remove", args[1]), sender);
                         break;
                 }
 
             } catch (NumberFormatException e) {
-                Messenger.sendError(String.format("The argument %s%s%s is not a number!",
-                        Messenger.ERROR_SECONDARY, args[2], Messenger.ERROR_PRIMARY), sender);
+                Messenger.sendError(String.format("The argument <red>%s</red> is not a number!", args[2]), sender);
             } catch (SQLException e) {
                 Messenger.sendError("An error occurred while performing the command!\n" +
                         "Please contact staff if this issue persists.", sender);
@@ -87,8 +84,8 @@ public class RankPointsCommand implements CommandExecutor {
     private void setRankPoints(CommandSender sender, String name, double rp) {
         StoreData.updateRank(name, rp);
         updateOnline(name, rp);
-        Messenger.sendSuccess(String.format("%s now has %s%f%s rank points.",
-                name, Messenger.SUCCESS_SECONDARY, rp, Messenger.SUCCESS_PRIMARY), sender);
+        Messenger.sendSuccess(String.format("%s now has <green>%f</green> rank points.",
+                name, rp), sender);
     }
 
     /**

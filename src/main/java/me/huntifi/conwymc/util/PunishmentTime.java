@@ -1,6 +1,5 @@
 package me.huntifi.conwymc.util;
 
-import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 
 import java.sql.Timestamp;
@@ -17,11 +16,10 @@ public class PunishmentTime {
      */
     public static void wrongFormat(CommandSender sender) {
         Messenger.sendError(
-                "Please supply a duration in the form " + Messenger.ERROR_SECONDARY + "0t"
-                + Messenger.ERROR_PRIMARY + ", where " + Messenger.ERROR_SECONDARY + "0" + Messenger.ERROR_PRIMARY
-                + " is any positive number and " + Messenger.ERROR_SECONDARY + "t" + Messenger.ERROR_PRIMARY
-                + " is one of the following units:\n"
-                + Messenger.ERROR_SECONDARY + "y(ears), M(onths), d(ays), h(ours), m(inutes), s(econds)",
+                "Please supply a duration in the form <red>0t</red>, " +
+                        "where <red>0</red> is any positive number and " +
+                        "<red>t</red> is one of the following units:\n" +
+                        "y(ears), M(onths), d(ays), h(ours), m(inutes), s(econds)",
                 sender
         );
     }
@@ -47,7 +45,7 @@ public class PunishmentTime {
             case 'y':
                 num *= 12;
             case 'M':
-                num *= 30.42;
+                num = (long) (num * 30.42);
             case 'd':
                 num *= 24;
             case 'h':
@@ -117,7 +115,7 @@ public class PunishmentTime {
         }
 
         if (duration >= 30.42) {
-            duration /= 30.42;
+            duration = (long) (duration / 30.42);
         } else {
             return df.format(duration) + " day(s)";
         }

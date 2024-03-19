@@ -1,8 +1,8 @@
 package me.huntifi.conwymc.commands.staff.punishments;
 
 import me.huntifi.conwymc.util.Messenger;
+import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -29,14 +29,14 @@ public class KickCommand implements CommandExecutor {
 
         Player player = Bukkit.getPlayer(args[0]);
         if (player == null) {
-            Messenger.sendError("Could not find player: " + Messenger.ERROR_SECONDARY + args[0], sender);
+            Messenger.sendError("Could not find player: <red>" + args[0], sender);
             return true;
         }
 
-        String message = ChatColor.RED + "You were kicked by " + ChatColor.WHITE + sender.getName();
+        Component message = Messenger.mm.deserialize("<red>You were kicked by <white>" + sender.getName());
         if (args.length > 1)
-            message += ChatColor.RED + " for: " + String.join(" ", args).split(" ", 2)[1];
-        player.kickPlayer(message);
+            message = message.append(Messenger.mm.deserialize("<red> for: " + String.join(" ", args).split(" ", 2)[1]));
+        player.kick(message);
 
         return true;
     }

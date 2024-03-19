@@ -2,9 +2,7 @@ package me.huntifi.conwymc.data_types;
 
 import me.huntifi.conwymc.commands.chat.GlobalChatCommand;
 import me.huntifi.conwymc.util.NameTag;
-import net.kyori.adventure.text.format.NamedTextColor;
-import net.kyori.adventure.text.format.TextColor;
-import org.bukkit.ChatColor;
+import net.kyori.adventure.text.Component;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -119,7 +117,7 @@ public class PlayerData {
      * Get the player's display rank.
      * @return The pretty representation of the player's staff or donator rank
      */
-    public String getDisplayRank() {
+    public Component getDisplayRank() {
         if (!staffRank.isEmpty() && !isHiddenStaff)
             return NameTag.convertRank(staffRank);
 
@@ -231,25 +229,12 @@ public class PlayerData {
         return !isHiddenStaff;
     }
 
-    /**
-     * Get the player's chat color.
-     * @return The player's chat color
-     */
-    public TextColor getTextColor() {
-        if (staffRank.isEmpty() || isHiddenStaff)
-            return NamedTextColor.GRAY;
-        if (staffRank.equals("owner"))
-            return NamedTextColor.GREEN;
-        return NamedTextColor.WHITE;
-    }
-
     public String getMMChatColor(String name) {
         if (staffRank.isEmpty() || isHiddenStaff || name == null)
             return "<gray>";
 
         switch (name) {
             case "Huntifi":
-                return "<dark_purple>";
             case "Greenfoot5":
                 return "<gradient:#1FD1F9:#B621FE>";
             default:

@@ -2,7 +2,6 @@ package me.huntifi.conwymc.commands.staff.currencies;
 
 import me.huntifi.conwymc.data_types.PlayerData;
 import me.huntifi.conwymc.util.Messenger;
-import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -32,10 +31,9 @@ public class SetCoinMultiplierCommand implements CommandExecutor {
                 throw new NumberFormatException();
             }
             PlayerData.setCoinMultiplier(multiplier);
-            Messenger.broadcastInfo("The coin multiplier has been set to: " + ChatColor.YELLOW + args[0]);
+            Messenger.broadcastInfo("The coin multiplier has been set to: <yellow>" + args[0]);
         } catch (NumberFormatException e) {
-            Messenger.sendError(String.format("The argument %s%s%s is not a positive number!",
-                    Messenger.ERROR_SECONDARY, args[0], Messenger.ERROR_PRIMARY), sender);
+            Messenger.sendError(String.format("The argument <red>%s</red> is not a positive number!", args[0]), sender);
         }
 
         return true;

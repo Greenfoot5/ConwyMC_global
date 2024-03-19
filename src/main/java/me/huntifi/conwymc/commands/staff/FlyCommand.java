@@ -1,7 +1,6 @@
 package me.huntifi.conwymc.commands.staff;
 
 import me.huntifi.conwymc.util.Messenger;
-import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;

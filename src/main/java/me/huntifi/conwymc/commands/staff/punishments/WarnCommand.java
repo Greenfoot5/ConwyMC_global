@@ -5,7 +5,6 @@ import me.huntifi.conwymc.database.LoadData;
 import me.huntifi.conwymc.database.Punishments;
 import me.huntifi.conwymc.util.Messenger;
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -42,7 +41,7 @@ public class WarnCommand implements CommandExecutor {
                 else
                     warn(sender, player.getUniqueId(), args);
             } catch (SQLException e) {
-                Messenger.sendError("An error occurred while trying to warn: " + Messenger.ERROR_SECONDARY + args[0], sender);
+                Messenger.sendError("An error occurred while trying to warn: <red>" + args[0], sender);
                 e.printStackTrace();
             }
         });
@@ -58,7 +57,7 @@ public class WarnCommand implements CommandExecutor {
     private void warnOffline(CommandSender sender, String[] args) throws SQLException {
         UUID uuid = LoadData.getUUID(args[0]);
         if (uuid == null) {
-            Messenger.sendError("Could not find player: " + Messenger.ERROR_SECONDARY + args[0], sender);
+            Messenger.sendError("Could not find player: <red>" + args[0], sender);
         } else {
             warn(sender, uuid, args);
         }
@@ -77,7 +76,7 @@ public class WarnCommand implements CommandExecutor {
         // Apply the warning to our database
         Punishments.add(args[0], uuid, null, "warn", reason, 0);
         warnOnline(uuid, reason);
-        Messenger.sendInfo("Successfully warned: " + Messenger.INFO_SECONDARY + args[0], sender);
+        Messenger.sendInfo("Successfully warned: <aqua>" + args[0], sender);
     }
 
     /**
@@ -88,6 +87,6 @@ public class WarnCommand implements CommandExecutor {
     private void warnOnline(UUID uuid, String reason) {
         Player player = Bukkit.getPlayer(uuid);
         if (player != null)
-            Messenger.sendError("You were warned for: " + Messenger.ERROR_SECONDARY + reason, player);
+            Messenger.sendError("You were warned for: <red>" + reason, player);
     }
 }

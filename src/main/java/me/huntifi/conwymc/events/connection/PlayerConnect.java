@@ -1,13 +1,20 @@
 package me.huntifi.conwymc.events.connection;
 
 import me.huntifi.conwymc.ConwyMC;
-import me.huntifi.conwymc.util.RankPoints;
-import me.huntifi.conwymc.util.PunishmentTime;
 import me.huntifi.conwymc.data_types.PlayerData;
 import me.huntifi.conwymc.data_types.Tuple;
-import me.huntifi.conwymc.database.*;
+import me.huntifi.conwymc.database.ActiveData;
+import me.huntifi.conwymc.database.LoadData;
+import me.huntifi.conwymc.database.Permissions;
+import me.huntifi.conwymc.database.Punishments;
+import me.huntifi.conwymc.database.StoreData;
+import me.huntifi.conwymc.util.Messenger;
+import me.huntifi.conwymc.util.PunishmentTime;
+import me.huntifi.conwymc.util.RankPoints;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.NamedTextColor;
+import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -54,12 +61,9 @@ public class PlayerConnect implements Listener {
 
         Tuple<String, Timestamp> banned = getBan(event.getUniqueId(), event.getAddress());
         if (banned != null) {
-            event.disallow(
-                    AsyncPlayerPreLoginEvent.Result.KICK_BANNED,
-                    ChatColor.DARK_RED + "\n[BAN] " + ChatColor.RED + banned.getFirst()
-                            + ChatColor.DARK_RED + "\n[EXPIRES IN] " + ChatColor.RED
-                            + PunishmentTime.getExpire(banned.getSecond())
-            );
+            Component content = Messenger.mm.deserialize("<br><dark_red>[BAN] <red>" + banned.getFirst() +
+                    "</red><br>[EXPIRES IN] <red>" + PunishmentTime.getExpire(banned.getSecond()));
+            event.disallow(AsyncPlayerPreLoginEvent.Result.KICK_BANNED, content);
             return;
         }
 
@@ -129,8 +133,10 @@ public class PlayerConnect implements Listener {
      * @param data The player's data
      */
     private void setJoinMessage(PlayerJoinEvent event, PlayerData data) {
-        if (!data.getJoinMessage().isEmpty())
-            event.setJoinMessage(ChatColor.YELLOW + data.getJoinMessage());
+        // Set the join message
+        if (!data.getJoinMessage().isEmpty()) {
+            event.joinMessage(Messenger.mm.deserialize(data.getJoinMessage()).color(NamedTextColor.YELLOW));
+        }
     }
 
     /**

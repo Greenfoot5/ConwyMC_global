@@ -1,6 +1,9 @@
 package me.huntifi.conwymc.events.nametag;
 
 import com.nametagedit.plugin.NametagEdit;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.NamedTextColor;
+import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -19,9 +22,10 @@ public class UpdateNameTag implements Listener {
     @EventHandler (priority = EventPriority.LOWEST)
     public void onUpdateNameTag(UpdateNameTagEvent event) {
         Player player = event.getPlayer();
-        String rank = event.getDisplayRank();
+        Component rank = event.getDisplayRank();
+        String serialized = LegacyComponentSerializer.legacySection().serialize(rank);
 
-        player.setDisplayName(rank + ChatColor.GRAY + player.getName());
-        NametagEdit.getApi().setPrefix(player, rank + ChatColor.GRAY);
+        player.displayName(rank.append(Component.text(player.getName(), NamedTextColor.GRAY)));
+        NametagEdit.getApi().setPrefix(player, serialized.substring(0, serialized.length() - 1) + ChatColor.GRAY);
     }
 }

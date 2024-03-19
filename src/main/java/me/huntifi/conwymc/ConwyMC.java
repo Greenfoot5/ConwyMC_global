@@ -6,22 +6,34 @@ import me.huntifi.conwymc.commands.chat.MessageCommand;
 import me.huntifi.conwymc.commands.chat.ReplyCommand;
 import me.huntifi.conwymc.commands.donator.JoinMessageCommand;
 import me.huntifi.conwymc.commands.donator.LeaveMessageCommand;
-import me.huntifi.conwymc.commands.info.*;
+import me.huntifi.conwymc.commands.info.CoinMultiplierCommand;
+import me.huntifi.conwymc.commands.info.CoinsCommand;
+import me.huntifi.conwymc.commands.info.DiscordCommand;
+import me.huntifi.conwymc.commands.info.PingCommand;
+import me.huntifi.conwymc.commands.info.RulesCommand;
+import me.huntifi.conwymc.commands.info.TopDonatorsCommand;
+import me.huntifi.conwymc.commands.info.WebShopCommand;
+import me.huntifi.conwymc.commands.info.WhoIsCommand;
 import me.huntifi.conwymc.commands.staff.FlyCommand;
+import me.huntifi.conwymc.commands.staff.chat.BroadcastCommand;
+import me.huntifi.conwymc.commands.staff.chat.StaffChatCommand;
 import me.huntifi.conwymc.commands.staff.currencies.AddCoinsCommand;
 import me.huntifi.conwymc.commands.staff.currencies.SetCoinMultiplierCommand;
 import me.huntifi.conwymc.commands.staff.currencies.SetCoinsCommand;
 import me.huntifi.conwymc.commands.staff.currencies.TakeCoinsCommand;
+import me.huntifi.conwymc.commands.staff.punishments.BanCommand;
+import me.huntifi.conwymc.commands.staff.punishments.KickAllCommand;
+import me.huntifi.conwymc.commands.staff.punishments.KickCommand;
+import me.huntifi.conwymc.commands.staff.punishments.MuteCommand;
+import me.huntifi.conwymc.commands.staff.punishments.UnbanCommand;
+import me.huntifi.conwymc.commands.staff.punishments.UnmuteCommand;
+import me.huntifi.conwymc.commands.staff.punishments.WarnCommand;
 import me.huntifi.conwymc.commands.staff.rank.RankPointsCommand;
 import me.huntifi.conwymc.commands.staff.rank.SetStaffRankCommand;
-import me.huntifi.conwymc.commands.staff.chat.BroadcastCommand;
-import me.huntifi.conwymc.commands.staff.chat.StaffChatCommand;
-import me.huntifi.conwymc.commands.staff.punishments.*;
 import me.huntifi.conwymc.commands.staff.rank.ToggleRankCommand;
 import me.huntifi.conwymc.database.KeepAlive;
 import me.huntifi.conwymc.database.MySQL;
 import me.huntifi.conwymc.database.StoreData;
-import me.huntifi.conwymc.events.chat.PlayerChat;
 import me.huntifi.conwymc.events.connection.PlayerConnect;
 import me.huntifi.conwymc.events.connection.PlayerDisconnect;
 import me.huntifi.conwymc.events.nametag.UpdateNameTag;
@@ -112,10 +124,11 @@ public final class ConwyMC extends JavaPlugin {
      * Register all events.
      */
     private void registerEvents() {
-        getServer().getPluginManager().registerEvents(new PlayerChat(), plugin);
         getServer().getPluginManager().registerEvents(new PlayerConnect(), plugin);
         getServer().getPluginManager().registerEvents(new PlayerDisconnect(), plugin);
         getServer().getPluginManager().registerEvents(new UpdateNameTag(), plugin);
+        getServer().getPluginManager().registerEvents(new GlobalChatCommand(), plugin);
+        getServer().getPluginManager().registerEvents(new StaffChatCommand(), plugin);
     }
 
     /**

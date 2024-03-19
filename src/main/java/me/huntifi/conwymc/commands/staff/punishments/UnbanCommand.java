@@ -34,9 +34,9 @@ public class UnbanCommand implements CommandExecutor {
         Bukkit.getScheduler().runTaskAsynchronously(ConwyMC.plugin, () -> {
             try {
                 Punishments.end(args[0], "ban");
-                Messenger.sendInfo("Successfully unbanned: " + Messenger.INFO_SECONDARY + args[0], sender);
+                Messenger.sendInfo("Successfully unbanned: <aqua>" + args[0], sender);
             } catch (SQLException e) {
-                Messenger.sendError("An error occurred while trying to unban: " + Messenger.ERROR_SECONDARY + args[0], sender);
+                Messenger.sendError("An error occurred while trying to unban: <red>" + args[0], sender);
                 e.printStackTrace();
             }
         });

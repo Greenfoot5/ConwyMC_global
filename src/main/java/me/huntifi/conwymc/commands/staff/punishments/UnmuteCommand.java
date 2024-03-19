@@ -5,7 +5,6 @@ import me.huntifi.conwymc.database.ActiveData;
 import me.huntifi.conwymc.database.Punishments;
 import me.huntifi.conwymc.util.Messenger;
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -37,9 +36,9 @@ public class UnmuteCommand implements CommandExecutor {
             try {
                 Punishments.end(args[0], "mute");
                 unmuteOnline(args[0]);
-                Messenger.sendInfo("Successfully unmuted: " + Messenger.INFO_SECONDARY + args[0], sender);
+                Messenger.sendInfo("Successfully unmuted: <aqua>" + args[0], sender);
             } catch (SQLException e) {
-                Messenger.sendError("An error occurred while trying to unmute: " + Messenger.ERROR_SECONDARY + args[0], sender);
+                Messenger.sendError("An error occurred while trying to unmute: <red>" + args[0], sender);
                 e.printStackTrace();
             }
         });

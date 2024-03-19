@@ -6,8 +6,9 @@ import me.huntifi.conwymc.database.LoadData;
 import me.huntifi.conwymc.util.Messenger;
 import me.huntifi.conwymc.util.NameTag;
 import me.huntifi.conwymc.util.RankPoints;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -60,27 +61,26 @@ public class TopDonatorsCommand implements CommandExecutor {
 
             // Prepare data used for the message
             Tuple<PreparedStatement, ResultSet> donators = LoadData.getDonators(offset);
-            StringBuilder message = new StringBuilder();
             DecimalFormat num = new DecimalFormat("0");
             int pos = offset;
 
             // Create the message
-            message.append(ChatColor.AQUA).append("#. Player Rank Points");
+            Component message = Component.text("#. Player Rank Points", NamedTextColor.AQUA);
             while (donators.getSecond().next()) {
                 pos++;
-                ChatColor color = pos == requested ? ChatColor.AQUA : ChatColor.DARK_AQUA;
+                NamedTextColor color = pos == requested ? NamedTextColor.AQUA : NamedTextColor.DARK_AQUA;
                 String name = donators.getSecond().getString("name");
                 int points = donators.getSecond().getInt("rank_points");
 
-                message.append("\n");
-                message.append(ChatColor.GRAY).append(num.format(pos)).append(". ");
-                message.append(color).append(name).append(" ");
-                message.append(getRank(pos, points)).append(" ");
-                message.append(ChatColor.WHITE).append(num.format(points));
+                message = message.append(Component.newline())
+                        .append(Component.text(num.format(pos) + ". ")
+                                .append(Component.text(name + " ", color))
+                                .append(Component.text(getRank(pos, points) + " "))
+                                .color(NamedTextColor.GRAY))
+                        .append(Component.text(num.format(points), NamedTextColor.WHITE));
             }
-
             // Send the message
-            sender.sendMessage(message.toString());
+            Messenger.send(message, sender);
             donators.getFirst().close();
 
         } catch (SQLException e) {
@@ -95,7 +95,7 @@ public class TopDonatorsCommand implements CommandExecutor {
      * @param position The position on the donator leaderboard
      * @return The corresponding pretty donator rank
      */
-    private String getRank(int position, int points) {
+    private Component getRank(int position, int points) {
         String rank;
         if (position <= 10) {
             rank = RankPoints.getTopRank(position);

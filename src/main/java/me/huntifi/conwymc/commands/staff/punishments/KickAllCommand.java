@@ -1,7 +1,8 @@
 package me.huntifi.conwymc.commands.staff.punishments;
 
+import me.huntifi.conwymc.util.Messenger;
+import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -23,12 +24,12 @@ public class KickAllCommand implements CommandExecutor {
      */
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command cmd, @NotNull String label, @NotNull String[] args) {
-        String message = ChatColor.RED + "You were kicked by " + ChatColor.WHITE + sender.getName();
+        Component message = Messenger.mm.deserialize("<red>You were kicked by <white>" + sender.getName());
         if (args.length > 0)
-            message += ChatColor.RED + " for: " + String.join(" ", args);
+            message = message.append(Messenger.mm.deserialize("<red> for: " + String.join(" ", args)));
 
         for (Player player : Bukkit.getOnlinePlayers())
-            player.kickPlayer(message);
+            player.kick(message);
 
         return true;
     }

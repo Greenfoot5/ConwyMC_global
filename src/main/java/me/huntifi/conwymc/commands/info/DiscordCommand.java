@@ -1,7 +1,6 @@
 package me.huntifi.conwymc.commands.info;
 
 import me.huntifi.conwymc.util.Messenger;
-import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -22,8 +21,8 @@ public class DiscordCommand implements CommandExecutor {
      */
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command cmd, @NotNull String label, @NotNull String[] args) {
-        Messenger.sendInfo(String.format("The link to the %s[ConwyMC] %sdiscord is: %shttps://discord.gg/AUDqTpC",
-                ChatColor.LIGHT_PURPLE, Messenger.INFO_PRIMARY, ChatColor.DARK_PURPLE), sender);
+        Messenger.sendInfo("The link to the <light_purple>[ConwyMC]</light_purple> " +
+                "discord is: <yellow><click:open_url:https://discord.gg/AUDqTpC>https://discord.gg/AUDqTpC</click></yellow>", sender);
         return true;
     }
 }

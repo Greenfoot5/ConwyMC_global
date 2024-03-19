@@ -2,7 +2,6 @@ package me.huntifi.conwymc.commands.info;
 
 import me.huntifi.conwymc.data_types.PlayerData;
 import me.huntifi.conwymc.util.Messenger;
-import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -23,8 +22,8 @@ public class CoinMultiplierCommand implements CommandExecutor {
      */
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command cmd, @NotNull String label, @NotNull String[] args) {
-        Messenger.sendInfo(String.format("%sCoin Multiplier: %s%.1f",
-                ChatColor.GOLD, ChatColor.YELLOW, PlayerData.getCoinMultiplier()), sender);
+        Messenger.sendInfo(String.format("<gold>Coin Multiplier: <yellow>%.1f",
+                PlayerData.getCoinMultiplier()), sender);
         return true;
     }
 }

@@ -2,7 +2,6 @@ package me.huntifi.conwymc.commands.info;
 
 import me.huntifi.conwymc.util.Messenger;
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -10,15 +9,13 @@ import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
-import java.lang.reflect.InvocationTargetException;
-
 /**
- * Shows a player's ping
+ * Shows the player their current ping
  */
 public class PingCommand implements CommandExecutor {
 
     /**
-     * Print the ping of a player.
+     * Print the ping of the player
      * @param sender Source of the command
      * @param cmd Command which was executed
      * @param label Alias of the command which was used
@@ -28,41 +25,39 @@ public class PingCommand implements CommandExecutor {
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command cmd, @NotNull String label, @NotNull String[] args) {
         if (sender instanceof ConsoleCommandSender && args.length == 0) {
-            Messenger.sendError("Console cannot use /ping!", sender);
+            Messenger.sendError("Console cannot use <yellow>/ping</yellow>!", sender);
             return true;
         }
 
-        Player player;
-        if (args.length == 0) {
-            player = (Player) sender;
+        Player t;
+        if (args.length == 0) { // No player was specified
+            t = (Player) sender;
         } else {
-            player = Bukkit.getPlayer(args[0]);
-            if (player == null) {
-                Messenger.sendError(String.format("Could not find player: %s%s",  Messenger.ERROR_SECONDARY, args[0]), sender);
+            t = Bukkit.getPlayer(args[0]); //get target player specified in arg
+            if (t == null) { //if target does not exist/is not online
+                Messenger.sendError("Could not find player: <red>" + args[0], sender);
                 return true;
             }
         }
 
-        String playerName = args.length == 0 ? "Your" : player.getName() + "'s";
-        Messenger.sendInfo(String.format("%s ping is %s%s%sms.",
-                playerName, Messenger.INFO_SECONDARY, getPing(player), Messenger.INFO_PRIMARY), sender);
+        String innerMessage = args.length == 0 ? "Your ": t.getName() + "'s ";
+        Messenger.sendInfo(innerMessage + "ping is <aqua>" + getPing(t) + "</aqua>ms.", sender);
         return true;
     }
 
     /**
-     * Get the ping of a player.
+     * Gets the ping of a player
      * @param player The player for whom to get the ping
      * @return The ping of the player
      */
     private int getPing(Player player) {
+        int ping = -1;
         try {
-            Object entityPlayer = player.getClass().getMethod("getHandle").invoke(player);
-            return (int) entityPlayer.getClass().getField("ping").get(entityPlayer);
-        } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException
-                 | NoSuchMethodException | SecurityException | NoSuchFieldException e) {
+            ping = player.getPing();
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
-        return -1;
+        return ping;
     }
 }

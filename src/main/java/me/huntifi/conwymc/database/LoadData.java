@@ -118,7 +118,11 @@ public class LoadData {
      * @throws SQLException If something goes wrong executing the query
      */
     public static Tuple<PreparedStatement, ResultSet> getTopDonators() throws SQLException {
-        return getDonators(0);
+        PreparedStatement ps = ConwyMC.SQL.getConnection().prepareStatement(
+                "SELECT * FROM player_rank ORDER BY rank_points DESC LIMIT 10");
+
+        ResultSet rs = ps.executeQuery();
+        return new Tuple<>(ps, rs);
     }
 
     /**

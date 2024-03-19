@@ -2,12 +2,14 @@ package me.huntifi.conwymc.commands.chat;
 
 import me.huntifi.conwymc.data_types.PlayerData;
 import me.huntifi.conwymc.database.ActiveData;
+import net.kyori.adventure.audience.Audience;
+import net.kyori.adventure.sound.Sound;
 import net.kyori.adventure.text.Component;
-import org.bukkit.Location;
-import org.bukkit.Sound;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+
+import static org.bukkit.Sound.BLOCK_NOTE_BLOCK_BELL;
 
 /**
  * Sends a message
@@ -37,16 +39,13 @@ public abstract class ChatCommand implements CommandExecutor {
         return data.getMMChatColor(player.getName());
     }
 
-    /**
-     * Play the tag sound for a tagged player.
-     * @param player The tagged player
-     */
-    protected void playTagSound(Player player) {
-        Location location = player.getLocation();
-        Sound sound = Sound.BLOCK_NOTE_BLOCK_BELL;
-        float volume = 1f; // 1 = 100%
-        float pitch = 0.5f; // Float between 0.5 and 2.0
+    public static void playTagSound(Audience viewer) {
+        float volume = 1f; //1 = 100%
+        float pitch = 0.5f; //Float between 0.5 and 2.0
 
-        player.playSound(location, sound, volume, pitch);
+        Sound sound = Sound.sound().type(BLOCK_NOTE_BLOCK_BELL)
+                .pitch(pitch).volume(volume).build();
+
+        viewer.playSound(sound);
     }
 }

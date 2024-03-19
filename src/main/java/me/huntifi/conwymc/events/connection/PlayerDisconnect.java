@@ -4,7 +4,9 @@ import me.huntifi.conwymc.data_types.PlayerData;
 import me.huntifi.conwymc.database.ActiveData;
 import me.huntifi.conwymc.database.Permissions;
 import me.huntifi.conwymc.database.StoreData;
-import org.bukkit.ChatColor;
+import me.huntifi.conwymc.util.Messenger;
+import net.kyori.adventure.text.format.NamedTextColor;
+import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerQuitEvent;
@@ -37,7 +39,9 @@ public class PlayerDisconnect implements Listener {
      * @param data The player's data
      */
     private void setLeaveMessage(PlayerQuitEvent event, PlayerData data) {
-        if (!data.getLeaveMessage().isEmpty())
-            event.setQuitMessage(ChatColor.YELLOW + data.getLeaveMessage());
+        // Set the leave message
+        if (!data.getLeaveMessage().isEmpty()) {
+            event.quitMessage(Messenger.mm.deserialize(data.getLeaveMessage()).color(NamedTextColor.YELLOW));
+        }
     }
 }

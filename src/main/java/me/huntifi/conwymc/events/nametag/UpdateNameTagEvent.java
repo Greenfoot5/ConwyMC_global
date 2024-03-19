@@ -1,5 +1,6 @@
 package me.huntifi.conwymc.events.nametag;
 
+import net.kyori.adventure.text.Component;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
@@ -14,14 +15,14 @@ public class UpdateNameTagEvent extends Event {
 
     private final Player player;
 
-    private final String displayRank;
+    private final Component displayRank;
 
     /**
      * Create a new event that calls for a player's name tag to be updated.
      * @param player The player
      * @param displayRank The pretty rank string that should be used
      */
-    public UpdateNameTagEvent(Player player, String displayRank) {
+    public UpdateNameTagEvent(Player player, Component displayRank) {
         this.player = player;
         this.displayRank = displayRank;
     }
@@ -38,7 +39,7 @@ public class UpdateNameTagEvent extends Event {
      * Get the player's new display rank.
      * @return The pretty rank string
      */
-    public String getDisplayRank() {
+    public Component getDisplayRank() {
         return displayRank;
     }
 

@@ -3,7 +3,6 @@ package me.huntifi.conwymc.commands.donator;
 import me.huntifi.conwymc.data_types.PlayerData;
 import me.huntifi.conwymc.database.ActiveData;
 import me.huntifi.conwymc.util.Messenger;
-import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -60,8 +59,8 @@ public abstract class CustomMessageCommand implements CommandExecutor {
         if (message.isEmpty()) {
             Messenger.sendSuccess(String.format("Your %s message has been reset.", getMessageType()), player);
         } else {
-            Messenger.sendSuccess(String.format("Your %s message has been set to: %s%s",
-                    getMessageType(), Messenger.SUCCESS_SECONDARY, message), player);
+            Messenger.sendSuccess(String.format("Your %s message has been set to: <green>%s",
+                    getMessageType(), message), player);
         }
     }
 

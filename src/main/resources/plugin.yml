@@ -146,6 +146,10 @@ commands:
     usage: /webshop
     aliases:
       - donate
+      - kofi
+      - ko-fi
+      - support
+      - shop
   WhoIs:
     description: Returns all previous names of a player!
     usage: /whois [player]
@@ -154,7 +158,7 @@ commands:
   Broadcast:
     description: Send a special message to everyone on the server
     usage: /broadcast <message>
-    permission: conwymc.chatmod
+    permission: conwymc.moderator
     permission-message: You are not permitted to use this command!
   StaffChat:
     description: Talk in staff-chat

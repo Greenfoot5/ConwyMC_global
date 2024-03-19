@@ -1,8 +1,10 @@
 package me.huntifi.conwymc.util;
 
 import me.huntifi.conwymc.data_types.Tuple;
+import me.huntifi.conwymc.gui.Gui;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.TextDecoration;
 import org.bukkit.Color;
-import org.bukkit.Material;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeModifier;
 import org.bukkit.enchantments.Enchantment;
@@ -16,42 +18,29 @@ import java.util.List;
 import java.util.UUID;
 
 /**
- * Serves as a tool to easily create items
+ * Serves as a tool to easily create items for kits
  */
 public class ItemCreator {
 
     /**
-     * Create a specified item.
-     * @param material The material for the item
-     * @param name The name for the item
-     * @param lore The lore for the item
-     * @param enchants The enchantments for the item
-     * @return The item with all flags and parameters applied
-     */
-    public static ItemStack item(Material material, String name, List<String> lore,
-                                 List<Tuple<Enchantment, Integer>> enchants) {
-        return item(new ItemStack(material), name, lore, enchants);
-    }
-
-    /**
-     * Create a specified item.
+     * Create a specified item
      * @param item The item to apply all flags and parameters to
      * @param name The name for the item
      * @param lore The lore for the item
      * @param enchants The enchantments for the item
      * @return The item with all flags and parameters applied
      */
-    public static ItemStack item(ItemStack item, String name, List<String> lore,
+    public static ItemStack item(ItemStack item, Component name, List<Component> lore,
                                  List<Tuple<Enchantment, Integer>> enchants) {
         ItemMeta itemMeta = item.getItemMeta();
         assert itemMeta != null;
-        itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
         itemMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
-        itemMeta.addItemFlags(ItemFlag.HIDE_POTION_EFFECTS);
+        itemMeta.addItemFlags(ItemFlag.HIDE_ITEM_SPECIFICS);
         itemMeta.addItemFlags(ItemFlag.HIDE_UNBREAKABLE);
+        itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
         itemMeta.setUnbreakable(true);
-        itemMeta.setDisplayName(name);
-        itemMeta.setLore(lore);
+        itemMeta.displayName(name.decorationIfAbsent(TextDecoration.ITALIC, TextDecoration.State.FALSE));
+        itemMeta.lore(Gui.removeItalics(lore));
         if (enchants != null) {
             for (Tuple<Enchantment, Integer> enchant : enchants) {
                 itemMeta.addEnchant(enchant.getFirst(), enchant.getSecond(), true);
@@ -61,55 +50,14 @@ public class ItemCreator {
         return item;
     }
 
-    /**
-     * Create a specified weapon.
-     * @param material The material for the item
-     * @param name The name for the item
-     * @param lore The lore for the item
-     * @param enchants The enchantments for the item
-     * @param damage The damage for the item
-     * @return The item with all flags and parameters applied
-     */
-    public static ItemStack weapon(Material material, String name, List<String> lore,
-                                   List<Tuple<Enchantment, Integer>> enchants, double damage) {
-        return setDamage(item(material, name, lore, enchants), damage);
-    }
-
-    /**
-     * Create a specified weapon.
-     * @param item The item to apply all flags and parameters to
-     * @param name The name for the item
-     * @param lore The lore for the item
-     * @param enchants The enchantments for the item
-     * @param damage The damage for the item
-     * @return The item with all flags and parameters applied
-     */
-    public static ItemStack weapon(ItemStack item, String name, List<String> lore,
+    public static ItemStack weapon(ItemStack item, Component name, List<Component> lore,
                                    List<Tuple<Enchantment, Integer>> enchants, double damage) {
         return setDamage(item(item, name, lore, enchants), damage);
+
     }
 
     /**
-     * Create a specified piece of leather armor.
-     * @param material The material for the item
-     * @param name The name for the item
-     * @param lore The lore for the item
-     * @param enchants The enchantments for the item
-     * @param color The color for the item
-     * @return The item with all flags and parameters applied
-     */
-    public static ItemStack leatherArmor(Material material, String name, List<String> lore,
-                                         List<Tuple<Enchantment, Integer>> enchants, Color color) {
-        ItemStack leatherItem = item(material, name, lore, enchants);
-        LeatherArmorMeta itemMeta = (LeatherArmorMeta) leatherItem.getItemMeta();
-        assert itemMeta != null;
-        itemMeta.setColor(color);
-        leatherItem.setItemMeta(itemMeta);
-        return leatherItem;
-    }
-
-    /**
-     * Create a specified piece of leather armor.
+     * Create a specified piece of leather armor
      * @param item The item to apply all flags and parameters to
      * @param name The name for the item
      * @param lore The lore for the item
@@ -117,7 +65,7 @@ public class ItemCreator {
      * @param color The color for the item
      * @return The item with all flags and parameters applied
      */
-    public static ItemStack leatherArmor(ItemStack item, String name, List<String> lore,
+    public static ItemStack leatherArmor(ItemStack item, Component name, List<Component> lore,
                                          List<Tuple<Enchantment, Integer>> enchants, Color color) {
         ItemStack leatherItem = item(item, name, lore, enchants);
         LeatherArmorMeta itemMeta = (LeatherArmorMeta) leatherItem.getItemMeta();

@@ -1,21 +1,24 @@
 package me.huntifi.conwymc.commands.chat;
 
+import io.papermc.paper.chat.ChatRenderer;
 import me.huntifi.conwymc.ConwyMC;
 import me.huntifi.conwymc.commands.staff.punishments.MuteCommand;
 import me.huntifi.conwymc.util.Messenger;
+import net.kyori.adventure.audience.ForwardingAudience;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.minimessage.MiniMessage;
+import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.event.Listener;
 import org.jetbrains.annotations.NotNull;
-
-import java.util.Collection;
-import java.util.Objects;
 
 /**
  * Toggles chat mode or sends a message in the chat mode
  */
-public abstract class ToggleChatCommand extends ChatCommand {
+public abstract class ToggleChatCommand extends ChatCommand implements ChatRenderer, Listener {
 
     /**
      * Toggle this chat mode if no arguments are provided.
@@ -48,24 +51,25 @@ public abstract class ToggleChatCommand extends ChatCommand {
      * Send the message from the sender to the receivers via this chat mode.
      * Play a tag sound for all tagged players.
      * @param sender The sender of the message
-     * @param message The message
+     * @param message The message content to send
      */
     private void sendMessage(CommandSender sender, String message) {
+        String content = Messenger.clean(message);
+
         // Get alternative versions of the message
-        String formattedMessage = getFormattedMessage(sender, message);
-        String lowerMessage = message.toLowerCase();
+        Component componentMessage;
+        if (sender instanceof Player) {
+            Player p = (Player) sender;
+            componentMessage = render(p, p.displayName(), Component.text(content), getReceivers(p));
+        } else {
+            String color = getChatColor(sender);
 
-        // Loop over all receivers to send the message and play the tag sound
-        for (CommandSender receiver : getReceivers(sender)) {
-            receiver.sendMessage(formattedMessage);
-
-            // Cannot tag self or console
-            if (Objects.equals(sender, receiver) || !(receiver instanceof Player))
-                continue;
-
-            if (lowerMessage.contains("@" + receiver.getName().toLowerCase()))
-                playTagSound((Player) receiver);
+            Component c = Messenger.mm.deserialize(color + message);
+            componentMessage = getName(sender).append(Component.text(": "))
+                    .append(c);
         }
+
+        getReceivers(sender).sendMessage(componentMessage);
     }
 
     /**
@@ -79,13 +83,5 @@ public abstract class ToggleChatCommand extends ChatCommand {
      * @param sender The sender of the message
      * @return The receivers of the message
      */
-    protected abstract Collection<CommandSender> getReceivers(CommandSender sender);
-
-    /**
-     * Get the message with formatting applied.
-     * @param sender The sender of the message
-     * @param message The message
-     * @return The formatted message
-     */
-    protected abstract String getFormattedMessage(CommandSender sender, String message);
+    protected abstract ForwardingAudience getReceivers(CommandSender sender);
 }

@@ -1,5 +1,8 @@
 package me.huntifi.conwymc.util;
 
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.minimessage.MiniMessage;
+
 /**
  * Utility functions related to player name tags
  */
@@ -10,44 +13,44 @@ public class NameTag {
      * @param rank The rank to convert
      * @return A formatted rank or an empty string if invalid
      */
-    public static String convertRank(String rank) {
+    public static Component convertRank(String rank) {
         switch (rank) {
             // Staff Ranks
             case "builder":
-                return "§b§lBuilder ";
+                return MiniMessage.miniMessage().deserialize("<b><gradient:#80CED7:#007EA7>Builder</gradient></b> ");
             case "chatmod":
-                return "§9§lChatMod ";
+                return MiniMessage.miniMessage().deserialize("<b><gradient:#08C8F6:#4D5DFB>ChatMod</gradient></b> ");
             case "chatmod+":
-                return "§1§lChatMod+ ";
+                return MiniMessage.miniMessage().deserialize("<b><gradient:#2876F9:#6D17CB>ChatMod+</gradient></b>  ");
             case "moderator":
-                return "§a§lMod ";
+                return MiniMessage.miniMessage().deserialize("<b><gradient:#2db379:#1c8c70>Mod</gradient></b> ");
             case "developer":
-                return "§2§lDev ";
+                return MiniMessage.miniMessage().deserialize("<b><gradient:#00BF00:#1A913E>Dev</gradient></b> ");
             case "communitymanager":
-                return "§5§lComm Man ";
+                return MiniMessage.miniMessage().deserialize("<b><gradient:#a422e6:#7830bf>Comm Man</gradient></b> ");
             case "admin":
-                return "§c§lAdmin ";
+                return MiniMessage.miniMessage().deserialize("<b><gradient:#A82533:#EF4848>Admin</gradient></b> ");
             case "owner":
-                return "§6§lOwner ";
+                return MiniMessage.miniMessage().deserialize("<b><dark_red><obf><st>!</dark_red><gradient:#FFAA00:#FF5500>Owner</gradient><dark_red><obf><st>!</dark_red></b> ");
             // Donator Ranks
             case "esquire":
-                return "§3Esquire ";
+                return MiniMessage.miniMessage().deserialize("<dark_aqua>Esquire</dark_aqua> ");
             case "noble":
-                return "§aNoble ";
+                return MiniMessage.miniMessage().deserialize("<green>Noble</green> ");
             case "baron":
-                return "§5Baron ";
+                return MiniMessage.miniMessage().deserialize("<dark_purple>Baron</dark_purple> ");
             case "count":
-                return "§6Count ";
+                return MiniMessage.miniMessage().deserialize("<gold>Count</gold> ");
             case "duke":
-                return "§4Duke ";
+                return MiniMessage.miniMessage().deserialize("<dark_red>Duke</dark_red> ");
             case "viceroy":
-                return "§dViceroy ";
+                return MiniMessage.miniMessage().deserialize("<gradient:#be1fcc:#d94cd9>Viceroy</gradient> ");
             case "king":
-                return "§eKing ";
+                return MiniMessage.miniMessage().deserialize("<gradient:#F07654:#F5DF2E:#F07654>⚜King⚜</gradient> ");
             case "high_king":
-                return "§eHigh King ";
+                return MiniMessage.miniMessage().deserialize("<gradient:#FFED00:#FF0000>👑High King👑</gradient> ");
             default:
-                return "";
+                return Component.empty();
         }
     }
 }
