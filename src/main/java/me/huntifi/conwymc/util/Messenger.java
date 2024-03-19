@@ -36,6 +36,12 @@ public class Messenger {
         return PlainTextComponentSerializer.plainText().serialize(mmContent);
     }
 
+    public static String clean(Component content) {
+        // Turn it into a string
+        String sContent = PlainTextComponentSerializer.plainText().serialize(content);
+        return clean(sContent);
+    }
+
     public static void sendAction(String message, @NotNull CommandSender receiver) {
         Component msg = mm.deserialize(message);
         receiver.sendActionBar(msg);

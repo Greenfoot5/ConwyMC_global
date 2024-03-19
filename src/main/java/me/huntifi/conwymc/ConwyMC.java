@@ -66,7 +66,7 @@ public final class ConwyMC extends JavaPlugin {
         getLogger().info("Enabling Plugin...");
 
         // Set important global variables
-        plugin = Bukkit.getServer().getPluginManager().getPlugin("ConwyMC_Global");
+        plugin = Bukkit.getServer().getPluginManager().getPlugin("ConwyMC");
         instance = this;
 
         // Connect to the database and register events, commands, and timed tasks

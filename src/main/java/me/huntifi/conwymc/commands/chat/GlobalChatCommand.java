@@ -46,7 +46,7 @@ public class GlobalChatCommand extends ToggleChatCommand {
     public @NotNull Component render(@NotNull Player source, @NotNull Component sourceDisplayName, @NotNull Component message, @NotNull Audience viewer) {
         String color = getChatColor(source);
 
-        Component content = Messenger.mm.deserialize(color + message);
+        Component content = Messenger.mm.deserialize(color + Messenger.clean(message));
         return getName(source).append(Component.text(": "))
                 .append(content);
     }

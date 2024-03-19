@@ -60,7 +60,7 @@ public class StaffChatCommand extends ToggleChatCommand {
                 .deserialize("<white>[<aqua><b>STAFF</b></aqua>] " +
                         source.getName() + "</white>");
 
-        Component content = Messenger.mm.deserialize(color + message);
+        Component content = Messenger.mm.deserialize(color + Messenger.clean(message));
         return prefix.append(Component.text(": ", NamedTextColor.AQUA))
                 .append(content);
     }
