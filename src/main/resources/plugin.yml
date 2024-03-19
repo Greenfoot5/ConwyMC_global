@@ -1,7 +1,7 @@
-name: ConwyMC_Global
+name: ConwyMC
 version: '${project.version}'
 main: me.huntifi.conwymc.ConwyMC
-api-version: 1.16
+api-version: 1.20
 prefix: ConwyMC
 load: STARTUP
 depend: [ NametagEdit ]
