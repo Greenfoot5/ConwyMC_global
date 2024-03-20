@@ -17,6 +17,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerPreLoginEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
@@ -60,7 +61,7 @@ public class PlayerConnect implements Listener {
      * @param event The event called when a player attempts to join the server
      * @throws SQLException If something goes wrong executing a query
      */
-    @EventHandler
+    @EventHandler(priority = EventPriority.LOWEST)
     public void preLogin(AsyncPlayerPreLoginEvent event) throws SQLException {
         if (event.getLoginResult() != AsyncPlayerPreLoginEvent.Result.ALLOWED)
             return;
