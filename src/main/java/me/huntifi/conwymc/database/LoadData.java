@@ -164,6 +164,10 @@ public class LoadData {
         }
     }
 
+    /**
+     * @param uuid The player to get the settings for
+     * @return All the settings the user has changed the valur for at some point
+     */
     public static HashMap<String, String> getSettings(UUID uuid) {
         HashMap<String, String> loadedSettings = new HashMap<>();
 

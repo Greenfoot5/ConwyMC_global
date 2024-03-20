@@ -36,26 +36,50 @@ public class Messenger {
         return PlainTextComponentSerializer.plainText().serialize(mmContent);
     }
 
+    /**
+     * Turns a component into a string and clears any mm formatting
+     * @param content The component to clean
+     * @return A string without any mm formatting
+     */
     public static String clean(Component content) {
         // Turn it into a string
         String sContent = PlainTextComponentSerializer.plainText().serialize(content);
         return clean(sContent);
     }
 
+    /**
+     * Displays an MM string message to the receiver in an action bar
+     * @param message The message to send
+     * @param receiver The CommandSender to display the message to
+     */
     public static void sendAction(String message, @NotNull CommandSender receiver) {
         Component msg = mm.deserialize(message);
         receiver.sendActionBar(msg);
     }
 
+    /**
+     * Displays an MM string message to the receiver in the chat
+     * @param message The message to send
+     * @param receiver The CommandSender to display the message to
+     */
     public static void send(String message, @NotNull CommandSender receiver) {
         Component msg = mm.deserialize(message);
         receiver.sendMessage(msg);
     }
 
+    /**
+     * Displays a Component message to the receiver in the chat
+     * @param msg The message to send
+     * @param receiver The CommandSender to display the message to
+     */
     public static void send(Component msg, @NotNull CommandSender receiver) {
         receiver.sendMessage(msg);
     }
 
+    /**
+     * Sends a component chat message to the whole server
+     * @param msg The message to send
+     */
     public static void broadcast(Component msg) {
         Bukkit.getServer().sendMessage(msg);
     }
@@ -70,6 +94,10 @@ public class Messenger {
         receiver.sendMessage(mm.deserialize("<gold>[!]</gold> ").append(msg));
     }
 
+    /**
+     * Sends an MM string with error formatting to the whole server
+     * @param message The MM string to broadcast
+     */
     public static void broadcastError(String message) {
         Component msg = mm.deserialize(message).color(DARK_RED);
         Bukkit.getServer().sendMessage(mm.deserialize("<gold>[!]</gold> ").append(msg));
@@ -85,6 +113,10 @@ public class Messenger {
         receiver.sendMessage(mm.deserialize("<gold>[!]</gold> ").append(msg));
     }
 
+    /**
+     * Sends an MM string with warning formatting to the whole server
+     * @param message The MM string to broadcast
+     */
     public static void broadcastWarning(String message) {
         Component msg = mm.deserialize(message).color(RED);
         ForwardingAudience audience = Bukkit.getServer();
@@ -97,8 +129,8 @@ public class Messenger {
     }
 
     /**
-     * Broadcasts a tip message to everyone on the server
-     * @param message The tip message
+     * Sends an MM string with tip formatting to the whole server
+     * @param message The MM string to broadcast
      */
     public static void broadcastTip(String message) {
         Component msg = mm.deserialize(message).color(AQUA);
@@ -117,8 +149,8 @@ public class Messenger {
     }
 
     /**
-     * Broadcasts a message about a secret to everyone on the server
-     * @param message The message to send
+     * Sends an MM string with secret formatting to the whole server
+     * @param message The MM string to broadcast
      */
     public static void broadcastSecret(String message) {
         Component msg = mm.deserialize(message).color(YELLOW);
@@ -147,8 +179,8 @@ public class Messenger {
     }
 
     /**
-     * Broadcasts a success message to everyone
-     * @param message The message to send
+     * Sends an MM string with success formatting to the whole server
+     * @param message The MM string to broadcast
      */
     public static void broadcastSuccess(Component message) {
         message = message.color(GREEN);
@@ -169,11 +201,19 @@ public class Messenger {
         receiver.sendActionBar(mm.deserialize(message).color(BLUE));
     }
 
+    /**
+     * Sends a Component with info formatting to the whole server
+     * @param message The Component to broadcast
+     */
     public static void broadcastInfo(Component message) {
         ForwardingAudience audience = Bukkit.getServer();
         audience.sendMessage(mm.deserialize("<gold>[i]</gold> ").append(message.color(BLUE)));
     }
 
+    /**
+     * Sends an MM string with info formatting to the whole server
+     * @param message The MM string to broadcast
+     */
     public static void broadcastInfo(String message) {
         Component msg = mm.deserialize(message).color(BLUE);
         ForwardingAudience audience = Bukkit.getServer();
@@ -222,8 +262,8 @@ public class Messenger {
     }
 
     /**
-     * Broadcasts a cursed message to everyone
-     * @param message The message to send
+     * Sends an MM string with curse formatting to the whole server
+     * @param message The MM string to broadcast
      */
     public static void broadcastCurse(String message) {
         Component msg = mm.deserialize(message).color(RED);
@@ -281,6 +321,10 @@ public class Messenger {
         receiver.sendMessage(mm.deserialize("<gold>[⚔]</gold> ").append(msg));
     }
 
+    /**
+     * Sends an MM string with duel formatting to the whole server
+     * @param message The MM string to broadcast
+     */
     public static void broadcastDuel(String message) {
         Component msg = mm.deserialize(message).color(BLUE);
         ForwardingAudience audience = Bukkit.getServer();
@@ -292,6 +336,10 @@ public class Messenger {
         receiver.sendMessage(mm.deserialize("<gold>[+]</gold> ").append(msg));
     }
 
+    /**
+     * Sends an MM string with congrats formatting to the whole server
+     * @param message The MM string to broadcast
+     */
     public static void broadcastCongrats(String message) {
         Component msg = mm.deserialize(message).color(DARK_GREEN);
         ForwardingAudience audience = Bukkit.getServer();

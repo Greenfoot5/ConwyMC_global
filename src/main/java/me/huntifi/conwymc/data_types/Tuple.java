@@ -7,8 +7,8 @@ package me.huntifi.conwymc.data_types;
  * @param <V> The 2nd value's type
  */
 public class Tuple<K, V> {
-    private K first;
-    private V second;
+    private final K first;
+    private final V second;
 
     /**
      * Create a tuple for two arbitrary elements

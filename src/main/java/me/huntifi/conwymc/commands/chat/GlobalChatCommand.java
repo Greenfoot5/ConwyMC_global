@@ -22,6 +22,10 @@ public class GlobalChatCommand extends ToggleChatCommand {
     /** The string representing global chat mode */
     public static final String CHAT_MODE = "global";
 
+    /**
+     * Used to set the renderer for when a player chats in global
+     * @param e The player chat event
+     */
     @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
     public void onChat(AsyncChatEvent e) {
 

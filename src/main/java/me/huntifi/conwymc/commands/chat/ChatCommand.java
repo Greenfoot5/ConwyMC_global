@@ -39,13 +39,17 @@ public abstract class ChatCommand implements CommandExecutor {
         return data.getMMChatColor(player.getName());
     }
 
-    public static void playTagSound(Audience viewer) {
+    /**
+     * Plays the tag sound to the tagged player
+     * @param tagged The player who's been tagged
+     */
+    public static void playTagSound(Audience tagged) {
         float volume = 1f; //1 = 100%
         float pitch = 0.5f; //Float between 0.5 and 2.0
 
         Sound sound = Sound.sound().type(BLOCK_NOTE_BLOCK_BELL)
                 .pitch(pitch).volume(volume).build();
 
-        viewer.playSound(sound);
+        tagged.playSound(sound);
     }
 }
