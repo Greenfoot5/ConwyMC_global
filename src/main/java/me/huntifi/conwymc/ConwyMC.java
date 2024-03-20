@@ -13,7 +13,6 @@ import me.huntifi.conwymc.commands.info.PingCommand;
 import me.huntifi.conwymc.commands.info.RulesCommand;
 import me.huntifi.conwymc.commands.info.TopDonatorsCommand;
 import me.huntifi.conwymc.commands.info.WebShopCommand;
-import me.huntifi.conwymc.commands.info.WhoIsCommand;
 import me.huntifi.conwymc.commands.staff.FlyCommand;
 import me.huntifi.conwymc.commands.staff.chat.BroadcastCommand;
 import me.huntifi.conwymc.commands.staff.chat.StaffChatCommand;
@@ -152,7 +151,6 @@ public final class ConwyMC extends JavaPlugin {
         Objects.requireNonNull(getCommand("Rules")).setExecutor(new RulesCommand());
         Objects.requireNonNull(getCommand("TopDonators")).setExecutor(new TopDonatorsCommand());
         Objects.requireNonNull(getCommand("WebShop")).setExecutor(new WebShopCommand());
-        Objects.requireNonNull(getCommand("WhoIs")).setExecutor(new WhoIsCommand());
 
         // Staff - Chat
         Objects.requireNonNull(getCommand("Broadcast")).setExecutor(new BroadcastCommand());
