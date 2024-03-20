@@ -1,14 +1,18 @@
 package me.huntifi.conwymc.data_types;
 
+import me.huntifi.conwymc.ConwyMC;
 import me.huntifi.conwymc.commands.chat.GlobalChatCommand;
+import me.huntifi.conwymc.database.StoreData;
 import me.huntifi.conwymc.util.NameTag;
 import net.kyori.adventure.text.Component;
+import org.bukkit.Bukkit;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.HashMap;
 import java.util.Objects;
+import java.util.UUID;
 
 /**
  * Represents a player's data
@@ -292,5 +296,24 @@ public class PlayerData {
      */
     public String getSetting(String name) {
         return settings.get(name) == null ? Objects.requireNonNull(Setting.getDefault(name)) : settings.get(name);
+    }
+
+    /**
+     * Set the player's value of a setting
+     * @param uuid The player's unique ID
+     * @param setting The setting
+     * @param value The value
+     */
+    public void setSetting(UUID uuid, String setting, String value) {
+        boolean isNewSetting = settings.get(setting) == null;
+        settings.put(setting, value);
+
+        Bukkit.getScheduler().runTaskAsynchronously(ConwyMC.plugin, () -> {
+            if (isNewSetting) {
+                StoreData.addSetting(uuid, setting, value);
+            } else {
+                StoreData.updateSetting(uuid, setting, value);
+            }
+        });
     }
 }

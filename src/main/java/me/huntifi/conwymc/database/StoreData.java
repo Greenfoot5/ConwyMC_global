@@ -3,6 +3,7 @@ package me.huntifi.conwymc.database;
 import me.huntifi.conwymc.ConwyMC;
 import me.huntifi.conwymc.data_types.PlayerData;
 import org.bukkit.Bukkit;
+import org.bukkit.scheduler.BukkitRunnable;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -101,5 +102,55 @@ public class StoreData {
                 e.printStackTrace();
             }
         });
+    }
+
+    /**
+     * Used to update a player's existing setting
+     * @param uuid The uuid of the player
+     * @param setting The setting to set
+     * @param value The value of the setting
+     */
+    public static void updateSetting(UUID uuid, String setting, String value) {
+        new BukkitRunnable() {
+            @Override
+            public void run() {
+                try {
+                    PreparedStatement ps = ConwyMC.SQL.getConnection().prepareStatement(
+                            "UPDATE player_settings SET value = ? WHERE uuid = ? AND setting = ?");
+                    ps.setString(1, value);
+                    ps.setString(2, uuid.toString());
+                    ps.setString(3, setting);
+                    ps.executeUpdate();
+                    ps.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }.runTaskAsynchronously(ConwyMC.plugin);
+    }
+
+    /**
+     * Used to add a player's setting to the database
+     * @param uuid The uuid of the player
+     * @param setting The setting to set
+     * @param value The value of the setting
+     */
+    public static void addSetting(UUID uuid, String setting, String value) {
+        new BukkitRunnable() {
+            @Override
+            public void run() {
+                try {
+                    PreparedStatement ps = ConwyMC.SQL.getConnection().prepareStatement(
+                            "INSERT INTO player_settings VALUES (?, ?, ?)");
+                    ps.setString(1, uuid.toString());
+                    ps.setString(2, setting);
+                    ps.setString(3, value);
+                    ps.executeUpdate();
+                    ps.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }.runTaskAsynchronously(ConwyMC.plugin);
     }
 }
