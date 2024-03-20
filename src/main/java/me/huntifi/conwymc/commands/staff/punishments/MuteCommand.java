@@ -10,7 +10,6 @@ import me.huntifi.conwymc.database.Punishments;
 import me.huntifi.conwymc.util.Messenger;
 import me.huntifi.conwymc.util.PunishmentTime;
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;

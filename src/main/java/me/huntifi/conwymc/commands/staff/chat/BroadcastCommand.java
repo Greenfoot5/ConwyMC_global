@@ -2,7 +2,6 @@ package me.huntifi.conwymc.commands.staff.chat;
 
 import me.huntifi.conwymc.util.Messenger;
 import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -13,7 +12,7 @@ import org.jetbrains.annotations.NotNull;
  */
 public class BroadcastCommand implements CommandExecutor {
 
-    public static Component broadcastPrefix = Messenger.mm.deserialize("<dark_green>[<dark_red>ConwyMC</dark_red>] - </dark_green>");
+    public static final Component broadcastPrefix = Messenger.mm.deserialize("<dark_green>[<dark_red>ConwyMC</dark_red>] - </dark_green>");
 
     /**
      * Sends a message to all players on the server, this can for example be used to let players know someone donated to the server.

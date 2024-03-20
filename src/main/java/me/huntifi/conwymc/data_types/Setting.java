@@ -15,12 +15,12 @@ import java.util.Objects;
  * A data holder for a Setting
  */
 public class Setting {
-    public TextComponent displayName;
-    public String key;
+    public final TextComponent displayName;
+    public final String key;
     /* Index 0 is default */
     public String[] values = new String[]{"false", "true"};
-    public List<Component> itemLore;
-    public Material material;
+    public final List<Component> itemLore;
+    public final Material material;
 
     /**
      * @param displayName The display name for the setting

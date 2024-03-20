@@ -69,7 +69,7 @@ public abstract class PrivateChatCommand extends ChatCommand {
 
         lastSender.put(target, sender);
         if (target instanceof Player)
-            playTagSound((Player) target);
+            playTagSound(target);
     }
 
     /**

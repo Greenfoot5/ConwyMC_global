@@ -6,7 +6,6 @@ import me.huntifi.conwymc.database.Punishments;
 import me.huntifi.conwymc.util.Messenger;
 import me.huntifi.conwymc.util.PunishmentTime;
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -101,8 +100,8 @@ public class BanCommand implements CommandExecutor {
         Bukkit.getScheduler().runTask(ConwyMC.plugin, () -> {
             Player player = Bukkit.getPlayer(uuid);
             if (player != null) {
-                player.kickPlayer(ChatColor.DARK_RED + "\n[BAN] " + ChatColor.RED + reason
-                        + ChatColor.DARK_RED + "\n[EXPIRES IN] " + ChatColor.RED + PunishmentTime.getExpire(duration));
+                player.kick(Messenger.mm.deserialize("<br><dark_red>[BAN] <red>" + reason +
+                        "</red><br>[EXPIRES IN] <red>" + PunishmentTime.getExpire(duration)));
             }
         });
     }
