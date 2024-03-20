@@ -6,7 +6,6 @@ import me.huntifi.conwymc.database.Permissions;
 import me.huntifi.conwymc.database.StoreData;
 import me.huntifi.conwymc.util.Messenger;
 import net.kyori.adventure.text.format.NamedTextColor;
-import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerQuitEvent;

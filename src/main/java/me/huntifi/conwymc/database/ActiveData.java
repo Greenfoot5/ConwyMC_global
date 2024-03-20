@@ -12,7 +12,7 @@ import java.util.UUID;
 public class ActiveData {
 
     /** A map that stores player data by their unique ID */
-    private static final HashMap<UUID, PlayerData> playerData = new HashMap<>();
+    protected static final HashMap<UUID, PlayerData> playerData = new HashMap<>();
 
     /**
      * Add a player's data to the active storage.
