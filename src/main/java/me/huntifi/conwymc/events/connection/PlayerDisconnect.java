@@ -7,6 +7,7 @@ import me.huntifi.conwymc.database.StoreData;
 import me.huntifi.conwymc.util.Messenger;
 import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerQuitEvent;
 
@@ -21,7 +22,7 @@ public class PlayerDisconnect implements Listener {
      * Set a player's quit message, remove them from active storage, and store their data in the database.
      * @param event The event called when a player quits the game
      */
-    @EventHandler
+    @EventHandler(priority = EventPriority.HIGH)
     public void onPlayerQuit(PlayerQuitEvent event) {
         UUID uuid = event.getPlayer().getUniqueId();
         PlayerData data = ActiveData.getData(uuid);

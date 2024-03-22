@@ -42,6 +42,5 @@ public class ToggleRankCommand implements CommandExecutor {
 
         Bukkit.getPluginManager().callEvent(new UpdateNameTagEvent(player, data.getDisplayRank()));
         return true;
-
     }
 }
