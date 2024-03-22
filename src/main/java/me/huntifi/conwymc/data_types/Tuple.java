@@ -7,8 +7,8 @@ package me.huntifi.conwymc.data_types;
  * @param <V> The 2nd value's type
  */
 public class Tuple<K, V> {
-    private final K first;
-    private final V second;
+    private K first;
+    private V second;
 
     /**
      * Create a tuple for two arbitrary elements
@@ -34,5 +34,21 @@ public class Tuple<K, V> {
      */
     public V getSecond() {
         return second;
+    }
+
+    /**
+     * Sets the first value in the tuple
+     * @param first the first value in the tuple
+     */
+    public void setFirst(K first) {
+        this.first = first;
+    }
+
+    /**
+     * Sets the second value in the tuple
+     * @param second the second value in the tuple
+     */
+    public void setSecond(V second) {
+        this.second = second;
     }
 }
