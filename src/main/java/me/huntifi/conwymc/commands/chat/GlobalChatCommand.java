@@ -26,7 +26,7 @@ public class GlobalChatCommand extends ToggleChatCommand {
      * Used to set the renderer for when a player chats in global
      * @param e The player chat event
      */
-    @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
+    @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
     public void onChat(AsyncChatEvent e) {
 
         PlayerData data = ActiveData.getData(e.getPlayer().getUniqueId());
@@ -51,7 +51,7 @@ public class GlobalChatCommand extends ToggleChatCommand {
         String color = getChatColor(source);
 
         Component content = Messenger.mm.deserialize(color + Messenger.clean(message));
-        return getName(source).append(Component.text(": "))
+        return sourceDisplayName.append(Component.text(": "))
                 .append(content);
     }
 }
