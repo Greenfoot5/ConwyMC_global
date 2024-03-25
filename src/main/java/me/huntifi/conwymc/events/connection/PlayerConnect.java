@@ -48,7 +48,7 @@ public class PlayerConnect implements Listener {
         setPermissions(uuid, data);
         StoreData.updateName(uuid);
 
-        for (Player p : Bukkit.getOnlinePlayers()) {
+        for (Player ignored : Bukkit.getOnlinePlayers()) {
             if (data.getSetting("joinPing").equals("true")) {
                 player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1.0f, 0.1f);
             }

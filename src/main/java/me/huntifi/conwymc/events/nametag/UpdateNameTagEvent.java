@@ -1,5 +1,6 @@
 package me.huntifi.conwymc.events.nametag;
 
+import me.huntifi.conwymc.database.ActiveData;
 import net.kyori.adventure.text.Component;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
@@ -16,6 +17,15 @@ public class UpdateNameTagEvent extends Event {
     private final Player player;
 
     private final Component displayRank;
+
+    /**
+     * Create a new event that calls for a refresh to a player's name tag
+     * @param player The player
+     */
+    public UpdateNameTagEvent(Player player) {
+        this.player = player;
+        displayRank = ActiveData.getData(player.getUniqueId()).getDisplayRank();
+    }
 
     /**
      * Create a new event that calls for a player's name tag to be updated.
