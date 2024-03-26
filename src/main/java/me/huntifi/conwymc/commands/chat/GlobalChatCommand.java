@@ -1,6 +1,7 @@
 package me.huntifi.conwymc.commands.chat;
 
 import io.papermc.paper.event.player.AsyncChatEvent;
+import me.huntifi.conwymc.ConwyMC;
 import me.huntifi.conwymc.data_types.PlayerData;
 import me.huntifi.conwymc.database.ActiveData;
 import me.huntifi.conwymc.util.Messenger;
@@ -8,6 +9,7 @@ import net.kyori.adventure.audience.Audience;
 import net.kyori.adventure.audience.ForwardingAudience;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
+import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -18,6 +20,31 @@ import org.jetbrains.annotations.NotNull;
  * Toggles global chat mode or sends a message in global chat
  */
 public class GlobalChatCommand extends ToggleChatCommand {
+
+    /**
+     * Disables the option to send a message
+     * @param sender Source of the command
+     * @param cmd Command which was executed
+     * @param label Alias of the command which was used
+     * @param args Passed command arguments
+     * @return True
+     */
+    @Override
+    public boolean onCommand(@NotNull CommandSender sender, @NotNull Command cmd, @NotNull String label, @NotNull String[] args) {
+        if (args.length > 1) {
+            Messenger.sendInfo("You can no longer send global messages individually. Please change your chat mode to global instead.", sender);
+            return true;
+        }
+
+        Bukkit.getScheduler().runTaskAsynchronously(ConwyMC.plugin, () -> {
+            if (sender instanceof Player)
+                toggleChatMode((Player) sender);
+            else
+                Messenger.sendError("Console cannot toggle chat modes", sender);
+        });
+
+        return true;
+    }
 
     /** The string representing global chat mode */
     public static final String CHAT_MODE = "global";

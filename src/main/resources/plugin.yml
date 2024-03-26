@@ -93,7 +93,7 @@ commands:
   # Chat
   GlobalChat:
     description: Talk in global-chat
-    usage: /g [message]
+    usage: /g
     aliases: g
   Message:
     description: Privately message a player
