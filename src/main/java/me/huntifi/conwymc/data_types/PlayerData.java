@@ -295,7 +295,7 @@ public class PlayerData {
      * @return The player's value of a setting or default
      */
     public String getSetting(String name) {
-        return settings.get(name) == null ? Objects.requireNonNull(Setting.getDefault(name)) : settings.get(name);
+        return settings.get(name) == null ? Setting.getDefault(name) : settings.get(name);
     }
 
     /**
