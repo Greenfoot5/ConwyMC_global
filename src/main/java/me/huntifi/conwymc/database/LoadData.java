@@ -24,6 +24,7 @@ public class LoadData {
     public static PlayerData load(UUID uuid) {
         try {
             // Rank data
+            // Also creates CS stats as coins are stored there
             createRankEntry(uuid);
             Tuple<PreparedStatement, ResultSet> prRank = getRankData(uuid);
 
@@ -54,6 +55,11 @@ public class LoadData {
     private static void createRankEntry(UUID uuid) throws SQLException {
         PreparedStatement ps = ConwyMC.SQL.getConnection().prepareStatement(
                 "INSERT IGNORE INTO player_rank (uuid) VALUES (?)");
+        ps.setString(1, uuid.toString());
+        ps.executeUpdate();
+        ps.close();
+        ps = ConwyMC.SQL.getConnection().prepareStatement(
+                "INSERT IGNORE INTO player_stats (uuid) VALUES (?)");
         ps.setString(1, uuid.toString());
         ps.executeUpdate();
         ps.close();

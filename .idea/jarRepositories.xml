@@ -46,5 +46,10 @@
       <option name="name" value="central" />
       <option name="url" value="https://repo1.maven.org/maven2" />
     </remote-repository>
+    <remote-repository>
+      <option name="id" value="github-castlesiege" />
+      <option name="name" value="github-castlesiege" />
+      <option name="url" value="https://maven.pkg.github.com/AdminHuntifi/ConwyMC_CastleSiege" />
+    </remote-repository>
   </component>
 </project>
