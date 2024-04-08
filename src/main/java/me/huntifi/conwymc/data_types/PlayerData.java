@@ -11,7 +11,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.HashMap;
-import java.util.Objects;
 import java.util.UUID;
 
 /**
@@ -245,6 +244,8 @@ public class PlayerData {
             return "<gray>";
 
         switch (name) {
+            case "Larrydabbles":
+                return "<gradient:#58D9FF:#AFDFFF>";
             case "Huntifi":
             case "Greenfoot5":
                 return "<gradient:#1FD1F9:#B621FE>";
