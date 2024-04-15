@@ -24,7 +24,7 @@ public class RankPoints {
             int i = 1;
 
             while (top.getSecond().next() && i <= 10) {
-                if (top.getSecond().getString("name").equalsIgnoreCase(uuid.toString())) {
+                if (top.getSecond().getString("uuid").equalsIgnoreCase(uuid.toString())) {
                     top.getFirst().close();
                     return getTopRank(i);
                 }
