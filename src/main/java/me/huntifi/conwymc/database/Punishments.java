@@ -24,7 +24,7 @@ public class Punishments {
      */
     public static Tuple<PreparedStatement, ResultSet> getActive(UUID uuid, String type) throws SQLException {
         PreparedStatement ps = ConwyMC.SQL.getConnection().prepareStatement(
-                "SELECT reason, end FROM punishments WHERE uuid = ? AND type = ? AND end > ?"
+                "SELECT reason, end FROM punishments WHERE UUID = ? AND type = ? AND end > ?"
                         + " ORDER BY end DESC LIMIT 1");
         ps.setString(1, uuid.toString());
         ps.setString(2, type);

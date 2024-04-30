@@ -54,13 +54,12 @@ public class PlayerData {
 
     /**
      * Initialize the player's data.
-     * @param coins The player's coins
      * @param rankData The data retrieved from player_rank
      * @param mute The player's active mute
      * @throws SQLException If a database access error occurs or an invalid column label is used
      */
-    public PlayerData(double coins, ResultSet rankData, ResultSet mute, HashMap<String, String> settings) throws SQLException {
-        this.coins = coins;
+    public PlayerData(ResultSet rankData, ResultSet mute, HashMap<String, String> settings) throws SQLException {
+        this.coins = rankData.getDouble("coins");
         this.staffRank = rankData.getString("staff_rank").toLowerCase();
         this.rankPoints = rankData.getDouble("rank_points");
         this.joinMessage = rankData.getString("join_message");

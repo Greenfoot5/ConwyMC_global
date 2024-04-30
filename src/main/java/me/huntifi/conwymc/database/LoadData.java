@@ -35,7 +35,7 @@ public class LoadData {
             HashMap<String, String> settings = getSettings(uuid);
 
             // Collect data and release resources
-            PlayerData data = new PlayerData(getCoins(uuid), prRank.getSecond(), prMute.getSecond(), settings);
+            PlayerData data = new PlayerData(prRank.getSecond(), prMute.getSecond(), settings);
             prRank.getFirst().close();
             prMute.getFirst().close();
 
@@ -58,11 +58,6 @@ public class LoadData {
         ps.setString(1, uuid.toString());
         ps.executeUpdate();
         ps.close();
-        ps = ConwyMC.SQL.getConnection().prepareStatement(
-                "INSERT IGNORE INTO cs_stats (uuid) VALUES (?)");
-        ps.setString(1, uuid.toString());
-        ps.executeUpdate();
-        ps.close();
     }
 
     /**
@@ -73,30 +68,13 @@ public class LoadData {
      */
     private static Tuple<PreparedStatement, ResultSet> getRankData(UUID uuid) throws SQLException {
         // Get player stats from the database
-        PreparedStatement ps = ConwyMC.SQL.getConnection().prepareStatement("SELECT * FROM player_rank WHERE uuid=?");
+        PreparedStatement ps = ConwyMC.SQL.getConnection().prepareStatement("SELECT * FROM player_rank WHERE UUID = ?");
         ps.setString(1, uuid.toString());
         ResultSet rs = ps.executeQuery();
 
         // Return result set with pointer on first (and only) row
         rs.next();
         return new Tuple<>(ps, rs);
-    }
-
-    /**
-     * Get a player's coins from the database.
-     * @param uuid The unique id of the player whose data to get
-     * @return The player's coins
-     * @throws SQLException If something goes wrong executing the query
-     */
-    private static double getCoins(UUID uuid) throws SQLException {
-        try (PreparedStatement ps = ConwyMC.SQL.getConnection().prepareStatement(
-                "SELECT coins FROM cs_stats WHERE uuid=?"
-        )) {
-            ps.setString(1, uuid.toString());
-            ResultSet rs = ps.executeQuery();
-            rs.next();
-            return rs.getDouble("coins");
-        }
     }
 
     /**
@@ -107,7 +85,7 @@ public class LoadData {
      */
     public static double getRankPoints(String name) throws SQLException {
         PreparedStatement ps = ConwyMC.SQL.getConnection().prepareStatement(
-                "SELECT rank_points FROM player_rank WHERE name=?");
+                "SELECT rank_points FROM player_rank WHERE username = ?");
         ps.setString(1, name);
         ResultSet rs = ps.executeQuery();
 
@@ -129,7 +107,7 @@ public class LoadData {
      */
     public static Tuple<PreparedStatement, ResultSet> getTopDonators() throws SQLException {
         PreparedStatement ps = ConwyMC.SQL.getConnection().prepareStatement(
-                "SELECT * FROM player_rank ORDER BY rank_points DESC LIMIT 10");
+                "SELECT * FROM vw_top_donator LIMIT 10");
 
         ResultSet rs = ps.executeQuery();
         return new Tuple<>(ps, rs);
@@ -143,7 +121,7 @@ public class LoadData {
      */
     public static Tuple<PreparedStatement, ResultSet> getDonators(int offset) throws SQLException {
         PreparedStatement ps = ConwyMC.SQL.getConnection().prepareStatement(
-                "SELECT * FROM vw_donator LIMIT 10 OFFSET ?");
+                "SELECT * FROM vw_top_donator LIMIT 10 OFFSET ?");
         ps.setInt(1, offset);
 
         ResultSet rs = ps.executeQuery();
@@ -158,7 +136,7 @@ public class LoadData {
      */
     public static UUID getUUID(String name) throws SQLException {
         try (PreparedStatement ps = ConwyMC.SQL.getConnection().prepareStatement(
-                "SELECT uuid FROM player_rank WHERE name=?"
+                "SELECT UUID FROM player_rank WHERE username = ?"
         )) {
             ps.setString(1, name);
             ResultSet rs = ps.executeQuery();
@@ -178,7 +156,7 @@ public class LoadData {
         HashMap<String, String> loadedSettings = new HashMap<>();
 
         try (PreparedStatement ps = ConwyMC.SQL.getConnection().prepareStatement(
-                "SELECT setting, value FROM player_settings WHERE uuid = ?")) {
+                "SELECT setting, value FROM player_settings WHERE UUID = ?")) {
             ps.setString(1, uuid.toString());
 
             ResultSet rs = ps.executeQuery();

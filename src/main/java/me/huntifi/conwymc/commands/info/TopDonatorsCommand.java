@@ -69,7 +69,7 @@ public class TopDonatorsCommand implements CommandExecutor {
             while (donators.getSecond().next()) {
                 pos++;
                 NamedTextColor color = pos == requested ? NamedTextColor.AQUA : NamedTextColor.DARK_AQUA;
-                String name = donators.getSecond().getString("name");
+                String name = donators.getSecond().getString("username");
                 int points = donators.getSecond().getInt("rank_points");
 
                 message = message.append(Component.newline())

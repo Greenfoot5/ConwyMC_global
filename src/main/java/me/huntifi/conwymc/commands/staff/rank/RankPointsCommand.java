@@ -59,7 +59,7 @@ public class RankPointsCommand implements CommandExecutor {
                         break;
                     default:
                         Messenger.sendError(String.format("The operation <red>%s</red> is not supported!\n" +
-                                "Please use one of the following:<red? set, add, remove", args[1]), sender);
+                                "Please use one of the following:<red>? set, add, remove</red>", args[1]), sender);
                         break;
                 }
 

@@ -23,7 +23,7 @@ public class StoreData {
      */
     private static void store(UUID uuid, PlayerData data) {
         try (PreparedStatement ps = ConwyMC.SQL.getConnection().prepareStatement(
-                "UPDATE player_rank SET staff_rank = ?, rank_points = ?, join_message = ?, leave_message = ?, coins = ? WHERE uuid = ?"
+                "UPDATE player_rank SET staff_rank = ?, rank_points = ?, join_message = ?, leave_message = ?, coins = ? WHERE UUID = ?"
         )) {
             ps.setString(1, data.getStaffRank());
             ps.setDouble(2, data.getRankPoints());
@@ -65,7 +65,7 @@ public class StoreData {
     public static void updateName(UUID uuid) {
         Bukkit.getScheduler().runTaskAsynchronously(ConwyMC.plugin, () -> {
             try (PreparedStatement ps = ConwyMC.SQL.getConnection().prepareStatement(
-                    "UPDATE player_rank SET username = ? WHERE uuid = ?"
+                    "UPDATE player_rank SET username = ? WHERE UUID = ?"
             )) {
                 ps.setString(1, Objects.requireNonNull(Bukkit.getPlayer(uuid)).getName());
                 ps.setString(2, uuid.toString());
@@ -107,7 +107,7 @@ public class StoreData {
             public void run() {
                 try {
                     PreparedStatement ps = ConwyMC.SQL.getConnection().prepareStatement(
-                            "UPDATE player_settings SET value = ? WHERE uuid = ? AND setting = ?");
+                            "UPDATE player_settings SET value = ? WHERE UUID = ? AND setting = ?");
                     ps.setString(1, value);
                     ps.setString(2, uuid.toString());
                     ps.setString(3, setting);

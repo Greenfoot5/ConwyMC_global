@@ -17,7 +17,7 @@ public class SetCoinsCommand extends ChangePermanentCurrencyCommand {
 
     @Override
     protected String getQuery() {
-        return "UPDATE player_stats SET coins = ? WHERE uuid = ?";
+        return "UPDATE player_rank SET coins = ? WHERE UUID = ?";
     }
 
     @Override
