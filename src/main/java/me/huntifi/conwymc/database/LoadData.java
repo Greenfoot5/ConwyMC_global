@@ -59,7 +59,7 @@ public class LoadData {
         ps.executeUpdate();
         ps.close();
         ps = ConwyMC.SQL.getConnection().prepareStatement(
-                "INSERT IGNORE INTO player_stats (uuid) VALUES (?)");
+                "INSERT IGNORE INTO cs_stats (uuid) VALUES (?)");
         ps.setString(1, uuid.toString());
         ps.executeUpdate();
         ps.close();
@@ -90,7 +90,7 @@ public class LoadData {
      */
     private static double getCoins(UUID uuid) throws SQLException {
         try (PreparedStatement ps = ConwyMC.SQL.getConnection().prepareStatement(
-                "SELECT coins FROM player_stats WHERE uuid=?"
+                "SELECT coins FROM cs_stats WHERE uuid=?"
         )) {
             ps.setString(1, uuid.toString());
             ResultSet rs = ps.executeQuery();

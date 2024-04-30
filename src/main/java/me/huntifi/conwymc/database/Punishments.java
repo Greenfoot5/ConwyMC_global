@@ -84,7 +84,7 @@ public class Punishments {
      */
     public static void end(String name, String type) throws SQLException {
         try (PreparedStatement ps = ConwyMC.SQL.getConnection().prepareStatement(
-                "UPDATE punishments SET end = ? WHERE end > ? AND name = ? AND type = ?"
+                "UPDATE punishments SET end = ? WHERE end > ? AND username = ? AND type = ?"
         )) {
             ps.setTimestamp(1, new Timestamp(System.currentTimeMillis()));
             ps.setTimestamp(2, new Timestamp(System.currentTimeMillis()));

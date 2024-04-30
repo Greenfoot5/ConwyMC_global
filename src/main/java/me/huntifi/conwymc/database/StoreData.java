@@ -23,23 +23,14 @@ public class StoreData {
      */
     private static void store(UUID uuid, PlayerData data) {
         try (PreparedStatement ps = ConwyMC.SQL.getConnection().prepareStatement(
-                "UPDATE player_rank SET staff_rank = ?, rank_points = ?, join_message = ?, leave_message = ? WHERE uuid = ?"
+                "UPDATE player_rank SET staff_rank = ?, rank_points = ?, join_message = ?, leave_message = ?, coins = ? WHERE uuid = ?"
         )) {
             ps.setString(1, data.getStaffRank());
             ps.setDouble(2, data.getRankPoints());
             ps.setString(3, data.getJoinMessage());
             ps.setString(4, data.getLeaveMessage());
-            ps.setString(5, uuid.toString());
-            ps.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        try (PreparedStatement ps = ConwyMC.SQL.getConnection().prepareStatement(
-                "UPDATE player_stats SET coins = ? WHERE uuid = ?"
-        )) {
-            ps.setDouble(1, data.getCoins());
-            ps.setString(2, uuid.toString());
+            ps.setDouble(5, data.getCoins());
+            ps.setString(6, uuid.toString());
             ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -74,7 +65,7 @@ public class StoreData {
     public static void updateName(UUID uuid) {
         Bukkit.getScheduler().runTaskAsynchronously(ConwyMC.plugin, () -> {
             try (PreparedStatement ps = ConwyMC.SQL.getConnection().prepareStatement(
-                    "UPDATE player_rank SET name = ? WHERE uuid = ?"
+                    "UPDATE player_rank SET username = ? WHERE uuid = ?"
             )) {
                 ps.setString(1, Objects.requireNonNull(Bukkit.getPlayer(uuid)).getName());
                 ps.setString(2, uuid.toString());
@@ -93,7 +84,7 @@ public class StoreData {
     public static void updateRank(String name, double rp) {
         Bukkit.getScheduler().runTaskAsynchronously(ConwyMC.plugin, () -> {
             try (PreparedStatement ps = ConwyMC.SQL.getConnection().prepareStatement(
-                        "UPDATE player_rank SET rank_points = ? WHERE name = ?"
+                        "UPDATE player_rank SET rank_points = ? WHERE username = ?"
             )) {
                 ps.setDouble(1, rp);
                 ps.setString(2, name);
