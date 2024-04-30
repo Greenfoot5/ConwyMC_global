@@ -8,6 +8,7 @@ import me.huntifi.conwymc.database.LoadData;
 import me.huntifi.conwymc.database.Permissions;
 import me.huntifi.conwymc.database.Punishments;
 import me.huntifi.conwymc.database.StoreData;
+import me.huntifi.conwymc.events.nametag.UpdateNameTagEvent;
 import me.huntifi.conwymc.util.Messenger;
 import me.huntifi.conwymc.util.PunishmentTime;
 import me.huntifi.conwymc.util.RankPoints;
@@ -47,6 +48,7 @@ public class PlayerConnect implements Listener {
         setJoinMessage(event, data);
         setPermissions(uuid, data);
         StoreData.updateName(uuid);
+        Bukkit.getPluginManager().callEvent(new UpdateNameTagEvent(player));
 
         for (Player ignored : Bukkit.getOnlinePlayers()) {
             if (data.getSetting("joinPing").equals("true")) {

@@ -28,8 +28,8 @@ public class UpdateNameTag implements Listener {
         String serialized = LegacyComponentSerializer.legacySection().serialize(rank);
 
         Bukkit.getScheduler().runTask(ConwyMC.plugin, () -> {
-            player.displayName(rank.append(Component.text(player.getName(), NamedTextColor.GRAY)));
-            NametagEdit.getApi().setPrefix(player, serialized.substring(0, serialized.length() - 1) + ChatColor.GRAY);
+            player.displayName(rank.append(Component.text(player.getName(), NamedTextColor.WHITE)));
+            NametagEdit.getApi().setPrefix(player, serialized.substring(0, serialized.length() - 1) + " " + ChatColor.WHITE);
         });
     }
 }

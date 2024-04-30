@@ -301,6 +301,11 @@ public class Messenger {
         receiver.sendMessage(mm.deserialize("<gold>[☠]</gold> ").append(msg));
     }
 
+    /**
+     * Sends a healing message to a specific user
+     * @param message The message
+     * @param receiver Who to send the message to
+     */
     public static void sendHealing(String message, @NotNull CommandSender receiver) {
         receiver.sendMessage(mm.deserialize("<gradient:#FF1053:#F7ACCF>[❤] " + message));
     }
