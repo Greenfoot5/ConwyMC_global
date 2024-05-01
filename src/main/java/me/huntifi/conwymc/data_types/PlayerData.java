@@ -11,6 +11,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.HashMap;
+import java.util.Objects;
 import java.util.UUID;
 
 /**
@@ -27,6 +28,9 @@ public class PlayerData {
     /** The player's rank */
     private String rank;
 
+    /** The player's top donator rank */
+    private String topRank;
+
     /** The player's rank points */
     private double rankPoints;
 
@@ -40,7 +44,7 @@ public class PlayerData {
     private String chatMode = GlobalChatCommand.CHAT_MODE;
 
     /** Whether the player's staff rank is hidden */
-    private boolean isHiddenStaff = false;
+    private String displayRank = null;
 
     /** The player's settings */
     private final HashMap<String, String> settings;
@@ -81,8 +85,9 @@ public class PlayerData {
         this.settings = data.settings;
 
         this.rank = data.getRank();
+        this.topRank = data.topRank;
         this.chatMode = data.getChatMode();
-        this.isHiddenStaff = data.isHiddenStaff;
+        this.displayRank = data.displayRank;
 
         this.mute = this.getMute();
     }
@@ -145,9 +150,14 @@ public class PlayerData {
      * @return The pretty representation of the player's staff or donator rank
      */
     public Component getDisplayRank() {
-        if (!staffRank.isEmpty() && !isHiddenStaff)
-            return NameTag.convertRank(staffRank);
+        if (displayRank != null) {
+            return NameTag.convertRank(displayRank);
+        }
 
+        if (!staffRank.isEmpty())
+            return NameTag.convertRank(staffRank);
+        if (!topRank.isEmpty())
+            return NameTag.convertRank(topRank);
         return NameTag.convertRank(rank);
     }
 
@@ -181,6 +191,22 @@ public class PlayerData {
      */
     public void setRank(String rank) {
         this.rank = rank;
+    }
+
+    /**
+     * Get the player's top donator rank.
+     * @return The player's rank
+     */
+    public String getTopRank() {
+        return topRank;
+    }
+
+    /**
+     * Sets the player's top donator rank
+     * @param rank The rank to set
+     */
+    public void setTopRank(String rank) {
+        this.topRank = rank;
     }
 
     /**
@@ -249,15 +275,13 @@ public class PlayerData {
 
     /**
      * Toggle whether the player's staff rank or donator rank is shown.
-     * @return Whether the player's staff rank is shown
      */
-    public boolean toggleRank() {
-        isHiddenStaff = !isHiddenStaff;
-        return !isHiddenStaff;
+    public void setDisplayRank(String rank) {
+        displayRank = rank;
     }
 
     public String getMMChatColor(String name) {
-        if (staffRank.isEmpty() || isHiddenStaff || name == null)
+        if (staffRank.isEmpty() || name == null)
             return "<gray>";
 
         switch (name) {
@@ -267,7 +291,9 @@ public class PlayerData {
             case "Greenfoot5":
                 return "<gradient:#1FD1F9:#B621FE>";
             default:
-                return "<white>";
+                if (Objects.equals(displayRank, staffRank))
+                    return "<white>";
+                return "<gray>";
         }
     }
 

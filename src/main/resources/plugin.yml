@@ -88,6 +88,11 @@ permissions:
       minecraft.command.msg: false
       minecraft.command.teammsg: false
       minecraft.command.trigger: false
+  conwymc.togglerank:
+    description: Allows donators and staff to use togglerank
+    children:
+      conwymc.esquire: true
+      conwymc.builder: true
 
 commands:
   # Chat
@@ -107,6 +112,13 @@ commands:
     description: Reply to the last player that sent you a private message
     usage: /r <message>
     aliases: r
+
+  # Rank
+  ToggleRank:
+    description: Toggle display of your staff/donator rank(s)
+    usage: /togglerank
+    permission: conwymc.togglerank
+    permission-message: You need to have a rank to use this command!
 
   # Donator
   JoinMessage:
@@ -233,11 +245,6 @@ commands:
     description: Set a staff rank for a player
     usage: /setstaffrank <player> <rank>
     permission: conwymc.admin
-    permission-message: You are not permitted to use this command!
-  ToggleRank:
-    description: Switch between staff and donator rank
-    usage: /togglerank
-    permission: conwymc.chatmod
     permission-message: You are not permitted to use this command!
 
   # Staff - Other

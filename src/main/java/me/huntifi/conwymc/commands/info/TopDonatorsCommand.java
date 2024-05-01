@@ -75,7 +75,7 @@ public class TopDonatorsCommand implements CommandExecutor {
                 message = message.append(Component.newline())
                         .append(Component.text(num.format(pos) + ". ")
                                 .append(Component.text(name + " ", color))
-                                .append(Component.text(getRank(pos, points) + " "))
+                                .append(getRank(pos, points))
                                 .color(NamedTextColor.GRAY))
                         .append(Component.text(num.format(points), NamedTextColor.WHITE));
             }

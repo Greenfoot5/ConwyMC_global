@@ -29,7 +29,11 @@ public class UpdateNameTag implements Listener {
 
         Bukkit.getScheduler().runTask(ConwyMC.plugin, () -> {
             player.displayName(rank.append(Component.text(player.getName(), NamedTextColor.WHITE)));
-            NametagEdit.getApi().setPrefix(player, serialized.substring(0, serialized.length() - 1) + " " + ChatColor.WHITE);
+            if (serialized.isEmpty()) {
+                NametagEdit.getApi().setPrefix(player, String.valueOf(ChatColor.WHITE));
+            } else {
+                NametagEdit.getApi().setPrefix(player, serialized.substring(0, serialized.length() - 1) + " " + ChatColor.WHITE);
+            }
         });
     }
 }

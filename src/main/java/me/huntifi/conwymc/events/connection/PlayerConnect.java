@@ -98,7 +98,7 @@ public class PlayerConnect implements Listener {
         if (data.getRankPoints() > 0) {
             String rank = RankPoints.getTopRank(uuid);
             if (!rank.isEmpty())
-                data.setRank(rank);
+                data.setTopRank(rank);
         }
     }
 
