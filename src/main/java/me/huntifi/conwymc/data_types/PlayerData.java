@@ -70,6 +70,24 @@ public class PlayerData {
     }
 
     /**
+     * Make a clone of a PlayerData
+     */
+    public PlayerData(PlayerData data) {
+        this.coins = data.getCoins();
+        this.staffRank = data.getStaffRank();
+        this.rankPoints = data.getRankPoints();
+        this.joinMessage = data.getJoinMessage();
+        this.leaveMessage = data.getLeaveMessage();
+        this.settings = data.settings;
+
+        this.rank = data.getRank();
+        this.chatMode = data.getChatMode();
+        this.isHiddenStaff = data.isHiddenStaff;
+
+        this.mute = this.getMute();
+    }
+
+    /**
      * Get the player's coins.
      * @return The player's coins
      */
