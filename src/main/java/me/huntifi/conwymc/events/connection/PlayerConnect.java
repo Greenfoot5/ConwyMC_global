@@ -1,6 +1,7 @@
 package me.huntifi.conwymc.events.connection;
 
 import me.huntifi.conwymc.ConwyMC;
+import me.huntifi.conwymc.advancements.AdvancementController;
 import me.huntifi.conwymc.data_types.PlayerData;
 import me.huntifi.conwymc.data_types.Tuple;
 import me.huntifi.conwymc.database.ActiveData;
@@ -55,6 +56,9 @@ public class PlayerConnect implements Listener {
                 player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1.0f, 0.1f);
             }
         }
+
+        AdvancementController.advancementTab.showTab(player);
+        AdvancementController.advancementTab.grantRootAdvancement(player);
     }
 
     /**
