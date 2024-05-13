@@ -19,7 +19,7 @@ public class AdvancementController {
 
         advancementTab = api.createAdvancementTab("conwymc");
 
-        AdvancementDisplay rootDisplay = new AdvancementDisplay(Material.WARPED_BUTTON, "V4 Tester", AdvancementFrameType.TASK, true, true, 0, 0, "Join ConwyMC");
+        AdvancementDisplay rootDisplay = new AdventureAdvancementDisplay(Material.WARPED_BUTTON, AdvancementFrameType.TASK, true, true, 0, 0,  "V4 Tester","Join ConwyMC");
 
         root = new RootAdvancement(advancementTab, "root", rootDisplay, "textures/block/stone.png");
 
