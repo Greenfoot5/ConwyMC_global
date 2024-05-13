@@ -13,9 +13,9 @@
 
     <description>The global plugin for the ConwyMC server</description>
     <properties>
-        <maven.compiler.source>8</maven.compiler.source>
-        <maven.compiler.target>8</maven.compiler.target>
-        <java.version>1.17</java.version>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
+        <java.version>17</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
@@ -33,7 +33,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-shade-plugin</artifactId>
-                <version>3.2.4</version>
+                <version>3.5.3</version>
                 <configuration>
                     <relocations>
                         <relocation>
@@ -96,6 +96,10 @@
             <id>upstream</id>
             <url>https://ci.nametagedit.com/plugin/repository/everything/</url>
         </repository>
+        <repository>
+            <id>fren_gor</id>
+            <url>https://nexus.frengor.com/repository/public/</url>
+        </repository>
     </repositories>
 
     <dependencies>
@@ -114,6 +118,12 @@
             <groupId>com.nametagedit</groupId>
             <artifactId>nametagedit</artifactId>
             <version>4.5.23</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.frengor</groupId>
+            <artifactId>ultimateadvancementapi</artifactId>
+            <version>2.2.8</version>
             <scope>provided</scope>
         </dependency>
     </dependencies>
