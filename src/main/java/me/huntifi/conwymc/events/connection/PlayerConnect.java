@@ -40,7 +40,7 @@ public class PlayerConnect implements Listener {
      * Set a player's join message, assign their permissions, and update their stored name.
      * @param event The event called when a player joins the game
      */
-    @EventHandler
+    @EventHandler(priority = EventPriority.LOWEST)
     public void onPlayerJoin(PlayerJoinEvent event) {
         Player player = event.getPlayer();
         UUID uuid = player.getUniqueId();
@@ -90,6 +90,9 @@ public class PlayerConnect implements Listener {
      * @param uuid The unique ID of the player
      */
     private void loadData(UUID uuid) {
+        // Remove any old data
+        ActiveData.removePlayer(uuid);
+
         // Load the player's data
         PlayerData data = LoadData.load(uuid);
         assert data != null;

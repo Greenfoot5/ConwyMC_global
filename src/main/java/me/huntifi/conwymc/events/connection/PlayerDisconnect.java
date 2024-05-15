@@ -30,7 +30,6 @@ public class PlayerDisconnect implements Listener {
         setLeaveMessage(event, data);
         Permissions.removePlayer(uuid);
         StoreData.storeAsync(uuid, data);
-        ActiveData.removePlayer(uuid);
     }
 
     /**

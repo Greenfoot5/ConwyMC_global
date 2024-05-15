@@ -22,6 +22,7 @@ public class StoreData {
      * @param data The player's data
      */
     private static void store(UUID uuid, PlayerData data) {
+        System.out.println("Storing Global data for " + uuid);
         try (PreparedStatement ps = ConwyMC.SQL.getConnection().prepareStatement(
                 "UPDATE player_rank SET staff_rank = ?, rank_points = ?, join_message = ?, leave_message = ?, coins = ? WHERE UUID = ?"
         )) {
