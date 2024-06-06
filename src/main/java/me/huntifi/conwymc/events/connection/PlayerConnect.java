@@ -14,7 +14,6 @@ import me.huntifi.conwymc.util.Messenger;
 import me.huntifi.conwymc.util.PunishmentTime;
 import me.huntifi.conwymc.util.RankPoints;
 import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.Bukkit;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
@@ -150,9 +149,7 @@ public class PlayerConnect implements Listener {
      */
     private void setJoinMessage(PlayerJoinEvent event, PlayerData data) {
         // Set the join message
-        if (!data.getJoinMessage().isEmpty()) {
-            event.joinMessage(Messenger.mm.deserialize(data.getJoinMessage()).color(NamedTextColor.YELLOW));
-        }
+        event.joinMessage(data.getCosmetics().getJoinMessage(event.getPlayer().getName()));
     }
 
     /**

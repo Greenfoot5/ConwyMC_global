@@ -36,7 +36,7 @@ public abstract class ChatCommand implements CommandExecutor {
 
         Player player = (Player) sender;
         PlayerData data = ActiveData.getData(player.getUniqueId());
-        return data.getMMChatColor(player.getName());
+        return data.getCosmetics().getChatColour();
     }
 
     /**

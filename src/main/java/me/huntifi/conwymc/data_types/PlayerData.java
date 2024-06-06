@@ -11,7 +11,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.HashMap;
-import java.util.Objects;
 import java.util.UUID;
 
 /**
@@ -34,11 +33,8 @@ public class PlayerData {
     /** The player's rank points */
     private double rankPoints;
 
-    /** The player's custom join message */
-    private String joinMessage;
-
-    /** The player's custom leave message */
-    private String leaveMessage;
+    /** The player's cosmetics */
+    private final PlayerCosmetics cosmetics;
 
     /** The player's current chat mode */
     private String chatMode = GlobalChatCommand.CHAT_MODE;
@@ -66,9 +62,8 @@ public class PlayerData {
         this.coins = rankData.getDouble("coins");
         this.staffRank = rankData.getString("staff_rank").toLowerCase();
         this.rankPoints = rankData.getDouble("rank_points");
-        this.joinMessage = rankData.getString("join_message");
-        this.leaveMessage = rankData.getString("leave_message");
         this.settings = settings;
+        this.cosmetics = new PlayerCosmetics(settings, this);
 
         this.mute = mute.next() ? new Tuple<>(mute.getString("reason"), mute.getTimestamp("end")) : null;
     }
@@ -80,8 +75,7 @@ public class PlayerData {
         this.coins = data.getCoins();
         this.staffRank = data.getStaffRank();
         this.rankPoints = data.getRankPoints();
-        this.joinMessage = data.getJoinMessage();
-        this.leaveMessage = data.getLeaveMessage();
+        this.cosmetics = data.getCosmetics();
         this.settings = data.settings;
 
         this.rank = data.getRank();
@@ -225,36 +219,8 @@ public class PlayerData {
         this.rankPoints = rankPoints;
     }
 
-    /**
-     * Get the player's custom join message.
-     * @return The player's custom join message
-     */
-    public String getJoinMessage() {
-        return joinMessage;
-    }
-
-    /**
-     * Set the player's custom join message.
-     * @param joinMessage The custom join message
-     */
-    public void setJoinMessage(String joinMessage) {
-        this.joinMessage = joinMessage;
-    }
-
-    /**
-     * Get the player's custom leave message.
-     * @return The player's custom leave message
-     */
-    public String getLeaveMessage() {
-        return leaveMessage;
-    }
-
-    /**
-     * Set the player's custom leave message.
-     * @param leaveMessage The custom leave message
-     */
-    public void setLeaveMessage(String leaveMessage) {
-        this.leaveMessage = leaveMessage;
+    public PlayerCosmetics getCosmetics() {
+        return cosmetics;
     }
 
     /**
@@ -278,23 +244,6 @@ public class PlayerData {
      */
     public void setDisplayRank(String rank) {
         displayRank = rank;
-    }
-
-    public String getMMChatColor(String name) {
-        if (staffRank.isEmpty() || name == null)
-            return "<gray>";
-
-        switch (name) {
-            case "Larrydabbles":
-                return "<gradient:#58D9FF:#AFDFFF>";
-            case "Huntifi":
-            case "Greenfoot5":
-                return "<gradient:#1FD1F9:#B621FE>";
-            default:
-                if (Objects.equals(displayRank, staffRank))
-                    return "<white>";
-                return "<gray>";
-        }
     }
 
     /**

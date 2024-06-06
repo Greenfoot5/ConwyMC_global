@@ -9,7 +9,7 @@ public class LeaveMessageCommand extends CustomMessageCommand {
 
     @Override
     protected void setMessageData(PlayerData data, String message) {
-        data.setLeaveMessage(message);
+        data.getCosmetics().setLeaveMessage(message, data);
     }
 
     @Override

@@ -42,7 +42,7 @@ public class SetStaffRankCommand implements CommandExecutor {
         if (Permissions.setStaffPermission(player.getUniqueId(), rank)) {
             PlayerData data = ActiveData.getData(player.getUniqueId());
             data.setStaffRank(rank);
-            Bukkit.getPluginManager().callEvent(new UpdateNameTagEvent(player, data.getDisplayRank()));
+            Bukkit.getPluginManager().callEvent(new UpdateNameTagEvent(player, data));
         } else {
             Messenger.sendError("Rank <red>" + rank + "</red> is invalid!", sender);
         }

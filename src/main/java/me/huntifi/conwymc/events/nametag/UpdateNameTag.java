@@ -24,11 +24,12 @@ public class UpdateNameTag implements Listener {
     @EventHandler(priority = EventPriority.LOWEST)
     public void onUpdateNameTag(UpdateNameTagEvent event) {
         Player player = event.getPlayer();
+        Component title = event.getTitle() == null ? Component.empty() : event.getTitle().append(Component.text(" "));
         Component rank = event.getDisplayRank();
         String serialized = LegacyComponentSerializer.legacySection().serialize(rank);
 
         Bukkit.getScheduler().runTask(ConwyMC.plugin, () -> {
-            player.displayName(rank.append(Component.text(player.getName(), NamedTextColor.WHITE)));
+            player.displayName(title.append(rank).append(Component.text(player.getName(), NamedTextColor.WHITE)));
             if (serialized.isEmpty()) {
                 NametagEdit.getApi().setPrefix(player, String.valueOf(ChatColor.WHITE));
             } else {

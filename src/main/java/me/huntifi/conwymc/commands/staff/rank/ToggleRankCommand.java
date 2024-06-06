@@ -103,7 +103,7 @@ public class ToggleRankCommand implements TabExecutor {
                 return true;
         }
 
-        Bukkit.getPluginManager().callEvent(new UpdateNameTagEvent(player, data.getDisplayRank()));
+        Bukkit.getPluginManager().callEvent(new UpdateNameTagEvent(player, data));
         return true;
     }
 

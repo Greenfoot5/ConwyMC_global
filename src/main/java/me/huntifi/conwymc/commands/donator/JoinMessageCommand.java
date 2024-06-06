@@ -9,7 +9,7 @@ public class JoinMessageCommand extends CustomMessageCommand {
 
     @Override
     protected void setMessageData(PlayerData data, String message) {
-        data.setJoinMessage(message);
+        data.getCosmetics().setJoinMessage(message, data);
     }
 
     @Override

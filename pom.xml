@@ -6,7 +6,7 @@
 
     <groupId>com.github.AdminHuntifi</groupId>
     <artifactId>conwymc-global</artifactId>
-    <version>0.0.24-fix</version>
+    <version>0.0.25</version>
     <packaging>jar</packaging>
 
     <name>ConwyMC_Global</name>
