@@ -82,13 +82,15 @@ public class PlayerCosmetics {
 
     public void setJoinMessage(String joinMessage, PlayerData playerData) {
         if (playerData.getRank() == null)
-            setJoinMessage(joinMessage, true);
-        setJoinMessage(joinMessage, false);
+            setJoinMessage(joinMessage, false);
+        setJoinMessage(joinMessage, true);
     }
 
     public void setJoinMessage(String joinMessage, boolean isDonator) {
         if (!isDonator)
             this.joinMessage = "{username} has joined the fight!";
+        else
+            this.joinMessage = joinMessage;
     }
 
     public Component getLeaveMessage(String username) {
@@ -102,12 +104,14 @@ public class PlayerCosmetics {
 
     public void setLeaveMessage(String leaveMessage, PlayerData playerData) {
         if (playerData.getRank() == null)
-            setLeaveMessage(leaveMessage, true);
-        setLeaveMessage(leaveMessage, false);
+            setLeaveMessage(leaveMessage, false);
+        setLeaveMessage(leaveMessage, true);
     }
 
     public void setLeaveMessage(String leaveMessage, boolean isDonator) {
         if (!isDonator)
             this.leaveMessage = "{username} abandoned their post!";
+        else
+            this.leaveMessage = leaveMessage;
     }
 }
