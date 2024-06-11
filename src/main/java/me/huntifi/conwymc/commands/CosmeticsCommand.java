@@ -3,6 +3,7 @@ package me.huntifi.conwymc.commands;
 import me.huntifi.conwymc.data_types.Cosmetic;
 import me.huntifi.conwymc.data_types.PlayerData;
 import me.huntifi.conwymc.database.ActiveData;
+import me.huntifi.conwymc.database.StoreData;
 import me.huntifi.conwymc.events.nametag.UpdateNameTagEvent;
 import me.huntifi.conwymc.gui.PaginatedGui;
 import me.huntifi.conwymc.util.Messenger;
@@ -91,15 +92,19 @@ public class CosmeticsCommand implements TabExecutor {
                     case "title":
                         data.getCosmetics().setTitle(cosmeticName, data);
                         Bukkit.getPluginManager().callEvent(new UpdateNameTagEvent(player, data));
+                        StoreData.updateSetting(player.getUniqueId(), "title", cosmeticName);
                         break;
                     case "chatcolour":
                         data.getCosmetics().setChatColour(cosmeticName, data);
+                        StoreData.updateSetting(player.getUniqueId(), "chat_colour", cosmeticName);
                         break;
                     case "joincolour":
                         data.getCosmetics().setJoinColour(cosmeticName, data);
+                        StoreData.updateSetting(player.getUniqueId(), "join_colour", cosmeticName);
                         break;
                     case "leavecolour":
                         data.getCosmetics().setLeaveColour(cosmeticName, data);
+                        StoreData.updateSetting(player.getUniqueId(), "leave_colour", cosmeticName);
                         break;
                     default:
                         Messenger.sendError(args[1] + " is an invalid equip category. Please use the GUI.", sender);
