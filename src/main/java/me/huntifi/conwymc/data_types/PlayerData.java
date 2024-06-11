@@ -10,7 +10,9 @@ import org.bukkit.Bukkit;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -33,8 +35,11 @@ public class PlayerData {
     /** The player's rank points */
     private double rankPoints;
 
-    /** The player's cosmetics */
-    private final PlayerCosmetics cosmetics;
+    /** The player's selected cosmetics */
+    private final PlayerCosmetics selectedCosmetics;
+
+    /** The player's owned cosmetics */
+    private List<Cosmetic> ownedCosmetics = new ArrayList<>();
 
     /** The player's current chat mode */
     private String chatMode = GlobalChatCommand.CHAT_MODE;
@@ -56,14 +61,17 @@ public class PlayerData {
      * Initialize the player's data.
      * @param rankData The data retrieved from player_rank
      * @param mute The player's active mute
+     * @param ownedCosmetics The cosmetics a player owns
+     * @param settings The player's settings
      * @throws SQLException If a database access error occurs or an invalid column label is used
      */
-    public PlayerData(ResultSet rankData, ResultSet mute, HashMap<String, String> settings) throws SQLException {
+    public PlayerData(ResultSet rankData, ResultSet mute, List<Cosmetic> ownedCosmetics, HashMap<String, String> settings) throws SQLException {
         this.coins = rankData.getDouble("coins");
         this.staffRank = rankData.getString("staff_rank").toLowerCase();
         this.rankPoints = rankData.getDouble("rank_points");
         this.settings = settings;
-        this.cosmetics = new PlayerCosmetics(settings, this);
+        this.ownedCosmetics = ownedCosmetics;
+        this.selectedCosmetics = new PlayerCosmetics(settings, this);
 
         this.mute = mute.next() ? new Tuple<>(mute.getString("reason"), mute.getTimestamp("end")) : null;
     }
@@ -75,7 +83,8 @@ public class PlayerData {
         this.coins = data.getCoins();
         this.staffRank = data.getStaffRank();
         this.rankPoints = data.getRankPoints();
-        this.cosmetics = data.getCosmetics();
+        this.selectedCosmetics = data.getCosmetics();
+        this.ownedCosmetics = data.ownedCosmetics;
         this.settings = data.settings;
 
         this.rank = data.getRank();
@@ -220,7 +229,27 @@ public class PlayerData {
     }
 
     public PlayerCosmetics getCosmetics() {
-        return cosmetics;
+        return selectedCosmetics;
+    }
+
+    public Cosmetic getCosmetic(String name, Cosmetic.CosmeticType type) {
+        for (Cosmetic cosmetic : ownedCosmetics) {
+            if (cosmetic.getName().equalsIgnoreCase(name) && cosmetic.getType() == type) {
+                return cosmetic;
+            }
+        }
+
+        return null;
+    }
+
+    public List<Cosmetic> getCosmetics(Cosmetic.CosmeticType type) {
+        List<Cosmetic> owned = new ArrayList<>();
+        for (Cosmetic cosmetic : ownedCosmetics) {
+            if (cosmetic.getType() == type) {
+                owned.add(cosmetic);
+            }
+        }
+        return owned;
     }
 
     /**

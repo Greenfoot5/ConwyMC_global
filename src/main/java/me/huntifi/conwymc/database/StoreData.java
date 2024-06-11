@@ -142,4 +142,56 @@ public class StoreData {
             }
         }.runTaskAsynchronously(ConwyMC.plugin);
     }
+
+    /**
+     * Used to grant a player a cosmetic
+     * @param uuid The player's UUID
+     * @param type The cosmetic type
+     * @param content The cosmetic's value
+     * @param name The cosmetic's name
+     */
+    public static void grantCosmetic(UUID uuid, String type, String name, String content) {
+        new BukkitRunnable() {
+            @Override
+            public void run() {
+                try {
+                    PreparedStatement ps = ConwyMC.SQL.getConnection().prepareStatement(
+                            "INSERT INTO player_cosmetics VALUES (?, ?, ?, ?)");
+                    ps.setString(1, uuid.toString());
+                    ps.setString(2, type);
+                    ps.setString(3, content);
+                    ps.setString(4, name);
+                    ps.executeUpdate();
+                    ps.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }.runTaskAsynchronously(ConwyMC.plugin);
+    }
+
+    /**
+     * Used to remove a player's cosmetic
+     * @param uuid The player's UUID
+     * @param type The cosmetic type
+     * @param name The cosmetic's name
+     */
+    public static void removeCosmetic(UUID uuid, String type, String name) {
+        new BukkitRunnable() {
+            @Override
+            public void run() {
+                try {
+                    PreparedStatement ps = ConwyMC.SQL.getConnection().prepareStatement(
+                            "DELETE FROM player_cosmetics WHERE UUID = ? AND TYPE = ? AND name = ?");
+                    ps.setString(1, uuid.toString());
+                    ps.setString(2, type);
+                    ps.setString(3, name);
+                    ps.executeUpdate();
+                    ps.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }.runTaskAsynchronously(ConwyMC.plugin);
+    }
 }

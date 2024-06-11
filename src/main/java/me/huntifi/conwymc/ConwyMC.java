@@ -2,6 +2,7 @@ package me.huntifi.conwymc;
 
 import dev.dejvokep.boostedyaml.YamlDocument;
 import me.huntifi.conwymc.advancements.AdvancementController;
+import me.huntifi.conwymc.commands.CosmeticsCommand;
 import me.huntifi.conwymc.commands.chat.GlobalChatCommand;
 import me.huntifi.conwymc.commands.chat.MessageCommand;
 import me.huntifi.conwymc.commands.chat.ReplyCommand;
@@ -144,6 +145,9 @@ public final class ConwyMC extends JavaPlugin {
         // Donator
         Objects.requireNonNull(getCommand("JoinMessage")).setExecutor(new JoinMessageCommand());
         Objects.requireNonNull(getCommand("LeaveMessage")).setExecutor(new LeaveMessageCommand());
+
+        // Cosmetics
+        Objects.requireNonNull(getCommand("Cosmetics")).setExecutor(new CosmeticsCommand());
 
         // Info
         Objects.requireNonNull(getCommand("Coins")).setExecutor(new CoinsCommand());

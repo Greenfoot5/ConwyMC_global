@@ -1,74 +1,76 @@
 package me.huntifi.conwymc.data_types;
 
+import me.huntifi.conwymc.events.nametag.UpdateNameTagEvent;
 import me.huntifi.conwymc.util.Messenger;
 import net.kyori.adventure.text.Component;
+import org.bukkit.Bukkit;
 
 import java.util.HashMap;
+import java.util.Objects;
+
+import static me.huntifi.conwymc.data_types.Cosmetic.CosmeticType.CHAT_COLOUR;
+import static me.huntifi.conwymc.data_types.Cosmetic.CosmeticType.JOIN_COLOUR;
+import static me.huntifi.conwymc.data_types.Cosmetic.CosmeticType.LEAVE_COLOUR;
+import static me.huntifi.conwymc.data_types.Cosmetic.CosmeticType.TITLE;
 
 public class PlayerCosmetics {
 
     /** The player's title */
-    private String title;
+    private Cosmetic title;
 
     /** The player's chat colour */
-    private String chatColour;
+    private Cosmetic chatColour;
 
     /** The player's custom join message */
     private String joinMessage;
 
     /** The mm prefix to the join message */
-    private String joinColour;
+    private Cosmetic joinColour;
 
     /** The player's custom leave message */
     private String leaveMessage;
 
     /** The mm prefix to the leave message */
-    private String leaveColour;
+    private Cosmetic leaveColour;
 
-    public PlayerCosmetics( HashMap<String, String> settings, PlayerData data) {
+    public PlayerCosmetics(HashMap<String, String> settings, PlayerData data) {
+
         setJoinMessage(settings.get("join_message"), data);
-        setJoinColour(settings.get("join_colour"));
+        setJoinColour(settings.get("join_colour"), data);
         setLeaveMessage(settings.get("leave_message"), data);
-        setLeaveColour(settings.get("leave_colour"));
-        setTitle(settings.get("title"));
+        setLeaveColour(settings.get("leave_colour"), data);
+        setTitle(settings.get("title"), data);
         setChatColour(settings.get("chat_colour"), data);
     }
 
     public String getRawTitle() {
-        return title;
+        return title.getValue();
     }
 
     public Component getTitle() {
         if (title == null)
             return null;
-        return Messenger.mm.deserialize(title);
+        return Messenger.mm.deserialize(title.getValue());
     }
 
-    public String getCleanTitle() {
-        return Messenger.clean(title);
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
+    public void setTitle(String title, PlayerData data) {
+        if (Objects.equals(title, "reset"))
+            this.title = null;
+        else
+            this.title = data.getCosmetic(title, TITLE);
     }
 
     public String getChatColour() {
-        return chatColour;
+        return chatColour.getValue();
     }
 
-    public void setChatColour(String chatColour, PlayerData playerData) {
-        if (playerData.getStaffRank() == null)
-            setChatColour(chatColour, true);
-        setChatColour(chatColour, false);
-    }
-
-    public void setChatColour(String chatColour, boolean isStaff) {
-        if (chatColour != null) {
-            this.chatColour = chatColour;
-            return;
-        }
-
-        this.chatColour = isStaff ? "<white>" : "<grey>";
+    public void setChatColour(String chatColour, PlayerData data) {
+        if (chatColour != null && !chatColour.equals("reset"))
+            this.chatColour = data.getCosmetic(chatColour, CHAT_COLOUR);
+        else if (data.getStaffRank() == null)
+            this.chatColour = new Cosmetic(CHAT_COLOUR, "Default", "<grey>");
+        else
+            this.chatColour = new Cosmetic(CHAT_COLOUR, "Staff", "<white>");
     }
 
     public Component getJoinMessage(String username) {
@@ -76,8 +78,10 @@ public class PlayerCosmetics {
         return Messenger.mm.deserialize(this.joinColour + message);
     }
 
-    public void setJoinColour(String joinColour) {
-        this.joinColour = joinColour.isEmpty() ? "<yellow>" : joinColour;
+    public void setJoinColour(String joinColour, PlayerData data) {
+        this.joinColour = joinColour.isEmpty() || joinColour.equals("reset") ?
+                new Cosmetic(JOIN_COLOUR, "Default", "<yellow>") :
+                data.getCosmetic(joinColour, JOIN_COLOUR);
     }
 
     public void setJoinMessage(String joinMessage, PlayerData playerData) {
@@ -98,8 +102,10 @@ public class PlayerCosmetics {
         return Messenger.mm.deserialize(this.leaveColour + message);
     }
 
-    public void setLeaveColour(String leaveColour) {
-        this.leaveColour = leaveColour.isEmpty() ? "<yellow>" : leaveColour;
+    public void setLeaveColour(String leaveColour, PlayerData data) {
+        this.leaveColour = leaveColour.isEmpty() || leaveColour.equals("reset") ?
+                new Cosmetic(JOIN_COLOUR, "Default", "<yellow>") :
+                data.getCosmetic(leaveColour, LEAVE_COLOUR);
     }
 
     public void setLeaveMessage(String leaveMessage, PlayerData playerData) {

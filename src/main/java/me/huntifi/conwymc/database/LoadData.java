@@ -1,13 +1,16 @@
 package me.huntifi.conwymc.database;
 
 import me.huntifi.conwymc.ConwyMC;
+import me.huntifi.conwymc.data_types.Cosmetic;
 import me.huntifi.conwymc.data_types.PlayerData;
 import me.huntifi.conwymc.data_types.Tuple;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -31,11 +34,14 @@ public class LoadData {
             // Mute data
             Tuple<PreparedStatement, ResultSet> prMute = Punishments.getActive(uuid, "mute");
 
+            // Cosmetics
+            List<Cosmetic> cosmetics = getCosmetics(uuid);
+
             // Settings
             HashMap<String, String> settings = getSettings(uuid);
 
             // Collect data and release resources
-            PlayerData data = new PlayerData(prRank.getSecond(), prMute.getSecond(), settings);
+            PlayerData data = new PlayerData(prRank.getSecond(), prMute.getSecond(), cosmetics, settings);
             prRank.getFirst().close();
             prMute.getFirst().close();
 
@@ -152,7 +158,7 @@ public class LoadData {
      * @param uuid The player to get the settings for
      * @return All the settings the user has changed the valur for at some point
      */
-    public static HashMap<String, String> getSettings(UUID uuid) {
+    private static HashMap<String, String> getSettings(UUID uuid) {
         HashMap<String, String> loadedSettings = new HashMap<>();
 
         try (PreparedStatement ps = ConwyMC.SQL.getConnection().prepareStatement(
@@ -169,5 +175,53 @@ public class LoadData {
         }
 
         return loadedSettings;
+    }
+
+    /**
+     * @param uuid The player to get the settings for
+     * @return All the settings the user has changed the valur for at some point
+     */
+    private static List<Cosmetic> getCosmetics(UUID uuid) {
+        ArrayList<Cosmetic> ownedCosmetics = new ArrayList<>();
+
+        try (PreparedStatement ps = ConwyMC.SQL.getConnection().prepareStatement(
+                "SELECT TYPE, VALUE, name FROM player_cosmetics WHERE UUID = ?")) {
+            ps.setString(1, uuid.toString());
+
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                Cosmetic.CosmeticType type;
+                switch (rs.getString("type").toLowerCase()) {
+                    case "chat colour":
+                    case "chat color":
+                    case "chatcolor":
+                    case "chatcolour":
+                        type = Cosmetic.CosmeticType.CHAT_COLOUR;
+                        break;
+                    case "join colour":
+                    case "join color":
+                    case "joincolor":
+                    case "joincolour":
+                        type = Cosmetic.CosmeticType.JOIN_COLOUR;
+                        break;
+                    case "leave colour":
+                    case "leave color":
+                    case "leavecolor":
+                    case "leavecolour":
+                        type = Cosmetic.CosmeticType.LEAVE_COLOUR;
+                        break;
+                    // We'll assume title if nothing else as it's easiest to debug
+                    default:
+                        type = Cosmetic.CosmeticType.TITLE;
+                }
+
+                ownedCosmetics.add(new Cosmetic(type, rs.getString("name"), rs.getString("VALUE")));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return ownedCosmetics;
     }
 }

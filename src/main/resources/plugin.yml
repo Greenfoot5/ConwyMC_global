@@ -135,6 +135,11 @@ commands:
     permission: conwymc.esquire
     permission-message: Only donators are permitted to use this command!
 
+  # Cosmetics
+  Cosmetics:
+    description: Open the cosmetics GUI
+    usage: /cosmetics [titles, chat_colour, join_colour, leave_colour]
+
   # Info
   CoinMultiplier:
     description: Shows the active coin multiplier
