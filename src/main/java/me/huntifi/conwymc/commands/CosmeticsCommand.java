@@ -5,6 +5,7 @@ import me.huntifi.conwymc.data_types.PlayerData;
 import me.huntifi.conwymc.database.ActiveData;
 import me.huntifi.conwymc.database.StoreData;
 import me.huntifi.conwymc.events.nametag.UpdateNameTagEvent;
+import me.huntifi.conwymc.gui.Gui;
 import me.huntifi.conwymc.gui.PaginatedGui;
 import me.huntifi.conwymc.util.Messenger;
 import net.kyori.adventure.text.Component;
@@ -45,7 +46,37 @@ public class CosmeticsCommand implements TabExecutor {
         Player player = (Player) sender;
         PlayerData data = ActiveData.getData(player.getUniqueId());
         if (args.length == 0) {
-            generateGui(data, Cosmetic.CosmeticType.TITLE).open(player);
+            Gui categories = new Gui(Component.text("Cosmetics"), 1);
+
+            categories.addItem(Messenger.mm.deserialize("<b><gold>Titles"),
+                    Material.NAME_TAG,
+                    List.of(Component.empty(),
+                            Messenger.mm.deserialize("<yellow><i>Titles are unique cosmetic player prefixes"),
+                            Messenger.mm.deserialize("<yellow><i>displayed in chat")),
+                    1, "cosmetics titles", true);
+
+            categories.addItem(Messenger.mm.deserialize("<b><gold>Chat Colours"),
+                    Material.BLUE_DYE,
+                    List.of(Component.empty(),
+                            Messenger.mm.deserialize("<yellow><i>Chat colours change the appearance of"),
+                            Messenger.mm.deserialize("<yellow><i>your messages in chat")),
+                    3, "cosmetics chat", true);
+
+            categories.addItem(Messenger.mm.deserialize("<b><gold>Join Colours"),
+                    Material.GREEN_DYE,
+                    List.of(Component.empty(),
+                            Messenger.mm.deserialize("<yellow><i>Join colours change the appearance of"),
+                            Messenger.mm.deserialize("<yellow><i>your join message")),
+                    5, "cosmetics join", true);
+
+            categories.addItem(Messenger.mm.deserialize("<b><gold>Leave Colours"),
+                    Material.YELLOW_DYE,
+                    List.of(Component.empty(),
+                            Messenger.mm.deserialize("<yellow><i>Leave colours change the appearance of"),
+                            Messenger.mm.deserialize("<yellow><i>your leave message")),
+                    7, "cosmetics leave", true);
+
+            categories.open(player);
             return true;
         }
 
@@ -159,7 +190,7 @@ public class CosmeticsCommand implements TabExecutor {
                 break;
             case JOIN_COLOUR:
                 title = Component.text("Join Colour");
-                material = Material.YELLOW_DYE;
+                material = Material.GREEN_DYE;
                 command += "joincolour ";
                 previewSuffix = "When I walk in the club";
                 defaultText = "<yellow>";
@@ -183,7 +214,7 @@ public class CosmeticsCommand implements TabExecutor {
                 defaultText = "<red>";
         }
         lorePrefix.add(Component.empty());
-        PaginatedGui gui = new PaginatedGui(title);
+        PaginatedGui gui = new PaginatedGui(title, true);
 
         List<Cosmetic> owned = data.getCosmetics(type);
 
@@ -203,6 +234,8 @@ public class CosmeticsCommand implements TabExecutor {
             gui.addItem(Messenger.mm.deserialize("<b><gold>Title: </gold><yellow>" + cosmetic.getName()),
                     material, lore, command + cosmetic.getName(), true);
         }
+
+        gui.setBackItemCommand("cosmetics");
         return gui;
     }
 }

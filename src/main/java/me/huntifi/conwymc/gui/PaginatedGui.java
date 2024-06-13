@@ -8,6 +8,7 @@ import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
 import net.kyori.adventure.text.format.TextDecoration;
 import org.bukkit.Bukkit;
+import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
@@ -18,12 +19,14 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.PotionMeta;
 import org.bukkit.inventory.meta.SkullMeta;
 import org.bukkit.profile.PlayerTextures;
 
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
@@ -42,6 +45,8 @@ public class PaginatedGui implements Listener {
 
     /** Whether this GUI should stop listening for events after being closed */
     protected final boolean shouldUnregister;
+
+    protected String backItemCommand;
 
     /**
      * Create an inventory.
@@ -79,10 +84,14 @@ public class PaginatedGui implements Listener {
                 name.decorationIfAbsent(TextDecoration.ITALIC, FALSE), loreI, null), new GuiItem(command, shouldClose)));
     }
 
+    public void setBackItemCommand(String backItemCommand) {
+        this.backItemCommand = backItemCommand;
+    }
+
     /**
      * @param location The location of the item
      */
-    public void addBottomRow(int location, boolean showLeft, boolean showRight) {
+    private void addBottomRow(int location, boolean showLeft, boolean showRight) {
         for (int i = 0; i < 9; i++) {
             ItemStack frame = ItemCreator.item(new ItemStack(Material.LIGHT_GRAY_STAINED_GLASS_PANE, 1),
                     Component.empty(), null, null);
@@ -124,6 +133,20 @@ public class PaginatedGui implements Listener {
             right.setItemMeta(skullMeta);
             inventory.setItem(location + 8, right);
             locationToItem.put(location + 8, new GuiItem("NEXT_PAGE", false));
+        }
+
+        if (backItemCommand != null) {
+            ItemStack item = ItemCreator.item(new ItemStack(Material.TIPPED_ARROW),
+                    Component.text("Go back", NamedTextColor.DARK_RED).decorate(TextDecoration.BOLD),
+                    Collections.singletonList(
+                            Component.text("Return to the previous interface.", NamedTextColor.RED)
+                                    .decorationIfAbsent(TextDecoration.ITALIC, FALSE)), null);
+            PotionMeta potionMeta = (PotionMeta) item.getItemMeta();
+            assert potionMeta != null;
+            potionMeta.setColor(Color.RED);
+            item.setItemMeta(potionMeta);
+            inventory.setItem(location + 4, item);
+            locationToItem.put(location + 4, new GuiItem(backItemCommand, true));
         }
     }
 
