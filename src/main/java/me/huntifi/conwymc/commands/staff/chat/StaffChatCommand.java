@@ -50,7 +50,7 @@ public class StaffChatCommand extends ToggleChatCommand {
     @Override
     protected ForwardingAudience getReceivers(CommandSender sender) {
         ForwardingAudience receivers = Bukkit.getServer();
-        receivers.filterAudience(v -> (v.get(Identity.UUID).isEmpty() || ((Player)v).hasPermission("castlesiege.chatmod")));
+        receivers.filterAudience(v -> (v.get(Identity.UUID).isEmpty() || ((Player)v).hasPermission("conwymc.chatmod")));
         return receivers;
     }
 

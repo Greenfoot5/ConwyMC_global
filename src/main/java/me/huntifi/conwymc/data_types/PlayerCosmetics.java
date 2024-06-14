@@ -1,9 +1,7 @@
 package me.huntifi.conwymc.data_types;
 
-import me.huntifi.conwymc.events.nametag.UpdateNameTagEvent;
 import me.huntifi.conwymc.util.Messenger;
 import net.kyori.adventure.text.Component;
-import org.bukkit.Bukkit;
 
 import java.util.HashMap;
 import java.util.Objects;
