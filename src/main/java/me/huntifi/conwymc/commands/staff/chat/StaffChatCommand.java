@@ -6,6 +6,7 @@ import me.huntifi.conwymc.commands.chat.ToggleChatCommand;
 import me.huntifi.conwymc.data_types.PlayerData;
 import me.huntifi.conwymc.database.ActiveData;
 import me.huntifi.conwymc.util.Messenger;
+import me.huntifi.conwymc.util.NameTag;
 import net.kyori.adventure.audience.Audience;
 import net.kyori.adventure.audience.ForwardingAudience;
 import net.kyori.adventure.identity.Identity;
@@ -56,9 +57,11 @@ public class StaffChatCommand extends ToggleChatCommand {
 
     public @NotNull Component render(@NotNull Player source, @NotNull Component sourceDisplayName, @NotNull Component message, @NotNull Audience viewer) {
         String color = getChatColor(source);
+        PlayerData data = ActiveData.getData(source.getUniqueId());
         Component prefix = Messenger.mm
-                .deserialize("<white>[<aqua><b>STAFF</b></aqua>] " +
-                        source.getName() + "</white>");
+                .deserialize("<white>[<aqua><b>STAFF</b></aqua>] </white>")
+                .append(NameTag.convertRank(data.getStaffRank()))
+                .append(Messenger.mm.deserialize(" <white>" + source.getName() + "</white>"));
 
         Component content = Messenger.mm.deserialize(color + Messenger.clean(message));
         return prefix.append(Component.text(": ", NamedTextColor.AQUA))
