@@ -63,9 +63,13 @@ public class PlayerCosmetics {
     }
 
     public void setChatColour(String chatColour, PlayerData data) {
-        if (chatColour != null && !chatColour.equals("reset"))
-            this.chatColour = data.getCosmetic(chatColour, CHAT_COLOUR);
-        else if (data.getStaffRank() == null)
+        if (chatColour != null && !chatColour.equals("reset")) {
+            Cosmetic newColour = data.getCosmetic(chatColour, CHAT_COLOUR);
+            if (newColour != null)
+                this.chatColour = newColour;
+        }
+
+        if (data.getStaffRank() == null)
             this.chatColour = new Cosmetic(CHAT_COLOUR, "Default", "<grey>");
         else
             this.chatColour = new Cosmetic(CHAT_COLOUR, "Staff", "<white>");
@@ -77,9 +81,13 @@ public class PlayerCosmetics {
     }
 
     public void setJoinColour(String joinColour, PlayerData data) {
-        this.joinColour = joinColour.isEmpty() || joinColour.equals("reset") ?
-                new Cosmetic(JOIN_COLOUR, "Default", "<yellow>") :
-                data.getCosmetic(joinColour, JOIN_COLOUR);
+        if (joinColour.isEmpty() || joinColour.equals("reset")) {
+            this.joinColour = new Cosmetic(JOIN_COLOUR, "Default", "<yellow>");
+            return;
+        }
+
+        Cosmetic newColour = data.getCosmetic(joinColour, JOIN_COLOUR);
+        this.joinColour = Objects.requireNonNullElseGet(newColour, () -> new Cosmetic(JOIN_COLOUR, "Default", "<yellow>"));
     }
 
     public void setJoinMessage(String joinMessage, PlayerData playerData) {
@@ -101,9 +109,13 @@ public class PlayerCosmetics {
     }
 
     public void setLeaveColour(String leaveColour, PlayerData data) {
-        this.leaveColour = leaveColour.isEmpty() || leaveColour.equals("reset") ?
-                new Cosmetic(JOIN_COLOUR, "Default", "<yellow>") :
-                data.getCosmetic(leaveColour, LEAVE_COLOUR);
+        if (leaveColour.isEmpty() || leaveColour.equals("reset")) {
+            this.leaveColour = new Cosmetic(LEAVE_COLOUR, "Default", "<yellow>");
+            return;
+        }
+
+        Cosmetic newColour = data.getCosmetic(leaveColour, JOIN_COLOUR);
+        this.leaveColour = Objects.requireNonNullElseGet(newColour, () -> new Cosmetic(LEAVE_COLOUR, "Default", "<yellow>"));
     }
 
     public void setLeaveMessage(String leaveMessage, PlayerData playerData) {
