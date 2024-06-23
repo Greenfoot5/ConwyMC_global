@@ -65,8 +65,10 @@ public class PlayerCosmetics {
     public void setChatColour(String chatColour, PlayerData data) {
         if (chatColour != null && !chatColour.equals("reset")) {
             Cosmetic newColour = data.getCosmetic(chatColour, CHAT_COLOUR);
-            if (newColour != null)
+            if (newColour != null) {
                 this.chatColour = newColour;
+                return;
+            }
         }
 
         if (data.getStaffRank() == null)
