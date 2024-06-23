@@ -70,7 +70,7 @@ public class TopBoostersCommand implements CommandExecutor {
             int offset = requested < 7 ? 0 : requested - 5;
 
             // Prepare data used for the message
-            Tuple<PreparedStatement, ResultSet> boosters = isMonthly ? LoadData.getAllTimeBoosters(offset) : LoadData.getMonthlyBoosters(offset);
+            Tuple<PreparedStatement, ResultSet> boosters = isMonthly ? LoadData.getMonthlyBoosters(offset) : LoadData.getAllTimeBoosters(offset);
             DecimalFormat num = new DecimalFormat("0");
             int pos = offset;
 
@@ -93,6 +93,7 @@ public class TopBoostersCommand implements CommandExecutor {
             }
             // Send the message
             Messenger.send(message, sender);
+            Messenger.sendInfo("Monthly leaderboards only show info from the <u>previous</u> month.", sender);
             boosters.getFirst().close();
 
         } catch (SQLException e) {
