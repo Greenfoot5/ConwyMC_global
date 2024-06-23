@@ -156,9 +156,15 @@ commands:
   Rules:
     description: Shows the rules
     usage: /rules
+  TopBoosters:
+    description: Shows the booster leaderboard
+    usage: /topboosters [position]
   TopDonators:
     description: Shows the donator leaderboard
     usage: /topdonators [position]
+  MonthlyBoosters:
+    description: Shows the previous month's booster leaderboard
+    usage: /monthlyboosters [position]
   WebShop:
     description: Gives the link to our web shop
     usage: /webshop

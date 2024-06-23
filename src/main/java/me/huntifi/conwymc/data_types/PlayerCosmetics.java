@@ -132,4 +132,12 @@ public class PlayerCosmetics {
         else
             this.leaveMessage = leaveMessage;
     }
+
+    private void checkTopCosmetics(PlayerData data) {
+
+    }
+
+    private void checkBottomCosmetics() {
+
+    }
 }

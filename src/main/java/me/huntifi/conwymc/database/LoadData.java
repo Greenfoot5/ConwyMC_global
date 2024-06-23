@@ -135,6 +135,36 @@ public class LoadData {
     }
 
     /**
+     * Get 10 donators from the database.
+     * @param offset The amount of donators to skip
+     * @return A tuple of the prepared statement (to close later) and the query's result
+     * @throws SQLException If something goes wrong executing the query
+     */
+    public static Tuple<PreparedStatement, ResultSet> getAllTimeBoosters(int offset) throws SQLException {
+        PreparedStatement ps = ConwyMC.SQL.getConnection().prepareStatement(
+                "SELECT * FROM vw_top_boosters ORDER BY all_time DESC LIMIT 10 OFFSET ?");
+        ps.setInt(1, offset);
+
+        ResultSet rs = ps.executeQuery();
+        return new Tuple<>(ps, rs);
+    }
+
+    /**
+     * Get 10 donators from the database.
+     * @param offset The amount of donators to skip
+     * @return A tuple of the prepared statement (to close later) and the query's result
+     * @throws SQLException If something goes wrong executing the query
+     */
+    public static Tuple<PreparedStatement, ResultSet> getMonthlyBoosters(int offset) throws SQLException {
+        PreparedStatement ps = ConwyMC.SQL.getConnection().prepareStatement(
+                "SELECT * FROM vw_top_boosters ORDER BY monthly DESC LIMIT 10 OFFSET ?");
+        ps.setInt(1, offset);
+
+        ResultSet rs = ps.executeQuery();
+        return new Tuple<>(ps, rs);
+    }
+
+    /**
      * Get the UUID of a player from the database.
      * @param name The name of the player
      * @return The player's UUID, or null if the name is not in the database
