@@ -2,6 +2,7 @@ package me.huntifi.conwymc.events.connection;
 
 import me.huntifi.conwymc.ConwyMC;
 import me.huntifi.conwymc.advancements.AdvancementController;
+import me.huntifi.conwymc.data_types.PlayerCosmetics;
 import me.huntifi.conwymc.data_types.PlayerData;
 import me.huntifi.conwymc.data_types.Tuple;
 import me.huntifi.conwymc.database.ActiveData;
@@ -58,6 +59,11 @@ public class PlayerConnect implements Listener {
 
         AdvancementController.advancementTab.showTab(player);
         AdvancementController.advancementTab.grantRootAdvancement(player);
+
+        // Temporary Cosmetics
+        Bukkit.getScheduler().runTaskAsynchronously(ConwyMC.plugin, () -> {
+            PlayerCosmetics.checkTopCosmetics(data, uuid);
+        });
     }
 
     /**

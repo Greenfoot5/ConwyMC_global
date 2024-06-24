@@ -1,10 +1,16 @@
 package me.huntifi.conwymc.data_types;
 
+import me.huntifi.conwymc.ConwyMC;
+import me.huntifi.conwymc.database.LoadData;
 import me.huntifi.conwymc.util.Messenger;
 import net.kyori.adventure.text.Component;
 
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Objects;
+import java.util.UUID;
 
 import static me.huntifi.conwymc.data_types.Cosmetic.CosmeticType.CHAT_COLOUR;
 import static me.huntifi.conwymc.data_types.Cosmetic.CosmeticType.JOIN_COLOUR;
@@ -133,11 +139,26 @@ public class PlayerCosmetics {
             this.leaveMessage = leaveMessage;
     }
 
-    private void checkTopCosmetics(PlayerData data) {
-
+    public static void checkTopCosmetics(PlayerData data, UUID uuid) {
+        try {
+            Cosmetic benevolent = new Cosmetic(TITLE, "Benevolent", "<gradient:#DA4453:#89216B>❤<b>Benevolent</b>❤");
+            Tuple<PreparedStatement, ResultSet> allTimeBoosters = LoadData.getAllTimeBoosters(0);
+            for (int i = 0; i < 3; i++) {
+                allTimeBoosters.getSecond().next();
+                if (allTimeBoosters.getSecond().getString("UUID").equals(uuid.toString())) {
+                    if (data.getCosmetic(benevolent.getName(), TITLE) == null) {
+                        data.addCosmetic(benevolent);
+                    }
+                }
+            }
+            allTimeBoosters.getFirst().close();
+        } catch (SQLException e) {
+            ConwyMC.plugin.getLogger().severe("Error in checkTopCosmetics for " + uuid);
+            ConwyMC.plugin.getLogger().severe(e.getMessage());
+        }
     }
 
-    private void checkBottomCosmetics() {
+    public static void checkBottomCosmetics() {
 
     }
 }

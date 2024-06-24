@@ -252,6 +252,10 @@ public class PlayerData {
         return owned;
     }
 
+    public void addCosmetic(Cosmetic cosmetic) {
+        ownedCosmetics.add(cosmetic);
+    }
+
     /**
      * Get the player's current chat mode.
      * @return The player's chat mode
