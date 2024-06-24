@@ -333,7 +333,7 @@ public class Messenger {
     public static void broadcastDuel(String message) {
         Component msg = mm.deserialize(message).color(BLUE);
         ForwardingAudience audience = Bukkit.getServer();
-        audience.sendMessage(mm.deserialize("<gold>[⚔]</gold> ").append(msg));
+        audience.sendMessage(mm.deserialize("<gold>[⚔]</gold> <gradient:#48A9FE:#0BEEF9>").append(msg));
     }
 
     public static void sendCongrats(String message, @NotNull CommandSender receiver) {

@@ -38,7 +38,10 @@ public class PlayerCosmetics {
     private Cosmetic leaveColour;
 
     public PlayerCosmetics(HashMap<String, String> settings, PlayerData data) {
+        updateCosmetics(settings, data);
+    }
 
+    public void updateCosmetics(HashMap<String, String> settings, PlayerData data) {
         setJoinMessage(settings.get("join_message"), data);
         setJoinColour(settings.get("join_colour"), data);
         setLeaveMessage(settings.get("leave_message"), data);
@@ -89,7 +92,7 @@ public class PlayerCosmetics {
     }
 
     public void setJoinColour(String joinColour, PlayerData data) {
-        if (joinColour.isEmpty() || joinColour.equals("reset")) {
+        if (joinColour == null || joinColour.isEmpty() || joinColour.equals("reset")) {
             this.joinColour = new Cosmetic(JOIN_COLOUR, "Default", "<yellow>");
             return;
         }
@@ -117,7 +120,7 @@ public class PlayerCosmetics {
     }
 
     public void setLeaveColour(String leaveColour, PlayerData data) {
-        if (leaveColour.isEmpty() || leaveColour.equals("reset")) {
+        if (leaveColour == null || leaveColour.isEmpty() || leaveColour.equals("reset")) {
             this.leaveColour = new Cosmetic(LEAVE_COLOUR, "Default", "<yellow>");
             return;
         }

@@ -256,6 +256,10 @@ public class PlayerData {
         ownedCosmetics.add(cosmetic);
     }
 
+    public void refreshCosmetics() {
+        selectedCosmetics.updateCosmetics(settings, this);
+    }
+
     /**
      * Get the player's current chat mode.
      * @return The player's chat mode
