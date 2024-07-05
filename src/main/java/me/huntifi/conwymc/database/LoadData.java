@@ -157,7 +157,7 @@ public class LoadData {
      */
     public static Tuple<PreparedStatement, ResultSet> getMonthlyBoosters(int offset) throws SQLException {
         PreparedStatement ps = ConwyMC.SQL.getConnection().prepareStatement(
-                "SELECT * FROM vw_top_boosters ORDER BY monthly DESC LIMIT 10 OFFSET ?");
+                "SELECT * FROM vw_top_boosters WHERE monthly > 0 ORDER BY monthly DESC LIMIT 10 OFFSET ?");
         ps.setInt(1, offset);
 
         ResultSet rs = ps.executeQuery();

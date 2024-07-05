@@ -148,8 +148,6 @@ public class PlayerCosmetics {
             Tuple<PreparedStatement, ResultSet> allTimeBoosters = LoadData.getAllTimeBoosters(0);
             isTop(data, uuid, allTimeBoosters.getSecond(), 3, benevolent);
             allTimeBoosters.getFirst().close();
-
-            Cosmetic reaper = new Cosmetic(TITLE, "Reaper", "<color:#3B3B3B>☠<b><gradient:#592E31:#92191E>Reaper</b>☠");
         } catch (SQLException e) {
             ConwyMC.plugin.getLogger().severe("Error in checkTopCosmetics for " + uuid);
             ConwyMC.plugin.getLogger().severe(e.getMessage());
