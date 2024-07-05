@@ -146,14 +146,7 @@ public class PlayerCosmetics {
         try {
             Cosmetic benevolent = new Cosmetic(TITLE, "Benevolent", "<gradient:#DA4453:#89216B>❤<b>Benevolent</b>❤");
             Tuple<PreparedStatement, ResultSet> allTimeBoosters = LoadData.getAllTimeBoosters(0);
-            for (int i = 0; i < 3; i++) {
-                allTimeBoosters.getSecond().next();
-                if (allTimeBoosters.getSecond().getString("UUID").equals(uuid.toString())) {
-                    if (data.getCosmetic(benevolent.getName(), TITLE) == null) {
-                        data.addCosmetic(benevolent);
-                    }
-                }
-            }
+            isTop(data, uuid, allTimeBoosters.getSecond(), 3, benevolent);
             allTimeBoosters.getFirst().close();
         } catch (SQLException e) {
             ConwyMC.plugin.getLogger().severe("Error in checkTopCosmetics for " + uuid);
@@ -161,7 +154,31 @@ public class PlayerCosmetics {
         }
     }
 
-    public static void checkBottomCosmetics() {
+    public static void checkMonthlyCosmetics(PlayerData data, UUID uuid) {
+        try {
+            Cosmetic magnificent = new Cosmetic(TITLE, "Magnificent", "<gradient:#C6FFDD:#FBD786:#f7797d>☀<b>Magnificent</b>♥");
+            Tuple<PreparedStatement, ResultSet> monthlyBoosters = LoadData.getMonthlyBoosters(0);
+            isTop(data, uuid, monthlyBoosters.getSecond(), 5, magnificent);
+            monthlyBoosters.getFirst().close();
+        } catch (SQLException e) {
+            ConwyMC.plugin.getLogger().severe("Error in checkTopCosmetics for " + uuid);
+            ConwyMC.plugin.getLogger().severe(e.getMessage());
+        }
+    }
 
+    private static void isTop(PlayerData data, UUID uuid, ResultSet results, int maximumPosition, Cosmetic cosmetic) {
+        try {
+            for (int i = 0; i < maximumPosition; i++) {
+                results.next();
+                if (results.getString("UUID").equals(uuid.toString())) {
+                    if (data.getCosmetic(cosmetic.getName(), TITLE) == null) {
+                        data.addCosmetic(cosmetic);
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            ConwyMC.plugin.getLogger().severe("Error in isTop for " + uuid);
+            ConwyMC.plugin.getLogger().severe(e.getMessage());
+        }
     }
 }

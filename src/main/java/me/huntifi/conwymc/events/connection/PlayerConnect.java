@@ -63,6 +63,7 @@ public class PlayerConnect implements Listener {
         // Temporary Cosmetics
         Bukkit.getScheduler().runTaskAsynchronously(ConwyMC.plugin, () -> {
             PlayerCosmetics.checkTopCosmetics(data, uuid);
+            PlayerCosmetics.checkMonthlyCosmetics(data, uuid);
             data.refreshCosmetics();
             Bukkit.getScheduler().runTask(ConwyMC.plugin, () -> Bukkit.getPluginManager().callEvent(new UpdateNameTagEvent(player)));
         });
