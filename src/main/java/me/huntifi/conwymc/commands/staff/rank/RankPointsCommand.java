@@ -122,6 +122,8 @@ public class RankPointsCommand implements CommandExecutor {
         data.setRankPoints(rp);
         data.setRank(rank);
         Permissions.setDonatorPermission(uuid, rank);
-        Bukkit.getPluginManager().callEvent(new UpdateNameTagEvent(player, data));
+        Bukkit.getScheduler().runTask(ConwyMC.plugin, () ->
+                Bukkit.getPluginManager().callEvent(new UpdateNameTagEvent(player, data))
+        );
     }
 }

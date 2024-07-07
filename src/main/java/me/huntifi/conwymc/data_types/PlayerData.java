@@ -157,9 +157,9 @@ public class PlayerData {
             return NameTag.convertRank(displayRank);
         }
 
-        if (!staffRank.isEmpty())
+        if (staffRank != null && !staffRank.isEmpty())
             return NameTag.convertRank(staffRank);
-        if (!topRank.isEmpty())
+        if (topRank != null && !topRank.isEmpty())
             return NameTag.convertRank(topRank);
         return NameTag.convertRank(rank);
     }

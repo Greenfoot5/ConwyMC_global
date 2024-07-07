@@ -94,6 +94,14 @@ public class PunishmentTime {
      */
     public static String getExpire(Timestamp end) {
         long duration = (end.getTime() - System.currentTimeMillis()) / 1000;
+        return getDuration(duration);
+    }
+
+    /**
+     * Turns a duration into a string
+     * @param duration How long (in seconds)
+     */
+    public static String getDuration(long duration) {
         DecimalFormat df = new DecimalFormat("0");
 
         if (duration >= 60) {
