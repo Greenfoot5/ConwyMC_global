@@ -36,6 +36,7 @@ import me.huntifi.conwymc.commands.staff.rank.ToggleRankCommand;
 import me.huntifi.conwymc.database.KeepAlive;
 import me.huntifi.conwymc.database.MySQL;
 import me.huntifi.conwymc.database.StoreData;
+import me.huntifi.conwymc.events.TabComplete;
 import me.huntifi.conwymc.events.connection.PlayerConnect;
 import me.huntifi.conwymc.events.connection.PlayerDisconnect;
 import me.huntifi.conwymc.events.nametag.UpdateNameTag;
@@ -132,6 +133,7 @@ public final class ConwyMC extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new UpdateNameTag(), plugin);
         getServer().getPluginManager().registerEvents(new GlobalChatCommand(), plugin);
         getServer().getPluginManager().registerEvents(new StaffChatCommand(), plugin);
+        getServer().getPluginManager().registerEvents(new TabComplete(), plugin);
     }
 
     /**

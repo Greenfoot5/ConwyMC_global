@@ -78,17 +78,9 @@ permissions:
     description: Gives access to all ConwyMC VIP commands
 
   # Other
-  conwymc.disable:
-    description: Disable basic minecraft permissions
+  conwymc.default:
+    description: Default Perms
     default: true
-    children:
-      bukkit.command.plugins: false
-      bukkit.command.version: false
-      minecraft.command.help: false
-      minecraft.command.me: false
-      minecraft.command.msg: false
-      minecraft.command.teammsg: false
-      minecraft.command.trigger: false
   conwymc.togglerank:
     description: Allows donators and staff to use togglerank
     children:
