@@ -39,24 +39,4 @@ public class TabComplete implements Listener {
             }
         }
     }
-
-    @EventHandler
-    public void tabComplete(TabCompleteEvent e) {
-        System.out.println("Filtering TabComplete");
-        List<String> correct = e.getCompletions();
-        correct.removeAll(getToRemove(e.getCompletions()));
-        e.setCompletions(correct);
-    }
-
-    private ArrayList<String> getToRemove(Collection<String> commands) {
-        ArrayList<String> toRemove = new ArrayList<>();
-        for (String command : commands) {
-            PluginCommand pluginCommand = Bukkit.getServer().getPluginCommand(command);
-            if (!allowedCommands.contains(command) &&
-                    pluginCommand != null && !allowedPlugins.contains(pluginCommand.getPlugin().getName()))
-                toRemove.add(command);
-        }
-
-        return toRemove;
-    }
 }
