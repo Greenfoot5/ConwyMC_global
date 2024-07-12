@@ -83,7 +83,7 @@ public class RankPointsCommand implements CommandExecutor {
      */
     private void setRankPoints(CommandSender sender, String name, double rp) {
         StoreData.updateRank(name, rp);
-        updateOnline(name, rp);
+        Bukkit.getScheduler().runTaskLater(ConwyMC.plugin, () -> updateOnline(name, rp), 400);
         Messenger.sendSuccess(String.format("%s now has <green>%f</green> rank points.",
                 name, rp), sender);
     }
@@ -106,24 +106,20 @@ public class RankPointsCommand implements CommandExecutor {
         if (data == null) {
             return;
         }
+        data.setRankPoints(rp);
 
         // Get the player's top donator rank
         String rank = "";
         if (rp > 0) {
             rank = RankPoints.getTopRank(uuid);
         }
+        data.setTopRank(rank);
 
-        // Get the player's regular donator rank otherwise
-        if (rank.isEmpty()) {
-            rank = RankPoints.getRank(rp);
-        }
-
-        // Apply the player's rank change
-        data.setRankPoints(rp);
+        // Apply the player's rank change\
+        rank = RankPoints.getRank(rp);
         data.setRank(rank);
+
         Permissions.setDonatorPermission(uuid, rank);
-        Bukkit.getScheduler().runTask(ConwyMC.plugin, () ->
-                Bukkit.getPluginManager().callEvent(new UpdateNameTagEvent(player, data))
-        );
+        Bukkit.getPluginManager().callEvent(new UpdateNameTagEvent(player, data));
     }
 }

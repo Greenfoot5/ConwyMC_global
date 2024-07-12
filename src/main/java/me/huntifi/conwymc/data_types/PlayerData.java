@@ -13,6 +13,7 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 
 /**
@@ -177,6 +178,9 @@ public class PlayerData {
      * @param staffRank The rank to set
      */
     public void setStaffRank(String staffRank) {
+        if (Objects.equals(staffRank, this.rank)) {
+            displayRank = rank;
+        }
         this.staffRank = staffRank;
     }
 
@@ -193,6 +197,9 @@ public class PlayerData {
      * @param rank The rank to set
      */
     public void setRank(String rank) {
+        if (Objects.equals(displayRank, this.rank)) {
+            displayRank = rank;
+        }
         this.rank = rank;
     }
 
@@ -209,6 +216,11 @@ public class PlayerData {
      * @param rank The rank to set
      */
     public void setTopRank(String rank) {
+        if (Objects.equals(topRank, this.rank)) {
+            displayRank = rank;
+        } else if (rank.isEmpty()) {
+            displayRank = this.rank;
+        }
         this.topRank = rank;
     }
 

@@ -31,6 +31,7 @@ permissions:
     description: Gives access to all ConwyMC Moderator commands
     children:
       conwymc.chatmod+: true
+      bukkit.command.restart: true
       minecraft.command.gamemode: true
   conwymc.chatmod+:
     description: Gives access to all ConwyMC Chatmod+ commands
@@ -42,6 +43,8 @@ permissions:
       conwymc.builder: true
   conwymc.builder:
     description: Gives access to all ConwyMC Builder commands
+    children:
+      conwymc.togglerank: true
 
   # Donator
   conwymc.high_king:
@@ -74,6 +77,8 @@ permissions:
       conwymc.esquire: true
   conwymc.esquire:
     description: Gives access to all ConwyMC Esquire commands
+    children:
+      conwymc.togglerank: true
   conwymc.vip:
     description: Gives access to all ConwyMC VIP commands
 
@@ -83,9 +88,6 @@ permissions:
     default: true
   conwymc.togglerank:
     description: Allows donators and staff to use togglerank
-    children:
-      conwymc.esquire: true
-      conwymc.builder: true
 
 commands:
   # Chat
