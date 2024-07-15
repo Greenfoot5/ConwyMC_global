@@ -27,6 +27,7 @@ permissions:
     description: Gives access to all ConwyMC Developer commands
     children:
       conwymc.moderator: true
+      mythicmobs.admin: true
   conwymc.moderator:
     description: Gives access to all ConwyMC Moderator commands
     children:
