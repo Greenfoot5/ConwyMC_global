@@ -32,6 +32,7 @@ public class ItemCreator {
         itemMeta.addItemFlags(ItemFlag.HIDE_ITEM_SPECIFICS);
         itemMeta.addItemFlags(ItemFlag.HIDE_UNBREAKABLE);
         itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
+        itemMeta.addItemFlags(ItemFlag.HIDE_ARMOR_TRIM);
         itemMeta.setUnbreakable(true);
         itemMeta.displayName(name.decorationIfAbsent(TextDecoration.ITALIC, TextDecoration.State.FALSE));
         itemMeta.lore(Gui.removeItalics(lore));
