@@ -111,7 +111,7 @@ public class PlayerCosmetics {
         if (!isDonator)
             this.joinMessage = "{username} has joined the fight!";
         else
-            this.joinMessage = joinMessage;
+            this.joinMessage = "<hover:show_text:'<yellow>{username} has joined the fight!</yellow>'>" + joinMessage;
     }
 
     public Component getLeaveMessage(String username) {
@@ -139,7 +139,7 @@ public class PlayerCosmetics {
         if (!isDonator)
             this.leaveMessage = "{username} abandoned their post!";
         else
-            this.leaveMessage = leaveMessage;
+            this.leaveMessage = "<hover:show_text:'<yellow>{username} abandoned their post!</yellow>'>" + leaveMessage;
     }
 
     public static void checkTopCosmetics(PlayerData data, UUID uuid) {

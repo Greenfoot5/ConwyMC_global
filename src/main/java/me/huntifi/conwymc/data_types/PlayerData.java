@@ -265,6 +265,11 @@ public class PlayerData {
     }
 
     public void addCosmetic(Cosmetic cosmetic) {
+        for (Cosmetic owned : ownedCosmetics) {
+            if (owned.getName().equalsIgnoreCase(cosmetic.getName())) {
+                ConwyMC.plugin.getLogger().warning("Attempted to grant " + cosmetic.getName() + " but the player already had it!");
+            }
+        }
         ownedCosmetics.add(cosmetic);
     }
 
