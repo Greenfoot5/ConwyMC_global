@@ -1,7 +1,6 @@
 package me.huntifi.conwymc;
 
 import dev.dejvokep.boostedyaml.YamlDocument;
-import me.huntifi.conwymc.advancements.AdvancementController;
 import me.huntifi.conwymc.commands.CosmeticsCommand;
 import me.huntifi.conwymc.commands.chat.GlobalChatCommand;
 import me.huntifi.conwymc.commands.chat.MessageCommand;
@@ -77,7 +76,6 @@ public final class ConwyMC extends JavaPlugin {
         registerEvents();
         registerCommands();
         registerTimedTasks();
-        new AdvancementController();
 
         getLogger().info("Plugin has been enabled!");
     }

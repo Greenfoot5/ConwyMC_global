@@ -231,6 +231,7 @@ commands:
     usage: /unban <player>
     permission: conwymc.chatmod+
     permission-message: You are not permitted to use this command!
+    aliases: pardon
   Unmute:
     description: Unmute a muted player
     usage: /unmute <player>
@@ -246,7 +247,7 @@ commands:
   RankPoints:
     description: Manage a player's rank points
     usage: /rankpoints <player> <set | add | remove> <amount>
-    permission: conwymc.moderator
+    permission: conwymc.developer
     permission-message: You are not permitted to use this command!
   SetStaffRank:
     description: Set a staff rank for a player
