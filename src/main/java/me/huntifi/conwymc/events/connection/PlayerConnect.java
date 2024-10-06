@@ -14,6 +14,8 @@ import me.huntifi.conwymc.util.Messenger;
 import me.huntifi.conwymc.util.PunishmentTime;
 import me.huntifi.conwymc.util.RankPoints;
 import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.TextComponent;
+import net.kyori.adventure.text.format.TextColor;
 import org.bukkit.Bukkit;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
@@ -28,6 +30,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.util.Objects;
 import java.util.UUID;
 
 /**
@@ -153,8 +156,15 @@ public class PlayerConnect implements Listener {
      * @param data The player's data
      */
     private void setJoinMessage(PlayerJoinEvent event, PlayerData data) {
-        // Set the join message
-        event.joinMessage(data.getCosmetics().getJoinMessage(event.getPlayer().getName()));
+
+        TextComponent component = (TextComponent) data.getCosmetics().getJoinMessage(event.getPlayer().getName());
+            if (component.content().equals("null")) {
+                event.joinMessage(Messenger.mm.deserialize(event.getPlayer().getName() + " has joined the battle!").color(TextColor.color(255, 255, 85)));
+                return;
+            }
+            // Set the join message
+            event.joinMessage(data.getCosmetics().getJoinMessage(event.getPlayer().getName()));
+
     }
 
     /**

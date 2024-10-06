@@ -10,6 +10,8 @@ import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.UUID;
+
 /**
  * Manages custom messages
  */
@@ -55,7 +57,7 @@ public abstract class CustomMessageCommand implements CommandExecutor {
             return;
         }
 
-        setMessageData(ActiveData.getData(player.getUniqueId()), message);
+        setMessageData(ActiveData.getData(player.getUniqueId()), message, player.getUniqueId());
         if (message.isEmpty()) {
             Messenger.sendSuccess(String.format("Your %s message has been reset.", getMessageType()), player);
         } else {
@@ -69,7 +71,7 @@ public abstract class CustomMessageCommand implements CommandExecutor {
      * @param data The player's data
      * @param message The custom message
      */
-    protected abstract void setMessageData(PlayerData data, String message);
+    protected abstract void setMessageData(PlayerData data, String message, UUID uuid);
 
     /**
      * Get the message type of this command
