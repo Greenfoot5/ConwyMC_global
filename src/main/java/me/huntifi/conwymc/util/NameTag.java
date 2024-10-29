@@ -16,6 +16,8 @@ public class NameTag {
     public static Component convertRank(String rank) {
         switch (rank) {
             // Staff Ranks
+            case "designer":
+                return MiniMessage.miniMessage().deserialize("<b><gradient:#905ea9:#eaaded>Design</gradient></b> ");
             case "builder":
                 return MiniMessage.miniMessage().deserialize("<b><gradient:#80CED7:#007EA7>Builder</gradient></b> ");
             case "chatmod":

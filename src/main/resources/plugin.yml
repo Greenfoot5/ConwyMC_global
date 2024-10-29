@@ -41,6 +41,10 @@ permissions:
   conwymc.chatmod:
     description: Gives access to all ConwyMC Chatmod commands
     children:
+      conwymc.designer: true
+  conwymc.designer:
+    description: Gives access to all ConwyMC Designer commands
+    children:
       conwymc.builder: true
   conwymc.builder:
     description: Gives access to all ConwyMC Builder commands
@@ -180,7 +184,7 @@ commands:
     description: Talk in staff-chat
     usage: /s [message]
     aliases: s
-    permission: conwymc.chatmod
+    permission: conwymc.designer
     permission-message: You are not permitted to use this command!
 
   # Staff - Currencies
