@@ -234,7 +234,7 @@ public class Messenger {
     }
 
     public static void broadcastKillStreakBounty(String bountied, int kills, int total) {
-        Component msg = mm.deserialize("<gold>[⌖]</gold> " + bountied + " has reached a <aqua>"
+        Component msg = mm.deserialize("<gold>[⌖]</gold> <yellow>" + bountied + " has reached a <aqua>"
                 + kills + "</aqua> kill streak! Their bounty has increased to <gold>" + total + "</gold>!");
         ForwardingAudience audience = Bukkit.getServer();
         audience.sendMessage(msg);

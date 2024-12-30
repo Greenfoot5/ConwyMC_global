@@ -91,6 +91,12 @@ public class PlayerCosmetics {
         return Messenger.mm.deserialize(this.joinColour + message);
     }
 
+    public static Component getJoinMessage(String username, boolean isStatic) {
+        String message = "{username} has joined the fight!".replace("{username}", username);
+        return Messenger.mm.deserialize("<yellow>" + message);
+    }
+
+
     public void setJoinColour(String joinColour, PlayerData data) {
         if (joinColour == null || joinColour.isEmpty() || joinColour.equals("reset")) {
             this.joinColour = new Cosmetic(JOIN_COLOUR, "Default", "<yellow>");

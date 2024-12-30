@@ -99,7 +99,7 @@ public class PlayerConnect implements Listener {
 
         // Load the player's data
         PlayerData data = LoadData.load(uuid);
-        assert data != null;
+        //assert data != null;
 
         // Actively store data
         ActiveData.addPlayer(uuid, data);
@@ -153,8 +153,12 @@ public class PlayerConnect implements Listener {
      * @param data The player's data
      */
     private void setJoinMessage(PlayerJoinEvent event, PlayerData data) {
-        // Set the join message
-        event.joinMessage(data.getCosmetics().getJoinMessage(event.getPlayer().getName()));
+        if (data != null) {
+            // Set the join message
+            event.joinMessage(data.getCosmetics().getJoinMessage(event.getPlayer().getName()));
+        } else {
+            event.joinMessage(PlayerCosmetics.getJoinMessage(event.getPlayer().getName(), true));
+        }
     }
 
     /**
