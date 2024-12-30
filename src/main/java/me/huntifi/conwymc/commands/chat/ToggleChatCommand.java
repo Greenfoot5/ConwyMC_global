@@ -51,7 +51,7 @@ public abstract class ToggleChatCommand extends ChatCommand implements ChatRende
      * @param sender The sender of the message
      * @param message The message content to send
      */
-    private void sendMessage(CommandSender sender, String message) {
+    public void sendMessage(CommandSender sender, String message) {
         String content = Messenger.clean(message);
 
         // Get alternative versions of the message

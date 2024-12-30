@@ -1,5 +1,6 @@
 package me.huntifi.conwymc.util;
 
+import me.huntifi.conwymc.commands.staff.chat.StaffChatCommand;
 import net.kyori.adventure.audience.ForwardingAudience;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
@@ -349,5 +350,9 @@ public class Messenger {
         Component msg = mm.deserialize(message).color(DARK_GREEN);
         ForwardingAudience audience = Bukkit.getServer();
         audience.sendMessage(mm.deserialize("<gold>[+]</gold> ").append(msg));
+    }
+
+    public static void sendSupportRequest(String message, @NotNull CommandSender requester) {
+        new StaffChatCommand().sendMessage(requester, message);
     }
 }

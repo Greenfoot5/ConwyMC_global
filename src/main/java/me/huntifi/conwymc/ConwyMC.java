@@ -32,6 +32,7 @@ import me.huntifi.conwymc.commands.staff.punishments.WarnCommand;
 import me.huntifi.conwymc.commands.staff.rank.RankPointsCommand;
 import me.huntifi.conwymc.commands.staff.rank.SetStaffRankCommand;
 import me.huntifi.conwymc.commands.staff.rank.ToggleRankCommand;
+import me.huntifi.conwymc.commands.staff.support.SupportCommand;
 import me.huntifi.conwymc.database.KeepAlive;
 import me.huntifi.conwymc.database.MySQL;
 import me.huntifi.conwymc.database.StoreData;
@@ -142,6 +143,9 @@ public final class ConwyMC extends JavaPlugin {
         Objects.requireNonNull(getCommand("GlobalChat")).setExecutor(new GlobalChatCommand());
         Objects.requireNonNull(getCommand("Message")).setExecutor(new MessageCommand());
         Objects.requireNonNull(getCommand("Reply")).setExecutor(new ReplyCommand());
+
+        // Support
+        Objects.requireNonNull(getCommand("Support")).setExecutor(new SupportCommand());
 
         // Donator
         Objects.requireNonNull(getCommand("JoinMessage")).setExecutor(new JoinMessageCommand());

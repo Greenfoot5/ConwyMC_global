@@ -109,6 +109,14 @@ commands:
     usage: /r <message>
     aliases: r
 
+  # Support
+  Support:
+    description: Request help from the staff team for and issue or report a user.
+    usage: /support <message>
+    aliases:
+      - report
+      - helpop
+
   # Rank
   ToggleRank:
     description: Toggle display of your staff/donator rank(s)
