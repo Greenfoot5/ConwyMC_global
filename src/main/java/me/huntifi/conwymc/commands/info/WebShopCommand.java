@@ -23,7 +23,7 @@ public class WebShopCommand implements CommandExecutor {
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command cmd, @NotNull String label, @NotNull String[] args) {
         Component c = Messenger.mm.deserialize("<green>Support the server here: </green>" +
-                "<color:#13C3FF><click:open_url:https://ko-fi.com/conwymc>☕ https://ko-fi.com/conwymc ☕</click></color>");
+                "<color:#13C3FF><click:open_url:https://conwystore.alchemix.dev>☕ https://conwystore.alchemix.dev ☕</click></color>");
         Messenger.send(c, sender);
 
         return true;
