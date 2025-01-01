@@ -73,6 +73,7 @@ public class ToggleRankCommand implements TabExecutor {
         switch (args[0]) {
             case "none":
                 data.setDisplayRank("");
+                data.setSetting(((Player) sender).getUniqueId(), "displayRank", "none");
                 break;
             case "staff":
                 if (data.getStaffRank() == null || data.getStaffRank().isEmpty()) {
@@ -80,6 +81,7 @@ public class ToggleRankCommand implements TabExecutor {
                     return true;
                 }
                 data.setDisplayRank(data.getStaffRank());
+                data.setSetting(((Player) sender).getUniqueId(), "displayRank", "staff");
                 break;
             case "rank":
             case "donator":
@@ -88,6 +90,7 @@ public class ToggleRankCommand implements TabExecutor {
                     return true;
                 }
                 data.setDisplayRank(data.getRank());
+                data.setSetting(((Player) sender).getUniqueId(), "displayRank", "donator");
                 break;
             case "top":
             case "toprank":
@@ -97,6 +100,7 @@ public class ToggleRankCommand implements TabExecutor {
                     return true;
                 }
                 data.setDisplayRank(data.getTopRank());
+                data.setSetting(((Player) sender).getUniqueId(), "displayRank", "top");
                 break;
             default:
                 Messenger.sendError("Invalid display type. Possible values: <red>[none, staff, donator, top]", sender);

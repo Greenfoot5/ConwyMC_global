@@ -158,11 +158,13 @@ public class PlayerData {
             return NameTag.convertRank(displayRank);
         }
 
-        if (staffRank != null && !staffRank.isEmpty())
+        if (staffRank != null && !staffRank.isEmpty() && Objects.equals(settings.get("displayRank"), "staff"))
             return NameTag.convertRank(staffRank);
-        if (topRank != null && !topRank.isEmpty())
+        if (topRank != null && !topRank.isEmpty() && Objects.equals(settings.get("displayRank"), "top"))
             return NameTag.convertRank(topRank);
-        return NameTag.convertRank(rank);
+        if (Objects.equals(settings.get("displayRank"), "rank"))
+            return NameTag.convertRank(rank);
+        return NameTag.convertRank("nothing");
     }
 
     /**
@@ -197,7 +199,7 @@ public class PlayerData {
      * @param rank The rank to set
      */
     public void setRank(String rank) {
-        if (Objects.equals(displayRank, this.rank)) {
+        if (Objects.equals(displayRank, this.rank) && this.rank != null) {
             displayRank = rank;
         }
         this.rank = rank;
