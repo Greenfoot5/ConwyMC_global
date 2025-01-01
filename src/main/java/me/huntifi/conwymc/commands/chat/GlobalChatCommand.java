@@ -8,6 +8,7 @@ import me.huntifi.conwymc.util.Messenger;
 import net.kyori.adventure.audience.Audience;
 import net.kyori.adventure.audience.ForwardingAudience;
 import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -78,7 +79,7 @@ public class GlobalChatCommand extends ToggleChatCommand {
         String color = getChatColor(source);
 
         Component content = Messenger.mm.deserialize(color + Messenger.clean(message));
-        return sourceDisplayName.append(Component.text(": "))
+        return sourceDisplayName.append(Component.text(": ", NamedTextColor.WHITE))
                 .append(content);
     }
 }

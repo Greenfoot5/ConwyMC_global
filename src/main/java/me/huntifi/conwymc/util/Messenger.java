@@ -2,6 +2,8 @@ package me.huntifi.conwymc.util;
 
 import me.huntifi.conwymc.commands.staff.chat.StaffChatCommand;
 import net.kyori.adventure.audience.ForwardingAudience;
+import net.kyori.adventure.key.Key;
+import net.kyori.adventure.sound.Sound;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
 import net.kyori.adventure.text.minimessage.MiniMessage;
@@ -353,6 +355,9 @@ public class Messenger {
     }
 
     public static void sendSupportRequest(String message, @NotNull CommandSender requester) {
-        new StaffChatCommand().sendMessage(requester, message);
+        Component msg = mm.deserialize(": <red>" + message + "</red>");
+        Component name = requester instanceof Player ? ((Player)requester).displayName() : requester.name();
+        new StaffChatCommand().getReceivers(requester).sendMessage(mm.deserialize("[<red><b>SUPPORT</b></red>] ").append(name).append(msg));
+        new StaffChatCommand().getReceivers(requester).playSound(Sound.sound(Key.key(Key.MINECRAFT_NAMESPACE, "item.goat_horn.sound.4"), Sound.Source.PLAYER, 20, 1.75f));
     }
 }
