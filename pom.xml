@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.github.AdminHuntifi</groupId>
+    <groupId>com.github.Greenfoot5</groupId>
     <artifactId>conwymc-global</artifactId>
     <version>1.0.0</version>
     <packaging>jar</packaging>
@@ -23,7 +23,7 @@
         <repository>
             <id>github</id>
             <name>GitHub Packages</name>
-            <url>https://maven.pkg.github.com/AdminHuntifi/ConwyMC-global</url>
+            <url>https://maven.pkg.github.com/Greenfoot5/ConwyMC-global</url>
         </repository>
     </distributionManagement>
 
@@ -38,7 +38,7 @@
                     <relocations>
                         <relocation>
                             <pattern>dev.dejvokep.boostedyaml</pattern>
-                            <shadedPattern>com.github.Huntif.CastleSiege.yaml</shadedPattern>
+                            <shadedPattern>com.github.Greenfoot5.CastleSiege.yaml</shadedPattern>
                         </relocation>
                     </relocations>
                     <artifactSet>

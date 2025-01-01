@@ -1,6 +1,6 @@
 name: ConwyMC
 version: '${project.version}'
-main: me.huntifi.conwymc.ConwyMC
+main: me.greenfoot5.conwymc.ConwyMC
 api-version: 1.21
 prefix: ConwyMC
 depend:
