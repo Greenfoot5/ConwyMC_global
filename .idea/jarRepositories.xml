@@ -12,6 +12,11 @@
       <option name="url" value="https://jitpack.io" />
     </remote-repository>
     <remote-repository>
+      <option name="id" value="github-castlesiege" />
+      <option name="name" value="github-castlesiege" />
+      <option name="url" value="https://maven.pkg.github.com/Greenfoot5/ConwyMC_CastleSiege" />
+    </remote-repository>
+    <remote-repository>
       <option name="id" value="papermc-repo" />
       <option name="name" value="papermc-repo" />
       <option name="url" value="https://repo.papermc.io/repository/maven-public/" />
@@ -30,6 +35,11 @@
       <option name="id" value="github-castlesiege" />
       <option name="name" value="github-castlesiege" />
       <option name="url" value="https://maven.pkg.github.com/AdminHuntifi/ConwyMC_CastleSiege" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="github-global" />
+      <option name="name" value="github-global" />
+      <option name="url" value="https://maven.pkg.github.com/Greenfoot5/ConwyMC-global" />
     </remote-repository>
     <remote-repository>
       <option name="id" value="fren_gor" />

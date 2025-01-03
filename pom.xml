@@ -6,7 +6,7 @@
 
     <groupId>com.github.Greenfoot5</groupId>
     <artifactId>conwymc-global</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.3</version>
     <packaging>jar</packaging>
 
     <name>ConwyMC_Global</name>
@@ -106,7 +106,7 @@
         <dependency>
             <groupId>io.papermc.paper</groupId>
             <artifactId>paper-api</artifactId>
-            <version>1.20.4-R0.1-SNAPSHOT</version>
+            <version>1.21.4-R0.1-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
@@ -123,7 +123,7 @@
         <dependency>
             <groupId>com.frengor</groupId>
             <artifactId>ultimateadvancementapi</artifactId>
-            <version>2.2.8</version>
+            <version>2.4.0</version>
             <scope>provided</scope>
         </dependency>
     </dependencies>
