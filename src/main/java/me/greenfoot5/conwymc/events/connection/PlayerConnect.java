@@ -157,7 +157,7 @@ public class PlayerConnect implements Listener {
             // Set the join message
             event.joinMessage(data.getCosmetics().getJoinMessage(event.getPlayer().getName()));
         } else {
-            event.joinMessage(PlayerCosmetics.getJoinMessage(event.getPlayer().getName(), true));
+            event.joinMessage(PlayerCosmetics.getStaticJoinMessage(event.getPlayer().getName()));
         }
     }
 

@@ -91,7 +91,7 @@ public class PlayerCosmetics {
         return Messenger.mm.deserialize(this.joinColour + message);
     }
 
-    public static Component getJoinMessage(String username, boolean isStatic) {
+    public static Component getStaticJoinMessage(String username) {
         String message = "{username} has joined the fight!".replace("{username}", username);
         return Messenger.mm.deserialize("<yellow>" + message);
     }
@@ -114,7 +114,7 @@ public class PlayerCosmetics {
     }
 
     public void setJoinMessage(String joinMessage, boolean isDonator) {
-        if (!isDonator)
+        if (!isDonator || joinMessage == null || joinMessage.isEmpty())
             this.joinMessage = "{username} has joined the fight!";
         else
             this.joinMessage = "<hover:show_text:'<yellow>{username} has joined the fight!</yellow>'>" + joinMessage;
