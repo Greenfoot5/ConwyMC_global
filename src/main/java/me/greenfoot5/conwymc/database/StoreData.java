@@ -60,12 +60,12 @@ public class StoreData {
      * This update is only done on the "player_rank" table and is always executed asynchronously.
      * @param uuid The unique ID of the player
      */
-    public static void updateName(UUID uuid) {
+    public static void updateName(UUID uuid, String name) {
         Bukkit.getScheduler().runTaskAsynchronously(ConwyMC.plugin, () -> {
             try (PreparedStatement ps = ConwyMC.SQL.getConnection().prepareStatement(
                     "UPDATE player_rank SET username = ? WHERE UUID = ?"
             )) {
-                ps.setString(1, Objects.requireNonNull(Bukkit.getPlayer(uuid)).getName());
+                ps.setString(1, name);
                 ps.setString(2, uuid.toString());
                 ps.executeUpdate();
             } catch (SQLException e) {

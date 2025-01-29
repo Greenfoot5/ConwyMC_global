@@ -47,7 +47,7 @@ public class PlayerConnect implements Listener {
 
         setJoinMessage(event, data);
         setPermissions(uuid, data);
-        StoreData.updateName(uuid);
+        StoreData.updateName(uuid, player.getName());
         Bukkit.getPluginManager().callEvent(new UpdateNameTagEvent(player));
 
         for (Player ignored : Bukkit.getOnlinePlayers()) {
@@ -61,7 +61,8 @@ public class PlayerConnect implements Listener {
             PlayerCosmetics.checkTopCosmetics(data, uuid);
             PlayerCosmetics.checkMonthlyCosmetics(data, uuid);
             data.refreshCosmetics();
-            Bukkit.getScheduler().runTask(ConwyMC.plugin, () -> Bukkit.getPluginManager().callEvent(new UpdateNameTagEvent(player)));
+            if (event.getPlayer().isOnline())
+                Bukkit.getScheduler().runTask(ConwyMC.plugin, () -> Bukkit.getPluginManager().callEvent(new UpdateNameTagEvent(player)));
         });
     }
 
@@ -167,10 +168,8 @@ public class PlayerConnect implements Listener {
      * @param data The player's data
      */
     private void setPermissions(UUID uuid, PlayerData data) {
-        Bukkit.getScheduler().runTaskAsynchronously(ConwyMC.plugin, () -> {
-            Permissions.addPlayer(uuid);
-            Permissions.setStaffPermission(uuid, data.getStaffRank());
-            Permissions.setDonatorPermission(uuid, data.getRank());
-        });
+        Permissions.addPlayer(uuid);
+        Permissions.setStaffPermission(uuid, data.getStaffRank());
+        Permissions.setDonatorPermission(uuid, data.getRank());
     }
 }
