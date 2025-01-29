@@ -1,9 +1,0 @@
-name: ConwyMC_Global
-version: '${project.version}'
-main: me.huntifi.conwymc.Main
-api-version: 1.16
-prefix: ConwyMC
-load: STARTUP
-depend: [ NametagEdit ]
-authors: [ Huntifi, Greenfoot5, kasteelvuur ]
-description: The global plugin for the ConwyMC server

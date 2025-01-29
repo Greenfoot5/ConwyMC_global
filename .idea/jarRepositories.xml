@@ -7,9 +7,14 @@
       <option name="url" value="https://repo.maven.apache.org/maven2" />
     </remote-repository>
     <remote-repository>
-      <option name="id" value="sonatype" />
-      <option name="name" value="sonatype" />
-      <option name="url" value="https://oss.sonatype.org/content/groups/public/" />
+      <option name="id" value="jitpack.io" />
+      <option name="name" value="jitpack.io" />
+      <option name="url" value="https://jitpack.io" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="github-castlesiege" />
+      <option name="name" value="github-castlesiege" />
+      <option name="url" value="https://maven.pkg.github.com/Greenfoot5/ConwyMC_CastleSiege" />
     </remote-repository>
     <remote-repository>
       <option name="id" value="papermc-repo" />
@@ -22,9 +27,54 @@
       <option name="url" value="https://repo1.maven.org/maven2" />
     </remote-repository>
     <remote-repository>
+      <option name="id" value="central" />
+      <option name="name" value="central" />
+      <option name="url" value="https://repo1.maven.org/maven2" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="github-castlesiege" />
+      <option name="name" value="github-castlesiege" />
+      <option name="url" value="https://maven.pkg.github.com/AdminHuntifi/ConwyMC_CastleSiege" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="github-global" />
+      <option name="name" value="github-global" />
+      <option name="url" value="https://maven.pkg.github.com/Greenfoot5/ConwyMC-global" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="fren_gor" />
+      <option name="name" value="fren_gor" />
+      <option name="url" value="https://nexus.frengor.com/repository/public/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="spigot-repo" />
+      <option name="name" value="spigot-repo" />
+      <option name="url" value="https://hub.spigotmc.org/nexus/content/repositories/snapshots/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="upstream" />
+      <option name="name" value="upstream" />
+      <option name="url" value="https://ci.nametagedit.com/plugin/repository/everything/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="dmulloy2-repo" />
+      <option name="name" value="dmulloy2-repo" />
+      <option name="url" value="https://repo.dmulloy2.net/repository/public/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="github-global" />
+      <option name="name" value="github-global" />
+      <option name="url" value="https://maven.pkg.github.com/AdminHuntifi/ConwyMC-global" />
+    </remote-repository>
+    <remote-repository>
       <option name="id" value="jboss.community" />
       <option name="name" value="JBoss Community repository" />
       <option name="url" value="https://repository.jboss.org/nexus/content/repositories/public/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="github" />
+      <option name="name" value="github" />
+      <option name="url" value="https://maven.pkg.github.com/AdminHuntifi/ConwyMC-global" />
     </remote-repository>
   </component>
 </project>
