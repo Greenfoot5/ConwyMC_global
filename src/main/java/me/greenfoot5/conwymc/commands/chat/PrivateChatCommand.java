@@ -3,6 +3,8 @@ package me.greenfoot5.conwymc.commands.chat;
 import me.greenfoot5.conwymc.ConwyMC;
 import me.greenfoot5.conwymc.commands.staff.punishments.MuteCommand;
 import me.greenfoot5.conwymc.util.Messenger;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -62,10 +64,20 @@ public abstract class PrivateChatCommand extends ChatCommand {
      */
     private void sendMessage(CommandSender sender, CommandSender target, String message) {
         message = Messenger.clean(message);
-        Messenger.send(String.format("<gold>To %s: <dark_aqua>%s",
-                getName(target), message), sender);
-        Messenger.send(String.format("<gold>From %s: <dark_aqua>%s",
-                getName(sender), message), target);
+        Messenger.send(Component.text("To ", NamedTextColor.GOLD)
+                .append(getName(target))
+                .append(Component.text(": "))
+                .append(Messenger.mm.deserialize(message).color(NamedTextColor.DARK_AQUA)),
+                sender);
+
+        Messenger.send(Component.text("From ", NamedTextColor.GOLD)
+                        .append(getName(sender))
+                        .append(Component.text(": "))
+                        .append(Messenger.mm.deserialize(message).color(NamedTextColor.DARK_AQUA)),
+                target);
+
+        // Log the message for moderation
+        ConwyMC.plugin.getLogger().info("[PRIVATE] From " + sender.getName() + " to " + target.getName() + ": " + message);
 
         lastSender.put(target, sender);
         if (target instanceof Player)
