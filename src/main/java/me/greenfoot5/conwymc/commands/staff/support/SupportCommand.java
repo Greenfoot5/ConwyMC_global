@@ -27,6 +27,8 @@ public class SupportCommand implements CommandExecutor {
         Messenger.sendSupportRequest(message, sender);
         Bukkit.getPluginManager().callEvent(supportEvent);
 
+        Messenger.sendSuccess("Your message has been sent to staff!", sender);
+
         return true;
     }
 }

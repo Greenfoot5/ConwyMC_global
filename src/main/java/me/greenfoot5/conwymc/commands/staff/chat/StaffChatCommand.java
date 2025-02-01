@@ -8,7 +8,6 @@ import me.greenfoot5.conwymc.database.ActiveData;
 import me.greenfoot5.conwymc.util.Messenger;
 import me.greenfoot5.conwymc.util.NameTag;
 import net.kyori.adventure.audience.Audience;
-import net.kyori.adventure.audience.ForwardingAudience;
 import net.kyori.adventure.identity.Identity;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
@@ -49,9 +48,11 @@ public class StaffChatCommand extends ToggleChatCommand {
     }
 
     @Override
-    public ForwardingAudience getReceivers(CommandSender sender) {
-        ForwardingAudience receivers = Bukkit.getServer();
-        receivers.filterAudience(v -> (v.get(Identity.UUID).isEmpty() || ((Player)v).hasPermission("conwymc.chatmod")));
+    public Audience getReceivers(CommandSender sender) {
+        Audience receivers = Bukkit.getServer();
+        receivers = receivers.filterAudience(v -> (v.get(Identity.UUID).isEmpty() || ((Player)v).hasPermission("conwymc.chatmod")));
+
+
         return receivers;
     }
 

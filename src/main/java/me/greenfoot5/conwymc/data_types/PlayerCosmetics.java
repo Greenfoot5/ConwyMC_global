@@ -142,7 +142,7 @@ public class PlayerCosmetics {
     }
 
     public void setLeaveMessage(String leaveMessage, boolean isDonator) {
-        if (!isDonator)
+        if (!isDonator || leaveMessage == null || leaveMessage.isEmpty())
             this.leaveMessage = "{username} abandoned their post!";
         else
             this.leaveMessage = "<hover:show_text:'<yellow>{username} abandoned their post!</yellow>'>" + leaveMessage;
