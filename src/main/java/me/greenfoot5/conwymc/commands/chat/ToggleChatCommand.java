@@ -4,7 +4,7 @@ import io.papermc.paper.chat.ChatRenderer;
 import me.greenfoot5.conwymc.ConwyMC;
 import me.greenfoot5.conwymc.commands.staff.punishments.MuteCommand;
 import me.greenfoot5.conwymc.util.Messenger;
-import net.kyori.adventure.audience.ForwardingAudience;
+import net.kyori.adventure.audience.Audience;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
@@ -81,5 +81,5 @@ public abstract class ToggleChatCommand extends ChatCommand implements ChatRende
      * @param sender The sender of the message
      * @return The receivers of the message
      */
-    protected abstract ForwardingAudience getReceivers(CommandSender sender);
+    protected abstract Audience getReceivers(CommandSender sender);
 }

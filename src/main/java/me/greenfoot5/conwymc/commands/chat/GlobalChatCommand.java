@@ -6,7 +6,6 @@ import me.greenfoot5.conwymc.data_types.PlayerData;
 import me.greenfoot5.conwymc.database.ActiveData;
 import me.greenfoot5.conwymc.util.Messenger;
 import net.kyori.adventure.audience.Audience;
-import net.kyori.adventure.audience.ForwardingAudience;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.Bukkit;
@@ -71,7 +70,7 @@ public class GlobalChatCommand extends ToggleChatCommand {
     }
 
     @Override
-    protected ForwardingAudience getReceivers(CommandSender sender) {
+    protected Audience getReceivers(CommandSender sender) {
         return Bukkit.getServer();
     }
 
