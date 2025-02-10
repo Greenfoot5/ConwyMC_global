@@ -63,13 +63,13 @@ public class RankPoints {
      * @return The corresponding non-pretty donator rank
      */
     public static String getRank(double rp) {
-        if (rp > 140) {
+        if (rp >= 140) {
             return "duke";
-        } else if (rp > 100) {
+        } else if (rp >= 100) {
             return "count";
-        } else if (rp > 60) {
+        } else if (rp >= 60) {
             return "baron";
-        } else if (rp > 20) {
+        } else if (rp >= 20) {
             return "noble";
         } else if (rp >= 1) {
             return "esquire";
