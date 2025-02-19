@@ -152,11 +152,30 @@ public class Messenger {
     }
 
     /**
+     * Sends a message about a secret to a user
+     * @param message The component to send
+     * @param receiver Who to send the message to
+     */
+    public static void sendSecret(Component message, CommandSender receiver) {
+        receiver.sendMessage(mm.deserialize("<gold>[\uD83D\uDDDD️]</gold> ").append(message));
+    }
+
+    /**
      * Sends an MM string with secret formatting to the whole server
      * @param message The MM string to broadcast
      */
     public static void broadcastSecret(String message) {
         Component msg = mm.deserialize(message).color(YELLOW);
+        ForwardingAudience audience = Bukkit.getServer();
+        audience.sendMessage(mm.deserialize("<gold>[\uD83D\uDDDD]</gold> ").append(msg));
+    }
+
+    /**
+     * Sends a component with secret formatting to the whole server
+     * @param message The component to broadcast
+     */
+    public static void broadcastSecret(Component message) {
+        Component msg = message.color(YELLOW);
         ForwardingAudience audience = Bukkit.getServer();
         audience.sendMessage(mm.deserialize("<gold>[\uD83D\uDDDD]</gold> ").append(msg));
     }
