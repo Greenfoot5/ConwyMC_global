@@ -84,7 +84,7 @@ public class RankPointsCommand implements CommandExecutor {
     private void setRankPoints(CommandSender sender, String name, double rp) {
         StoreData.updateRank(name, rp);
         Bukkit.getScheduler().runTaskLater(ConwyMC.plugin, () -> updateOnline(name, rp), 400);
-        Messenger.sendSuccess(String.format("%s now has <green>%f</green> rank points.",
+        Messenger.sendSuccess(String.format("%s now has <green>%.0f</green> rank points.",
                 name, rp), sender);
     }
 
