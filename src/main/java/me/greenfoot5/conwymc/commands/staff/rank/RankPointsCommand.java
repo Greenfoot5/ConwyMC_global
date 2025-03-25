@@ -9,6 +9,7 @@ import me.greenfoot5.conwymc.database.StoreData;
 import me.greenfoot5.conwymc.events.nametag.UpdateNameTagEvent;
 import me.greenfoot5.conwymc.util.Messenger;
 import me.greenfoot5.conwymc.util.RankPoints;
+import me.greenfoot5.conwymc.util.RankPoints.RankDisplay;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -106,20 +107,64 @@ public class RankPointsCommand implements CommandExecutor {
         if (data == null) {
             return;
         }
+
+        // Update the player's rp
         data.setRankPoints(rp);
 
+        // Get old ranks
+        String oldTop = data.getTopRank();
+        String oldRank = data.getRank();
+
         // Get the player's top donator rank
-        String rank = "";
+        String topRank = "";
         if (rp > 0) {
-            rank = RankPoints.getTopRank(uuid);
+            topRank = RankPoints.getTopRank(uuid);
         }
-        data.setTopRank(rank);
+        data.setTopRank(topRank);
 
         // Apply the player's rank change\
-        rank = RankPoints.getRank(rp);
+        String rank = RankPoints.getRank(rp);
         data.setRank(rank);
 
         Permissions.setDonatorPermission(uuid, rank);
+
+        String toggleRankCommand = "<yellow><hover:show_text:Click to type command><click:suggest_command:/togglerank>/togglerank</click></hover></yellow>";
+
+        switch (data.getRankDisplay()) {
+            case NONE:
+                if (oldTop != null && oldTop.isEmpty() && !topRank.isEmpty()) {
+                    ToggleRankCommand.toggleRank(RankDisplay.TOP_DONATOR, data, player);
+                    Messenger.sendSuccess("You've reached the top 10 donators and have gained a top donator rank! " +
+                            "It has been automatically equipped. You can change this in " + toggleRankCommand, player);
+                    break;
+                }
+                if (oldRank != null && oldRank.isEmpty() && !rank.isEmpty()) {
+                    ToggleRankCommand.toggleRank(RankDisplay.DONATOR, data, player);
+                    Messenger.sendSuccess("You've donated for the first time and gained a donator rank! " +
+                            "It has been automatically equipped. You can change this in " + toggleRankCommand, player);
+                    break;
+                }
+                break;
+            case TOP_DONATOR:
+                if (topRank.isEmpty() && !rank.isEmpty()) {
+                    ToggleRankCommand.toggleRank(RankDisplay.DONATOR, data, player);
+                    Messenger.sendSuccess("You've lost your top donator rank! " +
+                            "Your donator rank has been equipped. You can change this in " + toggleRankCommand, player);
+                    break;
+                }
+                if (topRank.isEmpty()) {
+                    ToggleRankCommand.toggleRank(RankDisplay.NONE, data, player);
+                    break;
+                }
+            case DONATOR:
+                if (oldTop != null && oldTop.isEmpty() && !topRank.isEmpty()) {
+                    ToggleRankCommand.toggleRank(RankDisplay.TOP_DONATOR, data, player);
+                    Messenger.sendSuccess("You've reached the top 10 donators and have gained a top donator rank! " +
+                            "It has been automatically equipped. You can change this in " + toggleRankCommand, player);
+                    break;
+                }
+        }
+
         Bukkit.getPluginManager().callEvent(new UpdateNameTagEvent(player, data));
     }
 }
