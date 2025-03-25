@@ -4,6 +4,7 @@ import me.greenfoot5.conwymc.ConwyMC;
 import me.greenfoot5.conwymc.commands.chat.GlobalChatCommand;
 import me.greenfoot5.conwymc.database.StoreData;
 import me.greenfoot5.conwymc.util.NameTag;
+import me.greenfoot5.conwymc.util.RankPoints.RankDisplay;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
 
@@ -46,7 +47,7 @@ public class PlayerData {
     private String chatMode = GlobalChatCommand.CHAT_MODE;
 
     /** Whether the player's staff rank is hidden */
-    private String displayRank = null;
+    private RankDisplay displayRank = RankDisplay.NONE;
 
     /** The player's settings */
     private final HashMap<String, String> settings;
@@ -155,7 +156,7 @@ public class PlayerData {
      */
     public Component displayRank() {
         if (displayRank != null) {
-            return NameTag.convertRank(displayRank);
+            return NameTag.convertRank(getDisplayRank());
         }
 
         if (staffRank != null && !staffRank.isEmpty() && Objects.equals(settings.get("displayRank"), "staff"))
@@ -173,7 +174,16 @@ public class PlayerData {
      */
     public String getDisplayRank() {
         if (displayRank != null) {
-            return displayRank;
+            switch (displayRank) {
+                case NONE:
+                    return "";
+                case DONATOR:
+                    return rank;
+                case TOP_DONATOR:
+                    return topRank;
+                case STAFF:
+                    return staffRank;
+            }
         }
 
         if (staffRank != null && !staffRank.isEmpty() && Objects.equals(settings.get("displayRank"), "staff"))
@@ -184,6 +194,25 @@ public class PlayerData {
             return rank;
         return "";
     }
+
+    /**
+     * Get the player's display rank setting
+     * @return RankDisplay enum representing the setting
+     */
+    public RankDisplay getRankDisplay() {
+        if (displayRank != null) {
+            return displayRank;
+        }
+
+        if (staffRank != null && !staffRank.isEmpty() && Objects.equals(settings.get("displayRank"), "staff"))
+            return RankDisplay.STAFF;
+        if (topRank != null && !topRank.isEmpty() && Objects.equals(settings.get("displayRank"), "top"))
+            return RankDisplay.TOP_DONATOR;
+        if (Objects.equals(settings.get("displayRank"), "donator"))
+            return RankDisplay.DONATOR;
+        return RankDisplay.NONE;
+    }
+
 
     /**
      * Get the player's staff rank.
@@ -198,8 +227,8 @@ public class PlayerData {
      * @param staffRank The rank to set
      */
     public void setStaffRank(String staffRank) {
-        if (Objects.equals(staffRank, this.rank)) {
-            displayRank = rank;
+        if (staffRank.isEmpty() && displayRank == RankDisplay.NONE) {
+            setDisplayRank(RankDisplay.TOP_DONATOR);
         }
         this.staffRank = staffRank;
     }
@@ -217,9 +246,6 @@ public class PlayerData {
      * @param rank The rank to set
      */
     public void setRank(String rank) {
-        if (Objects.equals(displayRank, this.rank) && this.rank != null) {
-            displayRank = rank;
-        }
         this.rank = rank;
     }
 
@@ -236,11 +262,6 @@ public class PlayerData {
      * @param rank The rank to set
      */
     public void setTopRank(String rank) {
-        if (Objects.equals(topRank, this.rank)) {
-            displayRank = rank;
-        } else if (rank.isEmpty()) {
-            displayRank = this.rank;
-        }
         this.topRank = rank;
     }
 
@@ -316,8 +337,19 @@ public class PlayerData {
     /**
      * Toggle whether the player's staff rank or donator rank is shown.
      */
-    public void setDisplayRank(String rank) {
-        displayRank = rank;
+    public boolean setDisplayRank(RankDisplay rankDisplay) {
+        if (rankDisplay.equals(RankDisplay.STAFF) && (this.staffRank == null || this.staffRank.isEmpty())) {
+            return false;
+        }
+        if (rankDisplay.equals(RankDisplay.TOP_DONATOR) && (this.topRank == null || this.topRank.isEmpty())) {
+            return false;
+        }
+        if (rankDisplay.equals(RankDisplay.DONATOR) && (this.rank == null || this.rank.isEmpty())) {
+            return false;
+        }
+
+        this.displayRank = rankDisplay;
+        return true;
     }
 
     /**
