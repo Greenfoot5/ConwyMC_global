@@ -153,7 +153,7 @@ public class PlayerData {
      * Get the player's display rank.
      * @return The pretty representation of the player's staff or donator rank
      */
-    public Component getDisplayRank() {
+    public Component displayRank() {
         if (displayRank != null) {
             return NameTag.convertRank(displayRank);
         }
@@ -165,6 +165,24 @@ public class PlayerData {
         if (Objects.equals(settings.get("displayRank"), "donator"))
             return NameTag.convertRank(rank);
         return NameTag.convertRank("nothing");
+    }
+
+    /**
+     * Get the player's display rank as a string
+     * @return The string representation of the player's staff or donator rank
+     */
+    public String getDisplayRank() {
+        if (displayRank != null) {
+            return displayRank;
+        }
+
+        if (staffRank != null && !staffRank.isEmpty() && Objects.equals(settings.get("displayRank"), "staff"))
+            return staffRank;
+        if (topRank != null && !topRank.isEmpty() && Objects.equals(settings.get("displayRank"), "top"))
+            return topRank;
+        if (Objects.equals(settings.get("displayRank"), "donator"))
+            return rank;
+        return "";
     }
 
     /**

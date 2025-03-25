@@ -29,7 +29,7 @@ public class UpdateNameTagEvent extends Event {
     public UpdateNameTagEvent(Player player) {
         this.player = player;
         title = ActiveData.getData(player.getUniqueId()).getCosmetics().getTitle();
-        displayRank = ActiveData.getData(player.getUniqueId()).getDisplayRank();
+        displayRank = ActiveData.getData(player.getUniqueId()).displayRank();
     }
 
     /**
@@ -52,7 +52,7 @@ public class UpdateNameTagEvent extends Event {
     public UpdateNameTagEvent(Player player, PlayerData data) {
         this.player = player;
         this.title = data.getCosmetics().getTitle();
-        this.displayRank = data.getDisplayRank();
+        this.displayRank = data.displayRank();
     }
 
     /**
