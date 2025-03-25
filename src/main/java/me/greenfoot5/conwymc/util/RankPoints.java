@@ -77,4 +77,11 @@ public class RankPoints {
             return "";
         }
     }
+
+    public enum RankDisplay {
+        NONE,
+        DONATOR,
+        TOP_DONATOR,
+        STAFF
+    }
 }
