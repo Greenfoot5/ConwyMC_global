@@ -70,45 +70,49 @@ public class ToggleRankCommand implements TabExecutor {
             return true;
         }
 
-        switch (args[0]) {
+        toggleRank(args[0], data, (Player) sender);
+        return true;
+    }
+
+    public static void toggleRank(String rank, PlayerData data, Player sender) {
+        switch (rank) {
             case "none":
                 data.setDisplayRank("");
-                data.setSetting(((Player) sender).getUniqueId(), "displayRank", "none");
+                data.setSetting(sender.getUniqueId(), "displayRank", "none");
                 break;
             case "staff":
                 if (data.getStaffRank() == null || data.getStaffRank().isEmpty()) {
                     Messenger.sendError("You do not have a staff rank!", sender);
-                    return true;
+                    return;
                 }
                 data.setDisplayRank(data.getStaffRank());
-                data.setSetting(((Player) sender).getUniqueId(), "displayRank", "staff");
+                data.setSetting(sender.getUniqueId(), "displayRank", "staff");
                 break;
             case "rank":
             case "donator":
                 if (data.getRank() == null || data.getRank().isEmpty()) {
                     Messenger.sendError("You do not have a donator rank!", sender);
-                    return true;
+                    return;
                 }
                 data.setDisplayRank(data.getRank());
-                data.setSetting(((Player) sender).getUniqueId(), "displayRank", "donator");
+                data.setSetting(sender.getUniqueId(), "displayRank", "donator");
                 break;
             case "top":
             case "toprank":
             case "topdonator":
                 if (data.getTopRank() == null || data.getTopRank().isEmpty()) {
                     Messenger.sendError("You do not have a top donator rank!", sender);
-                    return true;
+                    return;
                 }
                 data.setDisplayRank(data.getTopRank());
-                data.setSetting(((Player) sender).getUniqueId(), "displayRank", "top");
+                data.setSetting(sender.getUniqueId(), "displayRank", "top");
                 break;
             default:
                 Messenger.sendError("Invalid display type. Possible values: <red>[none, staff, donator, top]", sender);
-                return true;
+                return;
         }
 
-        Bukkit.getPluginManager().callEvent(new UpdateNameTagEvent(player, data));
-        return true;
+        Bukkit.getPluginManager().callEvent(new UpdateNameTagEvent(sender, data));
     }
 
     /**
