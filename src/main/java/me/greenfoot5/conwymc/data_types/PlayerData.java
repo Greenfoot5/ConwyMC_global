@@ -162,7 +162,7 @@ public class PlayerData {
             return NameTag.convertRank(staffRank);
         if (topRank != null && !topRank.isEmpty() && Objects.equals(settings.get("displayRank"), "top"))
             return NameTag.convertRank(topRank);
-        if (Objects.equals(settings.get("displayRank"), "rank"))
+        if (Objects.equals(settings.get("displayRank"), "donator"))
             return NameTag.convertRank(rank);
         return NameTag.convertRank("nothing");
     }
