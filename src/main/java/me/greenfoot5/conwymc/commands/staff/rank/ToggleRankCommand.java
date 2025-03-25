@@ -6,6 +6,7 @@ import me.greenfoot5.conwymc.events.nametag.UpdateNameTagEvent;
 import me.greenfoot5.conwymc.gui.Gui;
 import me.greenfoot5.conwymc.util.Messenger;
 import me.greenfoot5.conwymc.util.NameTag;
+import me.greenfoot5.conwymc.util.RankPoints.RankDisplay;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.Bukkit;
@@ -70,41 +71,53 @@ public class ToggleRankCommand implements TabExecutor {
             return true;
         }
 
-        toggleRank(args[0], data, (Player) sender);
-        return true;
-    }
-
-    public static void toggleRank(String rank, PlayerData data, Player sender) {
-        switch (rank) {
-            case "none":
-                data.setDisplayRank("");
-                data.setSetting(sender.getUniqueId(), "displayRank", "none");
-                break;
+        RankDisplay rank;
+        switch (args[0]) {
             case "staff":
-                if (data.getStaffRank() == null || data.getStaffRank().isEmpty()) {
-                    Messenger.sendError("You do not have a staff rank!", sender);
-                    return;
-                }
-                data.setDisplayRank(data.getStaffRank());
-                data.setSetting(sender.getUniqueId(), "displayRank", "staff");
+                rank = RankDisplay.STAFF;
                 break;
             case "rank":
             case "donator":
-                if (data.getRank() == null || data.getRank().isEmpty()) {
-                    Messenger.sendError("You do not have a donator rank!", sender);
-                    return;
-                }
-                data.setDisplayRank(data.getRank());
-                data.setSetting(sender.getUniqueId(), "displayRank", "donator");
+                rank = RankDisplay.DONATOR;
                 break;
             case "top":
             case "toprank":
             case "topdonator":
-                if (data.getTopRank() == null || data.getTopRank().isEmpty()) {
+                rank = RankDisplay.TOP_DONATOR;
+                break;
+            default:
+                rank = RankDisplay.NONE;
+        }
+
+        toggleRank(rank, data, (Player) sender);
+        return true;
+    }
+
+    public static void toggleRank(RankDisplay rank, PlayerData data, Player sender) {
+        switch (rank) {
+            case NONE:
+                data.setDisplayRank(RankDisplay.NONE);
+                data.setSetting(sender.getUniqueId(), "displayRank", "none");
+                break;
+            case STAFF:
+                if (data.setDisplayRank(RankDisplay.STAFF)) {
+                    Messenger.sendError("You do not have a staff rank!", sender);
+                    return;
+                }
+                data.setSetting(sender.getUniqueId(), "displayRank", "staff");
+                break;
+            case DONATOR:
+                if (data.setDisplayRank(RankDisplay.DONATOR)) {
+                    Messenger.sendError("You do not have a donator rank!", sender);
+                    return;
+                }
+                data.setSetting(sender.getUniqueId(), "displayRank", "donator");
+                break;
+            case TOP_DONATOR:
+                if (data.setDisplayRank(RankDisplay.TOP_DONATOR)) {
                     Messenger.sendError("You do not have a top donator rank!", sender);
                     return;
                 }
-                data.setDisplayRank(data.getTopRank());
                 data.setSetting(sender.getUniqueId(), "displayRank", "top");
                 break;
             default:
