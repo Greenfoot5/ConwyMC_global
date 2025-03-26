@@ -50,9 +50,9 @@ public class PlayerConnect implements Listener {
         StoreData.updateName(uuid, player.getName());
         Bukkit.getPluginManager().callEvent(new UpdateNameTagEvent(player));
 
-        for (Player ignored : Bukkit.getOnlinePlayers()) {
-            if (data.getSetting("joinPing").equals("true")) {
-                player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1.0f, 0.1f);
+        for (Player notified : Bukkit.getOnlinePlayers()) {
+            if (ActiveData.getData(notified.getUniqueId()).getSetting("joinPing").equals("true")) {
+                notified.playSound(notified.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 10.0f, 0.1f);
             }
         }
 
