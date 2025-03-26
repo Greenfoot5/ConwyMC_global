@@ -100,21 +100,21 @@ public class ToggleRankCommand implements TabExecutor {
                 data.setSetting(sender.getUniqueId(), "displayRank", "none");
                 break;
             case STAFF:
-                if (data.setDisplayRank(RankDisplay.STAFF)) {
+                if (!data.setDisplayRank(RankDisplay.STAFF)) {
                     Messenger.sendError("You do not have a staff rank!", sender);
                     return;
                 }
                 data.setSetting(sender.getUniqueId(), "displayRank", "staff");
                 break;
             case DONATOR:
-                if (data.setDisplayRank(RankDisplay.DONATOR)) {
+                if (!data.setDisplayRank(RankDisplay.DONATOR)) {
                     Messenger.sendError("You do not have a donator rank!", sender);
                     return;
                 }
                 data.setSetting(sender.getUniqueId(), "displayRank", "donator");
                 break;
             case TOP_DONATOR:
-                if (data.setDisplayRank(RankDisplay.TOP_DONATOR)) {
+                if (!data.setDisplayRank(RankDisplay.TOP_DONATOR)) {
                     Messenger.sendError("You do not have a top donator rank!", sender);
                     return;
                 }

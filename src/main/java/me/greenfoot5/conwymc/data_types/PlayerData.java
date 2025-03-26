@@ -47,7 +47,7 @@ public class PlayerData {
     private String chatMode = GlobalChatCommand.CHAT_MODE;
 
     /** Whether the player's staff rank is hidden */
-    private RankDisplay displayRank = RankDisplay.NONE;
+    private RankDisplay displayRank = null;
 
     /** The player's settings */
     private final HashMap<String, String> settings;
