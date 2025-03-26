@@ -6,6 +6,7 @@ import me.greenfoot5.conwymc.data_types.PlayerData;
 import me.greenfoot5.conwymc.database.ActiveData;
 import me.greenfoot5.conwymc.util.Messenger;
 import net.kyori.adventure.audience.Audience;
+import net.kyori.adventure.identity.Identity;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.Bukkit;
@@ -76,8 +77,15 @@ public class GlobalChatCommand extends ToggleChatCommand {
 
     public @NotNull Component render(@NotNull Player source, @NotNull Component sourceDisplayName, @NotNull Component message, @NotNull Audience viewer) {
         String color = getChatColor(source);
+        String clean = Messenger.clean(message);
 
-        Component content = Messenger.mm.deserialize(color + Messenger.clean(message));
+        String name = Messenger.clean(viewer.getOrDefault(Identity.NAME, "No name!"));
+        if (clean.contains(name + "@")) {
+            playTagSound(viewer);
+            clean = clean.replace(name + "@", "<aqua>" + name + "@</aqua>");
+        }
+
+        Component content = Messenger.mm.deserialize(color + clean);
         return sourceDisplayName.append(Component.text(": ", NamedTextColor.WHITE))
                 .append(content);
     }
