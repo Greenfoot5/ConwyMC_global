@@ -187,4 +187,19 @@ public class PlayerCosmetics {
             ConwyMC.plugin.getLogger().severe(e.getMessage());
         }
     }
+
+    public static void checkRankCosmetics(PlayerData data, UUID uuid) {
+        switch (data.getTopRank())
+        {
+            case "high_king":
+                Cosmetic highKingChat = new Cosmetic(CHAT_COLOUR, "High King", "<gradient:#FFED00:#FF0000>");
+                data.addCosmetic(highKingChat);
+            case "king":
+                Cosmetic kingChat = new Cosmetic(CHAT_COLOUR, "King", "<gradient:#F07654:#F5DF2E:#F07654>");
+                data.addCosmetic(kingChat);
+            case "viceroy":
+                Cosmetic viceroyChat = new Cosmetic(CHAT_COLOUR, "Viceroy", "<gradient:#A91BB6:#D46ED4>");
+                data.addCosmetic(viceroyChat);
+        }
+    }
 }
