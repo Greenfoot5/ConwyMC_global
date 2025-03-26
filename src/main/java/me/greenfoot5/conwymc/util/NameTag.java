@@ -44,7 +44,7 @@ public class NameTag {
             case "duke":
                 return MiniMessage.miniMessage().deserialize("<dark_red>Duke</dark_red> ");
             case "viceroy":
-                return MiniMessage.miniMessage().deserialize("<gradient:#be1fcc:#d94cd9>Viceroy</gradient> ");
+                return MiniMessage.miniMessage().deserialize("<gradient:#A91BB6:#D46ED4>Viceroy</gradient> ");
             case "king":
                 return MiniMessage.miniMessage().deserialize("<gradient:#F07654:#F5DF2E:#F07654>⚜King⚜</gradient> ");
             case "high_king":
