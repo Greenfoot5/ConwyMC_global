@@ -6,7 +6,7 @@
 
     <groupId>com.github.Greenfoot5</groupId>
     <artifactId>conwymc-global</artifactId>
-    <version>1.0.6</version>
+    <version>1.1</version>
     <packaging>jar</packaging>
 
     <name>ConwyMC_Global</name>
