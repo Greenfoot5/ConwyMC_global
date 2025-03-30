@@ -17,6 +17,8 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.UUID;
+
 /**
  * Toggles global chat mode or sends a message in global chat
  */
@@ -78,6 +80,12 @@ public class GlobalChatCommand extends ToggleChatCommand {
     public @NotNull Component render(@NotNull Player source, @NotNull Component sourceDisplayName, @NotNull Component message, @NotNull Audience viewer) {
         String color = getChatColor(source);
         String clean = Messenger.clean(message);
+
+        for (Player player : Bukkit.getOnlinePlayers()) {
+            if (viewer.getOrDefault(Identity.UUID, UUID.randomUUID()) != player.getUniqueId() && clean.contains(player.getName() + "@")) {
+                clean = clean.replace(player.getName() + "@", "<dark_aqua>" + player.getName() + "@</dark_aqua>");
+            }
+        }
 
         String name = Messenger.clean(viewer.getOrDefault(Identity.NAME, "No name!"));
         if (clean.contains(name + "@")) {
